@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bank @ Doorstep | Home</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="hXd+vKEj5uvuJtnzkJRrU897Hm/f3sJd1VO7SEXrRHp8+TMT9DxbrRSPR6DNk8haOLUOY6Zn/kT/Sk3mM63+8A==" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://dev.kandy.io:3000/assets/favicon-3da99d2536c9fa570157780f5d5f6f0d.ico" />
+    
+    <!--Load Bootstrap CSS (optional)-->
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+    
+    <!--Load Kandy JS files (required - jQuery is required too!)--><script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
+    <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
+    
+    <!--Load Pace AJAX Progress Bar (optional)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#demo-btn").click(function(){
+        	window.location.replace("demoSetup.html");
+        });
+        $("#setup-btn").click(function(){
+        	window.location.replace("#");
+        });
+    });   
+    
+    </script>
+  </head>
+  <body>  
+    <div class="container">    
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2" id="activity-container">
+          <div id="app-details">
+            <h1 class="h2">
+              Bank at your door Step
+            </h1>
+            <p>
+             <i>To provide a hassle free banking for our customer.</i>  
+            </p>
+          </div>
+          <br>
+  <br><br><br>
+  
+          <div id="logged-in">
+            <hr />
+            <div class="clearfix">
+              <p class="h4">
+                To test this WebRTC Banking Feature with predefined Banker and Customer credentials  
+              </p>
+              <button class="btn btn-primary pull-right" id="demo-btn">Banking Feature Demo</button>
+            </div>
+            <hr />
+          
+          </div>
+          <div id="logged-in">
+            <hr />
+            <div class="clearfix">
+              <p class="h4">
+                To setup Banking for your own banker and customer credentials
+              </p>
+              <button class="btn btn btn-warning pull-right" id="setup-btn">Setup your account</button>
+            </div>
+            <hr />
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

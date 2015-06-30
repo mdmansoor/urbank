@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="customer" extends="struts-default">
+		<action name="customerlogin" class="com.flopper.framework.customer.customerloginbean">
+			<result name="input">customerlogin.jsp</result>
+			<result name="success">customerlanding.jsp</result>
+		</action>
+
+		<action name="custlogin" class="com.flopper.framework.customer.custloginbean">
+			<result name="input">custlogin.jsp</result>
+			<result name="error">custlogin.jsp</result>
+			<result name="success">custlanding.jsp</result>
+		</action>
+		
+		<action name="kandycustomerlogin" class="com.flopper.framework.common.kandycustomerlogin">
+			<result name="success">customer/cscustomer.jsp</result>
+		</action>
+		<action name="appointmentbooking"
+			class="com.flopper.framework.customer.appointmentbookingbean">
+			<result name="input">appointmentbooking.jsp</result>
+			<result name="success">appointmentsuccess.jsp</result>
+			<result name="error">appointmentbooking.jsp</result>
+		</action>
+		<action name="scheduledmeeting"
+			class="com.flopper.framework.customer.scheduledmeetingbean">
+			<result name="input">scheduledmeeting.jsp</result>
+			<result name="success">scheduledmeeting.jsp</result>
+			<result name="error">scheduledmeeting.jsp</result>
+		</action>
+	</package>
+
+
+
+</struts> 
