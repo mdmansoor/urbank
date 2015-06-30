@@ -11,7 +11,7 @@
 <meta name="description" content="Xenon Boostrap Admin Panel" />
 <meta name="author" content="" />
 
-<title>Xenon - Profile</title>
+<title>UR Bank - Customer Banking</title>
 
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../assets/css/xenon-components.css">
 <link rel="stylesheet" href="../assets/css/xenon-skins.css">
 <link rel="stylesheet" href="../assets/css/custom.css">
-
+<link rel="stylesheet" href="../common/css/common.css">
 <script src="../assets/js/jquery-1.11.1.min.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,6 +33,23 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+
+<!-- Kandy API includes -->
+
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
+
+<!--Load Pace AJAX Progress Bar (optional)-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+<link rel="stylesheet" media="screen"
+	href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
+
+<!-- Kandy END -->
+
 
 <tags:script src="customer/custlanding.js" />
 </head>
@@ -402,8 +419,7 @@
 				<div class="breadcrumb-env">
 
 					<ol class="breadcrumb bc-1">
-						<li><i class="fa-home">Last Login Time :</i>
-						</li>
+						<li><i class="fa-home">Last Login Time :</i></li>
 						<li><i><%=session.getAttribute("LASTLOGINTIME")%></i></li>
 
 					</ol>
@@ -414,180 +430,46 @@
 			<section class="profile-env" id="chat_section">
 
 				<div class="row">
-
-
-					<div class="col-sm-12">
-
-						<div class="row">
-
-							<div class="col-sm-6">
-
-								<div class="xe-widget xe-conversations">
-									<div class="xe-bg-icon">
-										<i class="linecons-comment"></i>
-									</div>
-									<div class="xe-header">
-										<div class="xe-icon">
-											<i class="linecons-comment"></i>
-										</div>
-										<div class="xe-label">
-											<h3>
-												Conversations <small>Chatting arround</small>
-											</h3>
-										</div>
-									</div>
-									<div class="xe-body">
-
-										<ul class="list-unstyled">
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-2.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Jack
-																Gates</strong>
-														</a>
-
-														<p>In it except to so temper mutual tastes mother.</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-5.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Arlind
-																Nushi</strong> <span class="label label-secondary">5</span>
-														</a>
-
-														<p>Age sold some full like rich new. Amounted .</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-4.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Bryan
-																Green</strong>
-														</a>
-
-														<p>Stuff sight equal of my woody.</p>
-													</div>
-												</div>
-											</li>
-										</ul>
-
-									</div>
-									<div class="xe-footer">
-										<a href="#">View All</a>
-									</div>
-								</div>
-
-							</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-							<div class="col-sm-6">
-
-								<div class="xe-widget xe-conversations">
-									<div class="xe-bg-icon">
-										<i class="linecons-comment"></i>
-									</div>
-									<div class="xe-header">
-										<div class="xe-icon">
-											<i class="linecons-comment"></i>
-										</div>
-										<div class="xe-label">
-											<h3>
-												Conversations <small>Chatting arround</small>
-											</h3>
-										</div>
-									</div>
-									<div class="xe-body">
-
-										<ul class="list-unstyled">
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-2.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Jack
-																Gates</strong>
-														</a>
-
-														<p>In it except to so temper mutual tastes mother.</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-5.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Arlind
-																Nushi</strong> <span class="label label-secondary">5</span>
-														</a>
-
-														<p>Age sold some full like rich new. Amounted .</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="xe-comment-entry">
-													<a class="xe-user-img" href="#"> <img width="40"
-														class="img-circle" src="../assets/images/user-4.png">
-													</a>
-
-													<div class="xe-comment">
-														<a class="xe-user-name" href="#"> <strong>Bryan
-																Green</strong>
-														</a>
-
-														<p>Stuff sight equal of my woody.</p>
-													</div>
-												</div>
-											</li>
-										</ul>
-
-									</div>
-									<div class="xe-footer">
-										<a href="#">View All</a>
-									</div>
-								</div>
-
-							</div>
-
-
+					<div class="col-sm-6" id="activity-container">
+					<!--Chat design  -->
+					<div class="xe-widget xe-conversations">
+					<div class="xe-bg-icon">
+							<i class="linecons-comment"></i>
 						</div>
+						<div class="xe-header">
+							<div class="xe-icon">						
+								<i class="linecons-comment"></i>
+							</div>
+							<div class="xe-label">
+								<h3>
+									Conversations
+									<small>Chatting arround</small>
+								</h3>
+							</div>
+						</div>
+						<div class="xe-body  widget-scroll" id="xe-body" >
+							<!-- chat to be added dynamically -->
+							<ul class="list-unstyled" id="chatItem">
+							
+							</ul>
+						</div>						
+					</div>					
 
+						<div class="hidden" id="logged-in">							
+							<div id="chat-container">																
+								<div id="chat-input">									
+									<div class="form-group">
+										<label for="chat-message">Chat Message</label>
+										<input type="text" name="chat-message" id="chat-message"
+											class="form-control">									
+									</div>
+									<button name="button" type="submit" class="btn btn-success"
+										id="chat-btn">Send</button>
+
+								</div>
+							</div>
+						</div>
 					</div>
-
-
-
-
 				</div>
 
 			</section>
