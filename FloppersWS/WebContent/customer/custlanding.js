@@ -1,11 +1,19 @@
+$("#profile_section").show();
+    $("#chat_section").hide();
+	
 
-function onSupport(){
-	window.location.replace("../kandycustomerlogin");
-}
-function onappointment(){
-	window.location.replace("../customer/appointmentbooking.jsp");
-}
-
-function onscheduled(){
-	window.location.replace("../customer/scheduledmeeting.jsp");
-}
+$(document).ready(function(){
+	
+	
+    $("#support").click(function(){
+       
+       $("#profile_section").hide(500);
+       $("#chat_section").show(500);
+    });
+    
+    $("#home_btn").click(function(){
+        
+        $("#profile_section").show(500);
+        $("#chat_section").hide(500);
+     });
+});

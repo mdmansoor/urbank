@@ -83,7 +83,9 @@ public class custloginbean extends ActionSupport implements
 		if (map.get(Constants.RESULT).equals(Constants.SUCCESS)) {
 
 			session.setAttribute("LASTLOGINTIME", map.get("LASTLOGINTIME"));
-			session.setAttribute("USER_NAME", username);
+			session.setAttribute("SESSION_USERNAME", map.get("SESSION_USERNAME"));
+			session.setAttribute("SESSION_USERID", username);
+			
 			return SUCCESS;
 		} else
 			this.addFieldError("username", map.get(Constants.RESULT));
