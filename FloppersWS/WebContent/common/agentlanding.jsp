@@ -51,7 +51,7 @@
 <!-- Kandy END -->
 
 
-<tags:script src="customer/custlanding.js" />
+<tags:script src="common/agentlanding.js" />
 </head>
 <body class="page-body">
 
@@ -509,9 +509,45 @@
             </div>
           </div>
         </div>
-		
-					<!-- video call end -->
-				</div>
+       </div>
+       <!-- file sharing -->
+       
+       <div id="row">
+
+  <div id="logged-in">
+            <hr />
+            <div class="clearfix">
+              <p class="h4 pull-left">
+                <strong>Hello <span class="username"></span></strong>
+              </p>
+              <button class="btn btn-danger pull-right" id="logout-btn">Logout</button>
+            </div>
+            <hr />
+            <div id="chat-container">
+              <h3>
+                Messages
+              </h3>
+              <div id="chat-messages"></div>
+              <hr />
+              <div id="chat-input">
+                <div class="form-group">
+                  <label for="chat-contacts">Select Contact</label>
+                  <select name="chat-contacts" id="chat-contacts" class="form-control"></select>
+                  
+                </div>
+                <div class="form-group">
+                  <label for="chat-file">Chat File</label>
+                  <input type="file" name="chat-file" id="chat-file" class="form-control" />
+                  
+                </div>
+                <button name="button" type="submit" class="btn btn-success" id="file-btn">Send</button>
+                
+              </div>
+            </div>
+          </div>
+</div>
+       
+       <!-- file sharing end -->
 
 			</section>
 			<section class="profile-env" id="profile_section">
@@ -772,8 +808,7 @@
 	</div>
 
 	<!-- Imported styles on this page -->
-	<link rel="stylesheet"
-		href="../assets/css/fonts/elusive/css/elusive.css">
+	<link rel="stylesheet" href="../assets/css/fonts/elusive/css/elusive.css">
 
 	<!-- Bottom Scripts -->
 	<script src="../assets/js/bootstrap.min.js"></script>

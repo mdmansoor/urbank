@@ -16,7 +16,10 @@ $(function() {
  $('#chat-btn').on('click', function() {
    sendMessage();
  });
-  
+ $('#file-btn').on('click', function() {
+	 alert("send File");
+	   sendFile();
+	 }); 
  
  //---------- Video/Audio ---
  
@@ -97,6 +100,31 @@ audioSource.ringOut.forEach(function(entry) {
        }
      );
    }
+   
+   function sendFile() {
+       var file = $('#chat-file')[0].files[0];
+       //var sendTo = $('#chat-contacts').val();
+       alert(sendTo);
+   
+       /** sendImWithFile(userName, file, success, failure)
+           Sends a file via chat
+           @params <string> userName, <object> file, <function> success/failure
+       */
+       kandy.messaging.sendImWithFile(sendTo, file, function () {
+   
+         // On successful send, append chat item to DOM
+         var $chatItem = $('<div class="well text-right">')
+         var $username = $('<h5>').text(username);
+         var $file = $('<p>').text(file.name);
+   
+         $chatItem.append($username, $file);
+         $('#chat-messages').append($chatItem);
+       },
+       function () {
+           alert('IM send failed');
+         }
+       );
+     }
  
    // Event handler for messagesavailable 
      // receive messages from other Kandy users
@@ -127,7 +155,20 @@ audioSource.ringOut.forEach(function(entry) {
              //$('#xe-body ul').append('<li>Hi test</li>');;
              $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 
-           } else {
+           }
+           if(msg.messageType == 'chat' && msg.contentType === 'file') {
+        	   alert("file received");
+               var $username = $('<h5>').text(msg.sender.user_id);
+               var uuid = msg.message.content_uuid;
+               var thumbnailURL = kandy.messaging.buildFileThumbnailUrl(uuid);
+               var $fileName = $('<a>').text(msg.message.content_name).attr({'href': kandy.messaging.buildFileUrl(uuid), 'target': '_blank'});
+               var $file = $('<img>').attr('src', thumbnailURL).css('width', '20px');
+               var $chatItem = $('<div class="well text-left">');
+   
+               $chatItem.append($username, $file, $fileName);
+               $('#chat-messages').append($chatItem);
+             }
+           else {
              // When the recieved messageType is not chat, display message type
              console.log('received ' + msg.messageType + ': ');
            }

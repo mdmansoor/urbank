@@ -16,7 +16,7 @@ public class SessionListener implements HttpSessionListener {
 	 */
 	public SessionListener() {
 		// TODO Auto-generated constructor stub
-	}
+	} 
 
 	/**
 	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
