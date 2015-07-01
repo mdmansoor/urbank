@@ -43,7 +43,7 @@ public class RefererCheckFilter implements Filter {
 		_response.setDateHeader("Expires", System.currentTimeMillis()
 				+ (30 * 60 * 1000L));
 		String _path = _request.getContextPath();
-		String unauthAccessURL = _path + "/common/eunauthoriseaccess.jsp";
+		String unauthAccessURL = _path + "/customer/custlogin.jsp";
 		String URI = _request.getRequestURI();
 		String pgm[] = URI.split("/");
 		/* CacheDisable Begins */
@@ -57,7 +57,7 @@ public class RefererCheckFilter implements Filter {
 			_response.setHeader("Cache-Control", "no-store");
 		}
 		int i = pgm.length;
-		if (pgm[3].equals("customerlogin.jsp"))
+		if (pgm[3].equals("custlogin.jsp"))
 			chain.doFilter(request, response);
 		else {
 			System.out.println(_request.getHeader("referer"));
