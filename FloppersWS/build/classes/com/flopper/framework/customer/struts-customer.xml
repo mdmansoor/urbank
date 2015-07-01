@@ -13,7 +13,12 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 			<result name="error">custlogin.jsp</result>
 			<result name="success">custlanding.jsp</result>
 		</action>
-		
+
+		<action name="custlogout" class="com.flopper.framework.customer.custlogoutbean">
+			<result name="success">custlogin.jsp</result>
+		</action>
+
+
 		<action name="kandycustomerlogin" class="com.flopper.framework.common.kandycustomerlogin">
 			<result name="success">customer/cscustomer.jsp</result>
 		</action>

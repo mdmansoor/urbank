@@ -14,7 +14,7 @@ public class DBHelper {
 		   Connection conn = null;
 		   try{
 		      Class.forName("oracle.jdbc.driver.OracleDriver");
-		      System.out.println("Connecting to database...");
+		     // System.out.println("Connecting to database...");
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		   }catch(Exception e){
 			   e.printStackTrace();

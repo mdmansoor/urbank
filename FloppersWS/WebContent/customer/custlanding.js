@@ -16,7 +16,7 @@ $(function() {
  $('#chat-btn').on('click', function() {
    sendMessage();
  });
- 
+  
  
  //---------- Video/Audio ---
  
@@ -399,3 +399,4 @@ window.setInterval(function() {
     var elem = document.getElementById('xe-body');
     elem.scrollTop = elem.scrollHeight;
   }, 5000);
+

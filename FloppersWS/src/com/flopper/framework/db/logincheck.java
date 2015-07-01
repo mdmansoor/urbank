@@ -27,7 +27,7 @@ public class logincheck {
 				map.put("SESSION_USERNAME", rs.getString(2));
 				lastLoginDetail(username, conn);
 				loginHistory(username, conn);
-				
+
 				map.put(Constants.RESULT, Constants.SUCCESS);
 				return map;
 
@@ -104,5 +104,33 @@ public class logincheck {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void userLogout(String userID) {
+
+		PreparedStatement stmt = null;
+		Connection conn = DBHelper.getConnection();
+		try {
+
+			stmt = conn
+					.prepareStatement("UPDATE LOGINHISTORY  L set l.LOGOUTTIME=SYSDATE  where L.LOGINID=(SELECT max(LOGINID) FROM  LOGINHISTORY LH  WHERE LH.USERID=? ) AND L.USERID=? ");
+			stmt.setString(1, userID);
+			stmt.setString(2, userID);
+			int rs = stmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				stmt.close();
+				conn.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 }

@@ -41,6 +41,7 @@ public class SessionFilter implements Filter {
 
 		HttpSession session = _request.getSession(false);
 		String _path = _request.getContextPath();
+		String URI = _request.getRequestURI();
 		String unauthAccessURL = _path + "/customer/custlogin.jsp";
 
 		if (session == null) {
