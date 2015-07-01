@@ -77,8 +77,8 @@ public class custloginbean extends ActionSupport implements
 		logincheck login = new logincheck();
 		Map<String, String> map = new HashMap<String, String>();
 
-	
-		HttpSession session =request.getSession(true);
+		return SUCCESS;
+		/*HttpSession session =request.getSession(true);
 		map = login.userLogin(username, password);
 		if (map.get(Constants.RESULT).equals(Constants.SUCCESS)) {
 
@@ -89,7 +89,7 @@ public class custloginbean extends ActionSupport implements
 			return SUCCESS;
 		} else
 			this.addFieldError("username", map.get(Constants.RESULT));
-			return ERROR;
+			return ERROR;*/
 
 	}
 
