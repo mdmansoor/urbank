@@ -476,16 +476,13 @@
           
           
           
-          <div id="logged-in">
-            <hr />
-            
-            <hr />
+          <div id="logged-in">           
             <div id="video-container">
               <h3>
                 Video
               </h3>
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                   <div class="video" id="incoming-video"></div>
                 </div>
                 <div class="col-sm-6">
@@ -499,7 +496,7 @@
               </h4>
               <p id="username-incoming"></p>
               <div class="btn-toolbar">
-                <button class="btn btn-success" id="answer-call-btn">Answer Call</button><button class="btn btn-warning" id="reject-call-btn">Reject Call</button>
+                <button class="btn btn-success col-sm-5" id="answer-call-btn">Answer Call</button><button class="btn btn-warning col-sm-5" id="reject-call-btn">Reject Call</button>
               </div>
             </div><div class="hidden" id="call-connected">
               <h4>
@@ -507,7 +504,7 @@
               </h4>
               <p id="username-connected"></p>
               <div class="btn-toolbar">
-                <button class="btn btn-danger" id="end-call-btn">End Call</button><button class="btn btn-warning" id="hold-call-btn">Hold Call</button><button class="btn btn-success hidden" id="resume-call-btn">Resume Call</button>
+                <button class="btn btn-danger col-sm-5" id="end-call-btn">End Call</button><button class="btn btn-warning col-sm-5" id="hold-call-btn">Hold Call</button><button class="btn btn-success hidden col-sm-5" id="resume-call-btn">Resume Call</button>
               </div>
             </div>
           </div>
