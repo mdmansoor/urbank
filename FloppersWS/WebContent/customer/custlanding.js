@@ -10,6 +10,8 @@ $(function() {
         $("#chat_section").hide(500);
      });
     
+    
+    
 
  
  // Event handler for send message button
@@ -199,8 +201,9 @@ audioSource.ringOut.forEach(function(entry) {
   /* username = $('#username').val();
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
-   username="customer1";
-   var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+   username="customer";
+   alert(username);
+   var apiKey="DAK654f8a1cf41445718a512c4a7eb9d9f6";
    password="reset@123";
     
    /** login(domainApiId, userName, password,success,failure)

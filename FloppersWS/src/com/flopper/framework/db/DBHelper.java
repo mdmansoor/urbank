@@ -8,7 +8,7 @@ public class DBHelper {
 	 //  Database credentials
 	   static final String USER = "mansoor";
 	   static final String PASS = "mansoor";
-	   static final String DB_URL ="jdbc:oracle:thin:@localhost:1521:xe";
+	   static final String DB_URL ="jdbc:oracle:thin:@10.30.133.67:1521:xe";
 		public static Connection getConnection()
 		{		
 		   Connection conn = null;

@@ -114,7 +114,7 @@
 							<li><a href="mailbox-main.html" title="Mailbox"> <i
 									class="linecons-mail"></i> Mailbox
 							</a></li>
-							<li class="logout-link"><a href="custlanding!logout"
+							<li class="logout-link"><a href="custlogout"
 								title="Log out"> <i class="fa-power-off"></i>
 							</a></li>
 						</ul>
@@ -165,9 +165,6 @@
 							<span class="title">Loan</span>
 					</a></li>
 					<li><a href="#" id="support"> <i class="linecons-note"></i>
-							<span class="title">Support</span>
-					</a></li>
-					<li><a href="custlanding!appointment" id="support"> <i class="linecons-note"></i>
 							<span class="title">Support</span>
 					</a></li>
 
@@ -399,7 +396,7 @@
 							</a></li>
 							<li><a href="#help"> <i class="fa-info"></i> Help
 							</a></li>
-							<li class="last"><a href="custlanding!logout"> <i
+							<li class="last"><a href="custlogout"> <i
 									class="fa-lock"></i> Logout
 							</a></li>
 						</ul></li>
@@ -480,34 +477,18 @@
           
           
           <div id="logged-in">           
-            <div class="xe-widget xe-conversations">
-						<div class="xe-bg-icon">
-								<i class="linecons-comment"></i>
-						</div>
-						<div class="xe-header">
-							<div class="xe-icon">						
-								<i class="linecons-comment"></i>
-							</div>
-							<div class="xe-label">
-								<h3>
-									Video
-										<small>Video call with bank executive</small>
-								</h3>
-							</div>
-						</div>
-						<div class="xe-body video-scroll" id="xe-body" >
-								<!-- chat to be added dynamically -->
-							<div class="row">
-				                <div class="col-sm-10">
-				                <center>
-				                  <div class="video" id="incoming-video"></div>
-				                 </center>
-				                </div>
-				                <!-- <div class="col-sm-6">
-				                  <div class="video" id="outgoing-video"></div>
-				                </div> -->
-				              </div>
-							</div>
+            <div id="video-container">
+              <h3>
+                Video
+              </h3>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="video" id="incoming-video"></div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="video" id="outgoing-video"></div>
+                </div>
+              </div>
             </div>
             <hr /><div class="hidden" id="incoming-call">
               <h4>
@@ -527,106 +508,10 @@
               </div>
             </div>
           </div>
-          
-          
-          
-          
         </div>
 		
 					<!-- video call end -->
-					
-					
-					<!-- File sharing -->
 				</div>
-
-<div id="row" class="hidden">
-
-  <div id="logged-in">
-            <hr />
-            <div class="clearfix">
-              <p class="h4 pull-left">
-                <strong>Hello <span class="username"></span></strong>
-              </p>
-              <button class="btn btn-danger pull-right" id="logout-btn">Logout</button>
-            </div>
-            <hr />
-            <div id="chat-container">
-              <h3>
-                Messages
-              </h3>
-              <div id="chat-messages"></div>
-              <hr />
-              <div id="chat-input">
-                <div class="form-group">
-                  <label for="chat-contacts">Select Contact</label>
-                  <select name="chat-contacts" id="chat-contacts" class="form-control"></select>
-                  
-                </div>
-                <div class="form-group">
-                  <label for="chat-file">Chat File</label>
-                  <input type="file" name="chat-file" id="chat-file" class="form-control" />
-                  
-                </div>
-                <button name="button" type="submit" class="btn btn-success" id="file-btn">Send</button>
-                
-              </div>
-            </div>
-          </div>
-</div>
-
-<!-- File upload new design -->
-<div id="row">
-
-<div class="panel panel-default">
-			
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Upload Files <small>Send file to Bank agent</small>
-					</h3>
-				</div>
-				
-				<div class="panel-body">
-					
-					
-					
-					<br />
-					<div class="row">
-						<div class="col-sm-3 text-center">
-						
-							<div id="advancedDropzone" class="droppable-area">
-								Drop Files Here
-							</div>
-							
-						</div>
-						<div class="col-sm-9">
-							
-							<table class="table table-bordered table-striped" id="example-dropzone-filetable">
-								<thead>
-									<tr>
-										<th width="1%" class="text-center">#</th>
-										<th width="50%">Name</th>
-										<th width="20%">Upload Progress</th>
-										<th>Size</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="5">Files list will appear here</td>
-									</tr>
-								</tbody>
-							</table>
-							
-						</div>
-					</div>
-					
-				</div>
-			
-			</div>
-</div>
-
-
-<!--File upload end  -->
 
 			</section>
 			<section class="profile-env" id="profile_section">
@@ -698,7 +583,7 @@
 									data-to="117" data-from="1" data-count=".num"
 									class="xe-widget xe-counter xe-counter-blue">
 									<div class="xe-icon">
-										<i class="fa-bank"></i>
+										<i class="linecons-user"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">1053 Rs</strong> <span>Current
@@ -713,7 +598,7 @@
 									data-from="1000" data-count=".num"
 									class="xe-widget xe-counter xe-counter-info">
 									<div class="xe-icon">
-										<i class="fa-credit-card"></i>
+										<i class="linecons-camera"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">14556</strong> <span>Credit Card
@@ -728,7 +613,7 @@
 									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
 									data-count=".num" class="xe-widget xe-counter xe-counter-red">
 									<div class="xe-icon">
-										<i class="fa-cubes"></i>
+										<i class="linecons-lightbulb"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">55000</strong> <span>Loan Amount</span>
@@ -741,7 +626,7 @@
 									data-to="117" data-from="1" data-count=".num"
 									class="xe-widget xe-counter xe-counter-blue">
 									<div class="xe-icon">
-										<i class="fa-calculator"></i>
+										<i class="linecons-user"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">6050 Rs</strong> <span>Outstanding
@@ -887,12 +772,11 @@
 	</div>
 
 	<!-- Imported styles on this page -->
-	<link rel="stylesheet"
-		href="../assets/css/fonts/elusive/css/elusive.css">
+	<link rel="stylesheet" href="../assets/css/fonts/elusive/css/elusive.css">
 
 	<!-- Bottom Scripts -->
 	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
+	<script src="../assets/js/tweenmax.min.js"></script>
 	<script src="../assets/js/resizeable.js"></script>
 	<script src="../assets/js/joinable.js"></script>
 	<script src="../assets/js/xenon-api.js"></script>
@@ -900,26 +784,6 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
-	
-	<!-- Imported styles on this page -->
-	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
-
-	<!-- Bottom Scripts -->
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
-	<script src="../assets/js/resizeable.js"></script>
-	<script src="../assets/js/joinable.js"></script>
-	<script src="../assets/js/xenon-api.js"></script>
-	<script src="../assets/js/xenon-toggles.js"></script>
-
-
-	<!-- Imported scripts on this page -->
 	<script src="../assets/js/dropzone/dropzone.min.js"></script>
-
-
-	<!-- JavaScripts initializations and stuff -->
-	<script src="../assets/js/xenon-custom.js"></script>
-	
-
 </body>
 </html>
