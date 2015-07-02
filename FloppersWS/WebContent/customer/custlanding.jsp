@@ -516,7 +516,7 @@
 					<!-- File sharing -->
 				</div>
 
-<div id="row">
+<div id="row" class="hidden">
 
   <div id="logged-in">
             <hr />
@@ -550,6 +550,61 @@
             </div>
           </div>
 </div>
+
+<!-- File upload new design -->
+<div id="row">
+
+<div class="panel panel-default">
+			
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Upload Files <small>Send file to Bank agent</small>
+					</h3>
+				</div>
+				
+				<div class="panel-body">
+					
+					
+					
+					<br />
+					<div class="row">
+						<div class="col-sm-3 text-center">
+						
+							<div id="advancedDropzone" class="droppable-area">
+								Drop Files Here
+							</div>
+							
+						</div>
+						<div class="col-sm-9">
+							
+							<table class="table table-bordered table-striped" id="example-dropzone-filetable">
+								<thead>
+									<tr>
+										<th width="1%" class="text-center">#</th>
+										<th width="50%">Name</th>
+										<th width="20%">Upload Progress</th>
+										<th>Size</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="5">Files list will appear here</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					
+				</div>
+			
+			</div>
+</div>
+
+
+<!--File upload end  -->
+
 			</section>
 			<section class="profile-env" id="profile_section">
 
@@ -620,7 +675,7 @@
 									data-to="117" data-from="1" data-count=".num"
 									class="xe-widget xe-counter xe-counter-blue">
 									<div class="xe-icon">
-										<i class="linecons-user"></i>
+										<i class="fa-bank"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">1053 Rs</strong> <span>Current
@@ -635,7 +690,7 @@
 									data-from="1000" data-count=".num"
 									class="xe-widget xe-counter xe-counter-info">
 									<div class="xe-icon">
-										<i class="linecons-camera"></i>
+										<i class="fa-credit-card"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">14556</strong> <span>Credit Card
@@ -650,7 +705,7 @@
 									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
 									data-count=".num" class="xe-widget xe-counter xe-counter-red">
 									<div class="xe-icon">
-										<i class="linecons-lightbulb"></i>
+										<i class="fa-cubes"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">55000</strong> <span>Loan Amount</span>
@@ -663,7 +718,7 @@
 									data-to="117" data-from="1" data-count=".num"
 									class="xe-widget xe-counter xe-counter-blue">
 									<div class="xe-icon">
-										<i class="linecons-user"></i>
+										<i class="fa-calculator"></i>
 									</div>
 									<div class="xe-label">
 										<strong class="num">6050 Rs</strong> <span>Outstanding
@@ -822,6 +877,26 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
+	
+	<!-- Imported styles on this page -->
+	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
+
+	<!-- Bottom Scripts -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/TweenMax.min.js"></script>
+	<script src="../assets/js/resizeable.js"></script>
+	<script src="../assets/js/joinable.js"></script>
+	<script src="../assets/js/xenon-api.js"></script>
+	<script src="../assets/js/xenon-toggles.js"></script>
+
+
+	<!-- Imported scripts on this page -->
+	<script src="../assets/js/dropzone/dropzone.min.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="../assets/js/xenon-custom.js"></script>
+	
 
 </body>
 </html>

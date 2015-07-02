@@ -512,7 +512,7 @@
        </div>
        <!-- file sharing -->
        
-       <div id="row">
+       <div id="row" class = "hidden">
 
   <div id="logged-in">
             <hr />
@@ -548,6 +548,63 @@
 </div>
        
        <!-- file sharing end -->
+       
+       
+       
+       
+<!-- File upload new design -->
+<div id="row">
+
+<div class="panel panel-default">
+			
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Upload Files <small>Send file to Bank agent</small>
+					</h3>
+				</div>
+				
+				<div class="panel-body">
+					
+					
+					
+					<br />
+					<div class="row">
+						<div class="col-sm-3 text-center">
+						
+							<div id="advancedDropzone" class="droppable-area">
+								Drop Files Here
+							</div>
+							
+						</div>
+						<div class="col-sm-9">
+							
+							<table class="table table-bordered table-striped" id="example-dropzone-filetable">
+								<thead>
+									<tr>
+										<th width="1%" class="text-center">#</th>
+										<th width="50%">Name</th>
+										<th width="20%">Upload Progress</th>
+										<th>Size</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="5">Files list will appear here</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					
+				</div>
+			
+			</div>
+</div>
+
+
+<!--File upload end  -->
 
 			</section>
 			<section class="profile-env" id="profile_section">
@@ -808,7 +865,8 @@
 	</div>
 
 	<!-- Imported styles on this page -->
-	<link rel="stylesheet" href="../assets/css/fonts/elusive/css/elusive.css">
+	<link rel="stylesheet"
+		href="../assets/css/fonts/elusive/css/elusive.css">
 
 	<!-- Bottom Scripts -->
 	<script src="../assets/js/bootstrap.min.js"></script>
@@ -820,6 +878,26 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
+	
+	<!-- Imported styles on this page -->
+	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
+
+	<!-- Bottom Scripts -->
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/TweenMax.min.js"></script>
+	<script src="../assets/js/resizeable.js"></script>
+	<script src="../assets/js/joinable.js"></script>
+	<script src="../assets/js/xenon-api.js"></script>
+	<script src="../assets/js/xenon-toggles.js"></script>
+
+
+	<!-- Imported scripts on this page -->
+	<script src="../assets/js/dropzone/dropzone.min.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="../assets/js/xenon-custom.js"></script>
+	
 
 </body>
 </html>

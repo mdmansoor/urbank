@@ -104,7 +104,7 @@ audioSource.ringOut.forEach(function(entry) {
    function sendFile() {
        var file = $('#chat-file')[0].files[0];
        //var sendTo = $('#chat-contacts').val();
-       alert(sendTo);
+       
    
        /** sendImWithFile(userName, file, success, failure)
            Sends a file via chat
@@ -167,6 +167,11 @@ audioSource.ringOut.forEach(function(entry) {
    
                $chatItem.append($username, $file, $fileName);
                $('#chat-messages').append($chatItem);
+               
+               
+               
+               //$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$file+'</p>'+$fileName+'</div></div></li>');
+               $("#xe-body ul").append($chatItem);
              }
            else {
              // When the recieved messageType is not chat, display message type
@@ -434,6 +439,90 @@ $('#incoming-call').addClass('hidden');
 };
 
  
+//----------File upload script----------------
+
+
+var i = 1,
+$example_dropzone_filetable = $("#example-dropzone-filetable"),
+example_dropzone = $("#advancedDropzone").dropzone({
+url: 'data/upload-file.php',
+
+// Events
+addedfile: function(file)
+{
+	alert("added new");
+    // Script to send file
+	
+	
+	kandy.messaging.sendImWithFile(sendTo, file, function () {
+	
+	  // On successful send, append chat item to DOM
+	  var $chatItem = $('<div class="well text-right">')
+	  var $username = $('<h5>').text(username);
+	  var $file = $('<p>').text(file.name);
+	
+	  $chatItem.append($username, $file);
+	  $('#chat-messages').append($chatItem);
+	},
+	function () {
+	    alert('IM send failed');
+	  }
+	);
+		
+	
+	//----end
+	
+	if(i == 1)
+	{
+		$example_dropzone_filetable.find('tbody').html('');
+	}
+	
+	var size = parseInt(file.size/1024, 10);
+	size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");
+	
+	var $entry = $('<tr>\
+					<td class="text-center">'+(i++)+'</td>\
+					<td>'+file.name+'</td>\
+					<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
+					<td>'+size+'</td>\
+					<td>Uploading...</td>\
+				</tr>');
+	
+	$example_dropzone_filetable.find('tbody').append($entry);
+	file.fileEntryTd = $entry;
+	file.progressBar = $entry.find('.progress-bar');
+},
+
+uploadprogress: function(file, progress, bytesSent)
+{
+	file.progressBar.width(progress + '%');
+},
+
+success: function(file)
+{
+	
+	file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+},
+
+error: function(file)
+{
+	
+	file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+}
+});
+
+$("#advancedDropzone").css({
+minHeight: 200
+});
+
+
+//-------------file upload end----------------
+
+
+
+
  });
 
 window.setInterval(function() {
