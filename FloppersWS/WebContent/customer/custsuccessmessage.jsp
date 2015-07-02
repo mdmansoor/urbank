@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,30 +29,10 @@
 <link rel="stylesheet" href="../common/css/common.css">
 <script src="../assets/js/jquery-1.11.1.min.js"></script>
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 
-<!-- Kandy API includes -->
 
-<script
-	src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
-<script
-	src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
-
-<!--Load Pace AJAX Progress Bar (optional)-->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-<link rel="stylesheet" media="screen"
-	href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
-
-<!-- Kandy END -->
-
-
-<tags:script src="customer/custlanding.js" />
+<tags:script src="customer/custsuccessmessage.js" />
 </head>
 <body class="page-body">
 
@@ -167,8 +148,8 @@
 					<li><a href="#" id="support"> <i class="linecons-note"></i>
 							<span class="title">Support</span>
 					</a></li>
-					<li><a href="custlanding!appointment" id="support"> <i class="linecons-note"></i>
-							<span class="title">Support</span>
+					<li><a href="custlanding!appointment" id="support"> <i
+							class="linecons-note"></i> <span class="title">Support</span>
 					</a></li>
 
 				</ul>
@@ -430,430 +411,89 @@
 				</div>
 
 			</div>
-			<section class="profile-env" id="chat_section">
 
-				<div class="row">
-					<div class="col-sm-6" id="activity-container">
-					<!--Chat design  -->
-					<div class="xe-widget xe-conversations">
-					<div class="xe-bg-icon">
-							<i class="linecons-comment"></i>
-						</div>
-						<div class="xe-header">
-							<div class="xe-icon">						
-								<i class="linecons-comment"></i>
-							</div>
-							<div class="xe-label">
-								<h3>
-									Conversations
-									<small>Chatting arround</small>
-								</h3>
-							</div>
-						</div>
-						<div class="xe-body  widget-scroll" id="xe-body" >
-							<!-- chat to be added dynamically -->
-							<ul class="list-unstyled" id="chatItem">
-							
-							</ul>
-						</div>						
-					</div>					
-
-						<div class="hidden" id="logged-in">							
-							<div id="chat-container">																
-								<div id="chat-input">									
-									<div class="form-group">
-										<label for="chat-message">Chat Message</label>
-										<input type="text" name="chat-message" id="chat-message"
-											class="form-control">									
-									</div>
-									<button name="button" type="submit" class="btn btn-success"
-										id="chat-btn">Send</button>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Video Call -->
-					 <div class="col-sm-6" id="activity-container">
-          
-          
-          
-          <div id="logged-in">           
-            <div class="xe-widget xe-conversations">
-						<div class="xe-bg-icon">
-								<i class="linecons-comment"></i>
-						</div>
-						<div class="xe-header">
-							<div class="xe-icon">						
-								<i class="linecons-comment"></i>
-							</div>
-							<div class="xe-label">
-								<h3>
-									Video
-										<small>Video call with bank executive</small>
-								</h3>
-							</div>
-						</div>
-						<div class="xe-body video-scroll" id="xe-body" >
-								<!-- chat to be added dynamically -->
-							<div class="row">
-				                <div class="col-sm-10">
-				                <center>
-				                  <div class="video" id="incoming-video"></div>
-				                 </center>
-				                </div>
-				                <!-- <div class="col-sm-6">
-				                  <div class="video" id="outgoing-video"></div>
-				                </div> -->
-				              </div>
-							</div>
-            </div>
-            <hr /><div class="hidden" id="incoming-call">
-              <h4>
-                Incoming Call
-              </h4>
-              <p id="username-incoming"></p>
-              <div class="btn-toolbar">
-                <button class="btn btn-success col-sm-5" id="answer-call-btn">Answer Call</button><button class="btn btn-warning col-sm-5" id="reject-call-btn">Reject Call</button>
-              </div>
-            </div><div class="hidden" id="call-connected">
-              <h4>
-                Call Connected
-              </h4>
-              <p id="username-connected"></p>
-              <div class="btn-toolbar">
-                <button class="btn btn-danger col-sm-5" id="end-call-btn">End Call</button><button class="btn btn-warning col-sm-5" id="hold-call-btn">Hold Call</button><button class="btn btn-success hidden col-sm-5" id="resume-call-btn">Resume Call</button>
-              </div>
-            </div>
-          </div>
-          
-          
-          
-          
-        </div>
-		
-					<!-- video call end -->
-					
-					
-					<!-- File sharing -->
-				</div>
-
-<div id="row" class="hidden">
-
-  <div id="logged-in">
-            <hr />
-            <div class="clearfix">
-              <p class="h4 pull-left">
-                <strong>Hello <span class="username"></span></strong>
-              </p>
-              <button class="btn btn-danger pull-right" id="logout-btn">Logout</button>
-            </div>
-            <hr />
-            <div id="chat-container">
-              <h3>
-                Messages
-              </h3>
-              <div id="chat-messages"></div>
-              <hr />
-              <div id="chat-input">
-                <div class="form-group">
-                  <label for="chat-contacts">Select Contact</label>
-                  <select name="chat-contacts" id="chat-contacts" class="form-control"></select>
-                  
-                </div>
-                <div class="form-group">
-                  <label for="chat-file">Chat File</label>
-                  <input type="file" name="chat-file" id="chat-file" class="form-control" />
-                  
-                </div>
-                <button name="button" type="submit" class="btn btn-success" id="file-btn">Send</button>
-                
-              </div>
-            </div>
-          </div>
-</div>
-
-<!-- File upload new design -->
-<div id="row">
-
-<div class="panel panel-default">
-			
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Upload Files <small>Send file to Bank agent</small>
-					</h3>
-				</div>
-				
-				<div class="panel-body">
-					
-					
-					
-					<br />
-					<div class="row">
-						<div class="col-sm-3 text-center">
-						
-							<div id="advancedDropzone" class="droppable-area">
-								Drop Files Here
-							</div>
-							
-						</div>
-						<div class="col-sm-9">
-							
-							<table class="table table-bordered table-striped" id="example-dropzone-filetable">
-								<thead>
-									<tr>
-										<th width="1%" class="text-center">#</th>
-										<th width="50%">Name</th>
-										<th width="20%">Upload Progress</th>
-										<th>Size</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="5">Files list will appear here</td>
-									</tr>
-								</tbody>
-							</table>
-							
-						</div>
-					</div>
-					
-				</div>
-			
-			</div>
-</div>
-
-
-<!--File upload end  -->
-
-			</section>
 			<section class="profile-env" id="profile_section">
+				<div class="col-sm-12">
 
-				<div class="row">
+					<div class="row">
 
-					<!-- <div class="col-sm-3">
-						
-						User Info Sidebar
-						<div class="user-info-sidebar">
-							
-							<a href="#" class="user-img">
-								<img src="../assets/images/user-4.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-							</a>
-							
-							<a href="#" class="user-name">
-								Art Ramadani
-								<span class="user-status is-online"></span>
-							</a>
-							
-							<span class="user-title">
-								CEO at <strong>Google</strong>
-							</span>
-							
-							<hr />
-							
-							<ul class="list-unstyled user-info-list">
-							<li>
-								<i class="fa-home"></i>
-								Prishtina, Kosovo
-							</li>
-							<li>
-								<i class="fa-briefcase"></i>
-								<a href="#">Laborator</a>
-							</li>
-							<li>
-								<i class="fa-graduation-cap"></i>
-								University of Bologna
-							</li>
-						</ul>	
-								
-							<hr />
-							
-							<ul class="list-unstyled user-friends-count">
-								<li>
-									<span>643</span>
-									followers
-								</li>
-								<li>
-									<span>108</span>
-									following
-								</li>
-							</ul>
-							
-							<button type="button" class="btn btn-success btn-block text-left">
-								
-								<i class="fa-headphones "></i> Customer Care
-							</button>
+						<div class="col-sm-3">
+
+							<div data-easing="false" data-duration="3" data-suffix="k"
+								data-to="117" data-from="1" data-count=".num"
+								class="xe-widget xe-counter xe-counter-blue">
+								<div class="xe-icon">
+									<i class="fa-bank"></i>
+								</div>
+								<div class="xe-label">
+									<strong class="num">1053 Rs</strong> <span>Current
+										Balance</span>
+								</div>
+							</div>
+
 						</div>
-						
-					</div> -->
-					<div class="col-sm-12">
+						<div class="col-sm-3">
 
-						<div class="row">
-
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="fa-bank"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">1053 Rs</strong> <span>Current
-											Balance</span>
-									</div>
+							<div data-easing="true" data-duration="4" data-to="2470"
+								data-from="1000" data-count=".num"
+								class="xe-widget xe-counter xe-counter-info">
+								<div class="xe-icon">
+									<i class="fa-credit-card"></i>
 								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="true" data-duration="4" data-to="2470"
-									data-from="1000" data-count=".num"
-									class="xe-widget xe-counter xe-counter-info">
-									<div class="xe-icon">
-										<i class="fa-credit-card"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">14556</strong> <span>Credit Card
-											Outstanding</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-delay="1" data-easing="true" data-duration="5"
-									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
-									data-count=".num" class="xe-widget xe-counter xe-counter-red">
-									<div class="xe-icon">
-										<i class="fa-cubes"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">55000</strong> <span>Loan Amount</span>
-									</div>
+								<div class="xe-label">
+									<strong class="num">14556</strong> <span>Credit Card
+										Outstanding</span>
 								</div>
 							</div>
-							<div class="col-sm-3">
 
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="fa-calculator"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">6050 Rs</strong> <span>Outstanding
-											Balance</span>
-									</div>
+						</div>
+						<div class="col-sm-3">
+
+							<div data-delay="1" data-easing="true" data-duration="5"
+								data-suffix="%" data-prefix="-," data-to="57" data-from="0"
+								data-count=".num" class="xe-widget xe-counter xe-counter-red">
+								<div class="xe-icon">
+									<i class="fa-cubes"></i>
 								</div>
-
+								<div class="xe-label">
+									<strong class="num">55000</strong> <span>Loan Amount</span>
+								</div>
 							</div>
 						</div>
+						<div class="col-sm-3">
 
-					</div>
-
-					<div class="col-md-12">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Recent Transactions</h3>
-
-								<div class="panel-options">
-									<a href="#"> <i class="linecons-cog"></i>
-									</a> <a href="#" data-toggle="panel"> <span
-										class="collapse-icon">&ndash;</span> <span class="expand-icon">+</span>
-									</a> <a href="#" data-toggle="reload"> <i
-										class="fa-rotate-right"></i>
-									</a>
-
-
+							<div data-easing="false" data-duration="3" data-suffix="k"
+								data-to="117" data-from="1" data-count=".num"
+								class="xe-widget xe-counter xe-counter-blue">
+								<div class="xe-icon">
+									<i class="fa-calculator"></i>
+								</div>
+								<div class="xe-label">
+									<strong class="num">6050 Rs</strong> <span>Outstanding
+										Balance</span>
 								</div>
 							</div>
 
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Date</th>
-										<th>Description</th>
-										<th>Type</th>
-										<th>Amount</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>30/Jun/2015</td>
-										<td>ATM Withdrawn at TechMCC Chennai</td>
-										<td>Debited</td>
-										<td class="middle-align">5000.00</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>27/Jun/2015</td>
-										<td>Cheque No:985054</td>
-										<td>Debited</td>
-										<td class="middle-align">9500.00</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>16/Jun/2015</td>
-										<td>IMPS Tranfered Inwards</td>
-										<td>Credited</td>
-										<td class="middle-align">78600.00</td>
-									</tr>
-
-									<tr>
-										<td>5</td>
-										<td>31/May/2015</td>
-										<td>Salary Credited Tech Mahindra</td>
-										<td>Credited</td>
-										<td class="middle-align">49660.00</td>
-									</tr>
-
-									<tr>
-										<td>4</td>
-										<td>28/May/2015</td>
-										<td>ATM Card Maintenace Charges</td>
-										<td>Debited</td>
-										<td class="middle-align">250.00</td>
-									</tr>
-								</tbody>
-							</table>
 						</div>
-
 					</div>
 
 				</div>
+				<div class="page-title">
+
+					<div class="title-env">
+						<h1 class="title">Booked Appoinment Detail</h1>
+					</div>
+					<div class="col-sm-3">
+					<s:if test="hasActionMessages()">
+						<s:actionmessage />
+					</s:if>
+					</div>
+				</div>
+
 
 			</section>
 
-			<script type="text/javascript"
-				src="//maps.google.com/maps/api/js?sensor=false"></script>
-			<script type="text/javascript">
-				function initialize() {
-					var $ = jQuery, map_canvas = $("#sample-checkin");
 
-					var location = new google.maps.LatLng(36.738888,
-							-119.783013), map = new google.maps.Map(
-							map_canvas[0], {
-								center : location,
-								zoom : 14,
-								mapTypeId : google.maps.MapTypeId.ROADMAP,
-								scrollwheel : false
-							});
-
-					var marker = new google.maps.Marker({
-						position : location,
-						map : map
-					});
-				}
-
-				google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
 
 			<!-- Main Footer -->
 			<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
@@ -886,6 +526,7 @@
 		</div>
 	</div>
 
+
 	<!-- Imported styles on this page -->
 	<link rel="stylesheet"
 		href="../assets/css/fonts/elusive/css/elusive.css">
@@ -900,7 +541,7 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
-	
+
 	<!-- Imported styles on this page -->
 	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
 
@@ -919,7 +560,7 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
-	
+
 
 </body>
 </html>

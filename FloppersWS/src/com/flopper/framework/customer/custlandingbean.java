@@ -39,14 +39,9 @@ public class custlandingbean extends ActionSupport implements
 
 	}
 
-	public String scheduleappoinment() throws Exception {
-
+	public String appointment() throws Exception {
 		System.out.println("hi");
-		HttpSession session = request.getSession(false);
-		String userID = (String) session.getAttribute("SESSION_USERID");
-		if (userID != null)
-			new logincheck().userLogout(userID);
-		return "logout";
+		return "appointment";
 
 	}
 
