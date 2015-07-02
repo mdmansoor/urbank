@@ -1,21 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Kandy | Session Participation</title>
-<tags:dependencies></tags:dependencies>
-<tags:script src="sample/session_participation.js" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token"
+	content="ploHzS/U6EBH7NXst1Kp8VfpzkLvp9lZcD+O6gm+255Lg6k9q9OvlZgB1VzgSfpEMwVCXedV22HzScuNWJ60Mg==" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="/assets/favicon-3d48a59a912fb6c93201b5ad646b93ae.ico" />
 
-<script type="text/javascript">
-	
-</script>
+<!--Load Bootstrap CSS (optional)-->
+<link rel="stylesheet" media="screen"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" media="screen"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+
+<!--Load Kandy JS files (required - jQuery is required too!)-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.1/fcs.js"></script>
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.1.1/kandy.js"></script>
+
+<!--Load Pace AJAX Progress Bar (optional)-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+<link rel="stylesheet" media="screen"
+	href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
+
+
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2" id="activity-container">
+			<div class="col-md-8 col-md-offset-2" id="activity-container">
 				<div id="app-details">
 					<h1 class="h2">Quick Start Sample App: Session Participation</h1>
 					<p>This sample application demonstrates Session Participation</p>
@@ -26,7 +45,7 @@
 					method="post">
 					<input name="utf8" type="hidden" value="&#x2713;" /><input
 						type="hidden" name="authenticity_token"
-						value="1Sr6jqi0Eidu0/BudOcA3QDqFOMHblYBDnG58M4xcKFmusUV+NADmqkyjXBrc8fVokJLTu2jMBBJuGVoXVrdYw==" />
+						value="WhHZ3GKLEx9qZXW6B3pjTWuHkkQRM53zeyUK5i6zddW3yHcs5oxUyrWIdQpQYTD4D2seWxnBn8v4U0+Bf5MaeQ==" />
 					<div class="form-group string required quick_start_login_api_key">
 						<label class="string required col-sm-3 control-label"
 							for="api_key"><abbr title="required">*</abbr> Project API
@@ -129,7 +148,7 @@
 							method="post">
 							<input name="utf8" type="hidden" value="&#x2713;" /><input
 								type="hidden" name="authenticity_token"
-								value="WDIi/EITg74llk6u8vxAH+XVJY5wCO05gQNOwoxDIwvroh1nEneSA+J3M7DtaIcXR316I5rFiyjGypJaHyiOyQ==" />
+								value="fGyC4xdneWiH/EciyRRUNeMLR0WwMJ1g7FMbmEi4oxuRtSwTk2A+vVgRR5KeDweAh+fLWrjCn1hvJV7/GZjMtw==" />
 
 							<div class="form-group">
 								<label for="join_user_nickname">Join user nickname</label> <input

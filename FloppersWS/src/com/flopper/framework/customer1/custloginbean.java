@@ -1,4 +1,4 @@
-package com.flopper.framework.customer;
+package com.flopper.framework.customer1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author MM00344894
  * 
  */
-public class custloginbean extends ActionSupport implements
-		ServletRequestAware {
+public class custloginbean extends ActionSupport implements ServletRequestAware {
 
 	/**
 	 * 
@@ -73,22 +72,14 @@ public class custloginbean extends ActionSupport implements
 
 	@Override
 	public String execute() throws Exception {
-		logincheck login = new logincheck();
-		Map<String, String> map = new HashMap<String, String>();
 
-	
-		HttpSession session =request.getSession(true);
-		map = login.userLogin(username, password);
-		if (map.get(Constants.RESULT).equals(Constants.SUCCESS)) {
+		HttpSession session = request.getSession(true);
 
-			session.setAttribute("LASTLOGINTIME", map.get("LASTLOGINTIME"));
-			session.setAttribute("SESSION_USERNAME", map.get("SESSION_USERNAME"));
-			session.setAttribute("SESSION_USERID", username);
-			
-			return SUCCESS;
-		} else
-			this.addFieldError("username", map.get(Constants.RESULT));
-			return ERROR;
+		session.setAttribute("LASTLOGINTIME", "02/07/2015");
+		session.setAttribute("SESSION_USERNAME", "Mansoor M");
+		session.setAttribute("SESSION_USERID", username);
+
+		return SUCCESS;
 
 	}
 

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-import com.flopper.framework.common.WebContext;
 import com.flopper.framework.constant.Constants;
 import com.flopper.framework.db.logincheck;
 import com.opensymphony.xwork2.ActionSupport;

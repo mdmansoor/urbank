@@ -6,7 +6,7 @@
 <html>
 <head>
 <tags:custdependencies></tags:custdependencies>
-<tags:script src="common/agentlogin.js" />
+<tags:script src="customer/custlogin.js" />
 
 </head>
 <body>
@@ -22,7 +22,7 @@
 					<!-- Add class "fade-in-effect" for login form effect -->
 		
 
-					<s:form action="agentlogin" cssClass="login-form">
+					<s:form action="custlogin1" cssClass="login-form">
 						<div class="login-header">
 							<a href="custlogin.jsp" class="logo"> <img
 								src="../assets/images/logo-white-bg@2x.png" alt="" />
