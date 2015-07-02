@@ -71,4 +71,6 @@
 	height: 240px;
     overflow: auto;
 }
-
+.video-scroll{
+	height: 240px;
+}

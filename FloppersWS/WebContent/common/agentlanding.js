@@ -120,7 +120,7 @@ audioSource.ringOut.forEach(function(entry) {
          var $file = $('<p>').text(file.name);
    
          $chatItem.append($username, $file);
-         $('#chat-messages').append($chatItem);
+         $('#xe-body ul').append($chatItem);
        },
        function () {
            alert('IM send failed');

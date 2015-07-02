@@ -477,18 +477,34 @@
           
           
           <div id="logged-in">           
-            <div id="video-container">
-              <h3>
-                Video
-              </h3>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="video" id="incoming-video"></div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="video" id="outgoing-video"></div>
-                </div>
-              </div>
+            <div class="xe-widget xe-conversations">
+						<div class="xe-bg-icon">
+								<i class="linecons-comment"></i>
+						</div>
+						<div class="xe-header">
+							<div class="xe-icon">						
+								<i class="linecons-comment"></i>
+							</div>
+							<div class="xe-label">
+								<h3>
+									Video
+										<small>Video call with bank executive</small>
+								</h3>
+							</div>
+						</div>
+						<div class="xe-body video-scroll" id="xe-body" >
+								<!-- chat to be added dynamically -->
+							<div class="row">
+				                <div class="col-sm-10">
+				                <center>
+				                  <div class="video" id="incoming-video"></div>
+				                 </center>
+				                </div>
+				                <!-- <div class="col-sm-6">
+				                  <div class="video" id="outgoing-video"></div>
+				                </div> -->
+				              </div>
+							</div>
             </div>
             <hr /><div class="hidden" id="incoming-call">
               <h4>
@@ -508,6 +524,10 @@
               </div>
             </div>
           </div>
+          
+          
+          
+          
         </div>
 		
 					<!-- video call end -->
