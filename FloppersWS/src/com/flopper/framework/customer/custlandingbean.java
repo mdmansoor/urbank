@@ -12,7 +12,7 @@ import com.flopper.framework.constant.Constants;
 import com.flopper.framework.db.logincheck;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class custlogoutbean extends ActionSupport implements
+public class custlandingbean extends ActionSupport implements
 		ServletRequestAware {
 	/**
 	 * 
@@ -28,14 +28,25 @@ public class custlogoutbean extends ActionSupport implements
 		return this.request;
 	}
 
-	@Override
-	public String execute() throws Exception {
+	public String logout() throws Exception {
 
+		System.out.println("hi");
 		HttpSession session = request.getSession(false);
 		String userID = (String) session.getAttribute("SESSION_USERID");
 		if (userID != null)
 			new logincheck().userLogout(userID);
-		return SUCCESS;
+		return "logout";
+
+	}
+
+	public String scheduleappoinment() throws Exception {
+
+		System.out.println("hi");
+		HttpSession session = request.getSession(false);
+		String userID = (String) session.getAttribute("SESSION_USERID");
+		if (userID != null)
+			new logincheck().userLogout(userID);
+		return "logout";
 
 	}
 

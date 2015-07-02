@@ -14,8 +14,8 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 			<result name="success">custlanding.jsp</result>
 		</action>
 
-		<action name="custlogout" class="com.flopper.framework.customer.custlogoutbean">
-			<result name="success">custlogin.jsp</result>
+		<action name="custlanding" class="com.flopper.framework.customer.custlandingbean">
+			<result name="logout">custlanding.jsp</result>
 		</action>
 
 
