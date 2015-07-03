@@ -202,7 +202,7 @@ audioSource.ringOut.forEach(function(entry) {
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
    username="customer";
-   alert(username);
+   //alert(username);
    var apiKey="DAK654f8a1cf41445718a512c4a7eb9d9f6";
    password="reset@123";
     
@@ -214,7 +214,8 @@ audioSource.ringOut.forEach(function(entry) {
      userArray.push(username);
      kandy.getLastSeen(userArray);
      UIState.authenticated();
-     
+     getSessions();
+alert("login over");
      //Checks every 5 seconds for incoming messages
      setInterval(receiveMessages, 5000);
    },
@@ -523,10 +524,36 @@ minHeight: 200
 
 //-------------file upload end----------------
 
+//kandy.session.getOpenSessionsByType(success, failure);
 
+function getSessions(){
+alert("get session called");
+	kandy.session.getOpenSessions(
+	function(msg){
+	    
+		//alert(msg);
+		try{
+		
+			var strResp=JSON.stringify(msg);
+			alert(strResp);
+			
+		}catch(e){
+			
+		}
+		
+	  },
+	  function(){
+	    alert("error");
+	 
+	});
+	
+	
+}
 
 
  });
+
+
 
 window.setInterval(function() {
     var elem = document.getElementById('xe-body');
