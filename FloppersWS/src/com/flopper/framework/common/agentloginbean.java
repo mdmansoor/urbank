@@ -1,4 +1,4 @@
-package com.flopper.framework.customer;
+package com.flopper.framework.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.flopper.framework.constant.Constants;
-import com.flopper.framework.db.logincheck;
+import com.flopper.framework.db.agentlogincheck;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * @author MM00344894
  * 
  */
-public class custloginbean extends ActionSupport implements
+public class agentloginbean extends ActionSupport implements
 		ServletRequestAware {
 
 	/**
@@ -73,7 +73,7 @@ public class custloginbean extends ActionSupport implements
 
 	@Override
 	public String execute() throws Exception {
-		logincheck login = new logincheck();
+		agentlogincheck login = new agentlogincheck();
 		Map<String, String> map = new HashMap<String, String>();
 
 	

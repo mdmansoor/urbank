@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="agent1" extends="struts-default">
+		<action name="agentlogin1" class="com.flopper.framework.common1.agentloginbean">
+			<result name="input">agentlogin.jsp</result>
+			<result name="error">agentlogin.jsp</result>
+			<result name="success">agentlanding.jsp</result>
+		</action>
+	</package>
+
+
+
+</struts> 

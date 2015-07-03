@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <html>
 <head>
 <tags:dependencies></tags:dependencies>
-<tags:script src="customer/cscustomer.js" />
+<tags:script src="common/csagent.js" />
 </head>
-<body>
+<body class="brand-lighter">
 	<tags:header />
 	<div class="container">
 		<div class="row">
@@ -23,7 +21,7 @@
 								type="hidden" name="authenticity_token"
 								value="OlargpQtQGzKE+3wa9sKoPyc6HIeZ9GMmL1fUGlfwejD2OYtwTL9KjC6c6M23KmpC1L4fmfe7ZWypKn+Hxl7Yg==" />
 							<br> <br> <br> <br>
-							<h4>Login as Customer, Click login button</h4>
+							<h4>Login as Admin, Click login button</h4>
 							<div class="form-group string required quick_start_login_api_key">
 								<label class="string required col-sm-3 control-label hidden"
 									for="api_key"><abbr title="required">*</abbr> Project
@@ -40,8 +38,8 @@
 									for="username"><abbr title="required">*</abbr> Username</label>
 								<div class="col-sm-9">
 									<input id="username" name="username"
-										class="string required form-control" type="text"
-										value="customer1" disabled />
+										class="string required form-control" type="text" value="admin"
+										disabled />
 								</div>
 							</div>
 							<div
@@ -58,7 +56,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-9">
 									<input type="submit" name="commit" value="Login" id="login-btn"
-										class="btn btn-success" />
+										class="btn btn-primary" />
 
 								</div>
 							</div>
@@ -66,14 +64,13 @@
 					</div>
 				</div>
 
-
 				<div class="hidden" id="logged-in">
 					<hr />
 					<div class="clearfix">
 						<p class="h4 pull-left">
 							<strong>Hello <span class="username"></span></strong>
 						</p>
-						<button class="btn btn-danger pull-right" id="logout-btn">Logout</button>
+						<button class="btn btn-info pull-right" id="logout-btn">Logout</button>
 					</div>
 					<hr />
 					<div id="video-container">
@@ -88,15 +85,26 @@
 						</div>
 					</div>
 					<hr />
-					<div class="hidden" id="incoming-call">
-						<h4>Incoming Call</h4>
-						<p id="username-incoming"></p>
-						<div class="btn-toolbar">
-							<button class="btn btn-success" id="answer-call-btn">Answer
-								Call</button>
-							<button class="btn btn-warning" id="reject-call-btn">Reject
+					<div id="call-form">
+						<h4>Make a Call</h4>
+						<p id="username-calling"></p>
+						<div class="form-group call-initializer">
+							<label for="user_to_call">Enter Caller Username</label> <input
+								type="text" name="user_to_call" id="user_to_call"
+								class="form-control" placeholder="name@company.com"
+								value="customer@webrtc.techmahindra.com" />
+
+						</div>
+						<div class="form-group call-initializer">
+							<button class="btn btn-success" id="initialize-call-btn">Call</button>
+						</div>
+
+						<div class="form-group call-terminator hidden">
+							<button class="btn btn-danger" id="initialize-end-btn">End
 								Call</button>
 						</div>
+						<hr>
+
 					</div>
 					<div class="hidden" id="call-connected">
 						<h4>Call Connected</h4>
@@ -109,6 +117,7 @@
 							<button class="btn btn-success hidden" id="resume-call-btn">Resume
 								Call</button>
 						</div>
+						<hr>
 					</div>
 				</div>
 			</div>

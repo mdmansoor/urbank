@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bank @ Doorstep | Customer</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="csrf-param" content="authenticity_token" />
-    <meta name="csrf-token" content="zrraE4jjEDNDu3OF0OenQtnqvZH5f1RgtzcNboHbZS43NJe83fytdbkS7daN4ARLLiStnYDGaHmdLvvA953fpA==" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://dev.kandy.io:3000/assets/favicon-3da99d2536c9fa570157780f5d5f6f0d.ico" />
-    
-    <!--Load Bootstrap CSS (optional)-->
-    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
-    
-    <!--Load Kandy JS files (required - jQuery is required too!)--><script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
-    <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
-    
-    <!--Load Pace AJAX Progress Bar (optional)-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
-    
-    <script type="text/javascript">
+<head>
+    <title>Bank @ Doorstep | Agent</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token"
+	content="mpDPBAGiZS382EkSfu64Q9jLAYJogC8mjTWjqp+O/OVjHoKrVL3YawZx10Ej6RtKLwURjhE5Ez+nLFUE6chGbw==" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="http://dev.kandy.io:3000/assets/favicon-3da99d2536c9fa570157780f5d5f6f0d.ico" />
+
+<!--Load Bootstrap CSS (optional)-->
+<link rel="stylesheet" media="screen"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" media="screen"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+
+<!--Load Kandy JS files (required - jQuery is required too!)-->
+<script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
+<script
+	src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
+
+<!--Load Pace AJAX Progress Bar (optional)-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+<link rel="stylesheet" media="screen"
+	href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
+
+<script type="text/javascript">
       $(function() {
-        var callId;
+        var callId, username;
       
         // Create audio objects to play incoming calls and outgoing calls sound
       var $audioRingIn = $('<audio>', { loop: 'loop', id: 'ring-in' });
@@ -55,17 +64,16 @@
           
           remoteVideoContainer: $('#incoming-video')[0],
           localVideoContainer: $('#outgoing-video')[0],
-      
           // listeners registers events to handlers
           // You can handle all Kandy Events by registering it here
           listeners: {
             loginsuccess: onLoginSuccess,
             loginfailed: onLoginFailed,
-            callincoming: onCallIncoming,
+            callinitiated: onCallInitiate,
+            callinitiatefailed: onCallInitiateFail,
             oncall: onCall,
-            callanswered: onCallAnswer,
             callended: onCallTerminate,
-            callrejected: onCallRejected
+            callendedfailed: onCallEndedFailed
           }
         });
       
@@ -104,10 +112,9 @@
         KandyAPI.Phone.updatePresence(0);
         UIState.authenticated();
         loadContacts();
-
+        
         // Checks every 5 seconds for incoming messages
         setInterval(receiveMessages, 1000);
-        
       }
       
       // Event handler for onLoginFailed event
@@ -122,6 +129,12 @@
         username = $('#username').val();
         var apiKey = $('#api_key').val();
         var password = $('#password').val();
+        
+      /*   username="admin";
+        var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+        password="reset@123";
+         */
+        
       
         /** login(domainApiId, userName, password)
             logs in user to Kandy Platform
@@ -138,6 +151,40 @@
         KandyAPI.Phone.logout(function() {
           UIState.unauthenticated();
         });
+      });
+        // Event handler for callinitiate
+      function onCallInitiate(call) {
+        callId = call.getId();
+      
+        $audioRingIn[0].pause();
+        $audioRingOut[0].play();
+      
+        $('#username-calling').text('Calling ' + $('#user_to_call').val());
+        UIState.callinitialized();
+      }
+      
+      // Event handler for callinitiatefail event
+      function onCallInitiateFail() {
+        console.debug('call initiate fail');
+      
+        $audioRingOut[0].pause();
+        UIState.initial();
+        alert('call failed');
+      }
+      
+      UIState.callinitialized = function() {
+        console.log('callinitialized');
+      
+        $('.call-initializer').addClass('hidden');
+      };// Event handler for initiate call button
+      $('#initialize-call-btn').on('click', function() {
+        var username = $('#user_to_call').val();
+      
+        /** makeCall( userName, cameraOn ) : Void
+            Initiates a call to another Kandy user over web
+            @params <string> userName, <boolean> cameraOn
+        */
+        KandyAPI.Phone.makeCall(username, true);
       });
         // Event handler for oncall event
       function onCall(call) {
@@ -199,75 +246,6 @@
         $('#hold-call-btn').removeClass('hidden');
         $('#resume-call-btn').addClass('hidden');
       };
-        // Event handler for callincoming event
-      function onCallIncoming(call, isAnonymous) {
-        $audioRingIn[0].play();
-        callId = call.getId();
-      
-        if (!isAnonymous) {
-          $('#username-incoming').text(call.callerName + ' Calling!');
-        } else {
-          $('#username-incoming').text('Anonymous Calling');
-        }
-      
-        UIState.callincoming();
-      }
-      
-      // Event handler for oncallanswered event
-      function onCallAnswer(call) {
-        callId = call.getId();
-      
-        $audioRingOut[0].pause();
-        $audioRingIn[0].pause();
-      }
-      
-      // Event handler for callansweredfailed event
-      function onCallAnsweredFailed(call) {
-        console.debug('callanswerfailed');
-        callId = null;
-      }
-      
-      // Event handler for callrejected event
-      function onCallRejected() {
-        console.debug('callrejected');
-        callId = null;
-        $audioRingIn[0].pause();
-        UIState.callrejected();
-        alert('Call Rejected');
-      }
-      
-      // Event handler for callrejectfailed event
-      function onCallRejectFailed() {
-        console.debug('callrejectfailed');
-        alert('Call Decline Failed');
-      }
-      
-      // Event handler for call answer button
-      $('#answer-call-btn').on('click', function() {
-        KandyAPI.Phone.answerCall(callId, true);
-        UIState.oncall();
-      });
-      
-      // Event handler for call reject button
-      $('#reject-call-btn').on('click', function() {
-        KandyAPI.Phone.rejectCall(callId);
-        UIState.initial();
-      });
-      
-      UIState.callincoming = function() {
-        console.log('call incoming');
-      
-        $('#call-form, #call-connected').addClass('hidden');
-        $('#incoming-call').removeClass('hidden');
-      };
-      
-      UIState.callrejected = function() {
-        console.log('call rejected');
-      
-        $('#incoming-call').addClass('hidden');
-      };
-      
-      
       
       
       
@@ -376,82 +354,133 @@
       
       
       });
+    
     </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-8" id="activity-container">
-          <div id="app-details">
+</head>
+<body class="brand-lighter">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8" id="activity-container">
+				<div id="app-details">
 					<h1 class="h2">Bank at your door Step</h1>
 					<p>
 						<i>To provide a hassle free banking for our customer.</i>
 					</p>
 				</div>
-				
-         <div class="row">
-          <div class="col-xs-offset-2">
-          <form id="login-form" class="simple_form form-horizontal" novalidate="novalidate" action="" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="OlargpQtQGzKE+3wa9sKoPyc6HIeZ9GMmL1fUGlfwejD2OYtwTL9KjC6c6M23KmpC1L4fmfe7ZWypKn+Hxl7Yg==" />
-          				<br> <br> <br> <br>		
-          			<h4>Login as Customer, Click login button</h4>
-                    <div class="form-group string required quick_start_login_api_key"><label class="string required col-sm-3 control-label hidden" for="api_key"><abbr title="required">*</abbr> Project API Key</label><div class="col-sm-9"><input id="api_key" name="api_key" class="string required form-control hidden" type="text" value="DAK5aa3e878df1d46ca9f83e27ad0dfba1f" /></div></div>
-                    <div class="form-group string required quick_start_login_username"><label class="string required col-sm-3 control-label" for="username"><abbr title="required">*</abbr> Username</label><div class="col-sm-9"><input id="username" name="username" class="string required form-control" type="text" value="customer1" disabled/></div></div>
-                    <div class="form-group password required quick_start_login_password"><label class="password required col-sm-3 control-label" for="password"><abbr title="required">*</abbr> Password</label><div class="col-sm-9"><input id="password" name="password" class="password required form-control" type="password" value="reset@123" disabled/></div></div>
-                    
-                    <div class="form-group">
-                      <div class="col-sm-offset-3 col-sm-9">
-                        <input type="submit" name="commit" value="Login" id="login-btn" class="btn btn-success" />
-                        
-                      </div>
-                    </div></form>
-          </div>
-          </div>
-         
-         
-          <div class="hidden" id="logged-in">
-            <hr />
-            <div class="clearfix">
-              <p class="h4 pull-left">
-                <strong>Hello <span class="username"></span></strong>
-              </p>
-              <button class="btn btn-danger pull-right" id="logout-btn">Logout</button>
-            </div>
-            <hr />
-            <div id="video-container">
-              <h3>
-                Video
-              </h3>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="video" id="incoming-video"></div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="video" id="outgoing-video"></div>
-                </div>
-              </div>
-            </div>
-            <hr /><div class="hidden" id="incoming-call">
-              <h4>
-                Incoming Call
-              </h4>
-              <p id="username-incoming"></p>
-              <div class="btn-toolbar">
-                <button class="btn btn-success" id="answer-call-btn">Answer Call</button><button class="btn btn-warning" id="reject-call-btn">Reject Call</button>
-              </div>
-            </div><div class="hidden" id="call-connected">
-              <h4>
-                Call Connected
-              </h4>
-              <p id="username-connected"></p>
-              <div class="btn-toolbar">
-                <button class="btn btn-danger" id="end-call-btn">End Call</button><button class="btn btn-warning" id="hold-call-btn">Hold Call</button><button class="btn btn-success hidden" id="resume-call-btn">Resume Call</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
+
+				<div class="row">
+					<div class="col-xs-offset-2">
+						<form id="login-form" class="simple_form form-horizontal"
+							novalidate="novalidate" action="" accept-charset="UTF-8"
+							method="post">
+							<input name="utf8" type="hidden" value="&#x2713;" /><input
+								type="hidden" name="authenticity_token"
+								value="OlargpQtQGzKE+3wa9sKoPyc6HIeZ9GMmL1fUGlfwejD2OYtwTL9KjC6c6M23KmpC1L4fmfe7ZWypKn+Hxl7Yg==" />
+							<br> <br> <br> <br>
+							<h4>Login as Admin, Click login button</h4>
+							<div class="form-group string required quick_start_login_api_key">
+								<label class="string required col-sm-3 control-label hidden"
+									for="api_key"><abbr title="required">*</abbr> Project
+									API Key</label>
+								<div class="col-sm-9">
+									<input id="api_key" name="api_key"
+										class="string required form-control hidden" type="text"
+										value="DAK5aa3e878df1d46ca9f83e27ad0dfba1f" />
+								</div>
+							</div>
+							<div
+								class="form-group string required quick_start_login_username">
+								<label class="string required col-sm-3 control-label"
+									for="username"><abbr title="required">*</abbr> Username</label>
+								<div class="col-sm-9">
+									<input id="username" name="username"
+										class="string required form-control" type="text" value="admin"
+										disabled />
+								</div>
+							</div>
+							<div
+								class="form-group password required quick_start_login_password">
+								<label class="password required col-sm-3 control-label"
+									for="password"><abbr title="required">*</abbr> Password</label>
+								<div class="col-sm-9">
+									<input id="password" name="password"
+										class="password required form-control" type="password"
+										value="reset@123" disabled />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-9">
+									<input type="submit" name="commit" value="Login" id="login-btn"
+										class="btn btn-primary" />
+
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="hidden" id="logged-in">
+					<hr />
+					<div class="clearfix">
+						<p class="h4 pull-left">
+							<strong>Hello <span class="username"></span></strong>
+						</p>
+						<button class="btn btn-info pull-right" id="logout-btn">Logout</button>
+					</div>
+					<hr />
+					<div id="video-container">
+						<h3>Video</h3>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="video" id="incoming-video"></div>
+							</div>
+							<div class="col-sm-6">
+								<div class="video" id="outgoing-video"></div>
+							</div>
+						</div>
+					</div>
+					<hr />
+					<div id="call-form">
+						<h4>Make a Call</h4>
+						<p id="username-calling"></p>
+						<div class="form-group call-initializer">
+							<label for="user_to_call">Enter Caller Username</label> 
+							<input
+								type="text" name="user_to_call" id="user_to_call"
+								class="form-control" placeholder="name@company.com"
+								value="customer@webrtc.techmahindra.com" />
+
+						</div>
+						<div class="form-group call-initializer">
+							<button class="btn btn-success" id="initialize-call-btn">Call</button>
+						</div>
+					
+						<div class="form-group call-terminator hidden">
+							<button class="btn btn-danger" id="initialize-end-btn">End
+								Call</button>
+						</div>
+												<hr>
+						
+					</div>
+					<div class="hidden" id="call-connected">
+						<h4>Call Connected</h4>
+						<p id="username-connected"></p>
+						<div class="btn-toolbar">
+							<button class="btn btn-danger" id="end-call-btn">End
+								Call</button>
+							<button class="btn btn-warning" id="hold-call-btn">Hold
+								Call</button>
+							<button class="btn btn-success hidden" id="resume-call-btn">Resume
+								Call</button>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div id="row">
 			<div id="chat-container" class="hidden">	
 						
@@ -482,6 +511,6 @@
 				</div>
 			</div>
 		</div>
-    </div>
-  </body>
+	</div>
+</body>
 </html>

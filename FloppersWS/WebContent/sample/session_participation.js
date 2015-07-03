@@ -42,13 +42,13 @@ $(function() {
 	// Event handler for onUserLeave event
 	function onUserLeave(notification) {
 		$('#session-status').text("User left");
-		$('#session-actions').addClass('hidden');
+		$('#session-actions)').addClass('hidden');
 		loadSessionDetails();
 	}
 	// Event handler for onUserBoot event
 	function onUserBoot(notification) {
 		$('#session-status').text("Session User Boot");
-		$('#session-actions').addClass('hidden');
+		$('#session-actions)').addClass('hidden');
 		loadSessionDetails();
 	}
 	// Event handler for onActive event
@@ -116,7 +116,7 @@ $(function() {
 		 * 
 		 * @params <function> success/failure
 		 */
-		kandy.session.getOpenSessions(function(result) {
+		KandyAPI.Session.getOpenSessions(function(result) {
 			loadSessionList(result.sessions, alertWhenNone);
 		}, function(msg, code) {
 			$('#session-status').text(
@@ -168,18 +168,6 @@ $(function() {
 		}
 	}
 
-	function getLimitedUserDetails(user_access_token, cb) {
-
-		kandy.getLimitedUserDetails(user_access_token, function(results) {
-			if (typeof cb === 'function') {
-				cb(results);
-			}
-
-		}, function() {
-			console.log('Failed to get details: ', user_access_token);
-
-		});
-	}
 	// Event handler for login button
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
@@ -190,22 +178,19 @@ $(function() {
 		var password = $('#password').val();
 
 		/**
-		 * login(domainApiId, userName, password, success, failure ) logs in
-		 * user to Kandy Platform
+		 * login(domainApiId, userName, password) logs in user to Kandy Platform
 		 * 
 		 * @params <string> domainApiId, <string> userName, <string> password
 		 */
-		kandy.login(apiKey, username, password, function(results) {
-			getLimitedUserDetails(results.user_access_token, function(results) {
-				$('#username').text(results.full_user_id);
-				UIState.authenticated();
-				setInterval(function() {
-					if (sessions.length < 1) {
-						getOpenSessions();
-					}
-				}, 3000);
-				getOpenSessions();
-			});
+		KandyAPI.login(apiKey, username, password, function(results) {
+			$('#username').text(results.full_user_id);
+			UIState.authenticated();
+			setInterval(function() {
+				if (sessions.length < 1) {
+					getOpenSessions();
+				}
+			}, 3000);
+			getOpenSessions();
 		}, function(msg, code) {
 			alert('Error loggin in:(' + code + '): ' + msg);
 		});
@@ -219,7 +204,7 @@ $(function() {
 		 * 
 		 * @params <function> success/failure
 		 */
-		kandy.logout();
+		KandyAPI.logout();
 		UIState.unauthenticated();
 	});
 
@@ -240,7 +225,7 @@ $(function() {
 				 * @params <string> sessionId, <object> data, <function>
 				 *         success/failure, <string> destinationFullUserId
 				 */
-				kandy.session.sendData(
+				KandyAPI.Session.sendData(
 						sessions[$('#sessions-select').val()].session_id, $(
 								'#send-session-data').val(), function() {
 							$('#session-status').text('Data sent');
@@ -264,7 +249,7 @@ $(function() {
 		 * 
 		 * @params <string> sessionId, <function> success/failure
 		 */
-		kandy.session.getInfoById(sessionId, function(result) {
+		KandyAPI.Session.getInfoById(sessionId, function(result) {
 
 			// Update session details
 			var sess = updateSessionDetails(sessionId, result.session);
@@ -319,7 +304,7 @@ $(function() {
 								 * @params <string> sessionId, <object>
 								 *         sessionId
 								 */
-								kandy.session.setListeners(sess.session_id,
+								KandyAPI.Session.setListeners(sess.session_id,
 										listeners);
 								sessionListeners.push(sess.session_id);
 							}
@@ -341,10 +326,9 @@ $(function() {
 			function(e) {
 				e.preventDefault();
 
-				kandy.session.setListeners(
-						sessions[$("#sessions-select").val()].session_id,
-						listeners);
-				kandy.session.join(
+				KandyAPI.Session.setListeners(sessions[$("#sessions-select")
+						.val()].session_id, listeners);
+				KandyAPI.Session.join(
 						sessions[$("#sessions-select").val()].session_id, {
 							user_nickname : $("#join_user_nickname").val(),
 							user_first_name : $("#join_user_first_name").val(),
@@ -378,7 +362,7 @@ $(function() {
 				 * @params <string> sessionId, <string> leaveReason, <function>
 				 *         success/failure
 				 */
-				kandy.session.leave(
+				KandyAPI.Session.leave(
 						sessions[$("#sessions-select").val()].session_id,
 						"Let me outta here", function() {
 							UIState.sessionsavailable();

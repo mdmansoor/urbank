@@ -1,5 +1,5 @@
 $(function() {
-	var callId;
+	var callId, username;
 
 	// Create audio objects to play incoming calls and outgoing calls sound
 	var $audioRingIn = $('<audio>', {
@@ -53,17 +53,16 @@ $(function() {
 
 		remoteVideoContainer : $('#incoming-video')[0],
 		localVideoContainer : $('#outgoing-video')[0],
-
 		// listeners registers events to handlers
 		// You can handle all Kandy Events by registering it here
 		listeners : {
 			loginsuccess : onLoginSuccess,
 			loginfailed : onLoginFailed,
-			callincoming : onCallIncoming,
+			callinitiated : onCallInitiate,
+			callinitiatefailed : onCallInitiateFail,
 			oncall : onCall,
-			callanswered : onCallAnswer,
 			callended : onCallTerminate,
-			callrejected : onCallRejected
+			callendedfailed : onCallEndedFailed
 		}
 	});
 
@@ -107,7 +106,6 @@ $(function() {
 
 		// Checks every 5 seconds for incoming messages
 		setInterval(receiveMessages, 1000);
-
 	}
 
 	// Event handler for onLoginFailed event
@@ -122,6 +120,11 @@ $(function() {
 		username = $('#username').val();
 		var apiKey = $('#api_key').val();
 		var password = $('#password').val();
+
+		/*
+		 * username="admin"; var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+		 * password="reset@123";
+		 */
 
 		/**
 		 * login(domainApiId, userName, password) logs in user to Kandy Platform
@@ -141,6 +144,42 @@ $(function() {
 		KandyAPI.Phone.logout(function() {
 			UIState.unauthenticated();
 		});
+	});
+	// Event handler for callinitiate
+	function onCallInitiate(call) {
+		callId = call.getId();
+
+		$audioRingIn[0].pause();
+		$audioRingOut[0].play();
+
+		$('#username-calling').text('Calling ' + $('#user_to_call').val());
+		UIState.callinitialized();
+	}
+
+	// Event handler for callinitiatefail event
+	function onCallInitiateFail() {
+		console.debug('call initiate fail');
+
+		$audioRingOut[0].pause();
+		UIState.initial();
+		alert('call failed');
+	}
+
+	UIState.callinitialized = function() {
+		console.log('callinitialized');
+
+		$('.call-initializer').addClass('hidden');
+	};// Event handler for initiate call button
+	$('#initialize-call-btn').on('click', function() {
+		var username = $('#user_to_call').val();
+
+		/**
+		 * makeCall( userName, cameraOn ) : Void Initiates a call to another
+		 * Kandy user over web
+		 * 
+		 * @params <string> userName, <boolean> cameraOn
+		 */
+		KandyAPI.Phone.makeCall(username, true);
 	});
 	// Event handler for oncall event
 	function onCall(call) {
@@ -201,73 +240,6 @@ $(function() {
 
 		$('#hold-call-btn').removeClass('hidden');
 		$('#resume-call-btn').addClass('hidden');
-	};
-	// Event handler for callincoming event
-	function onCallIncoming(call, isAnonymous) {
-		$audioRingIn[0].play();
-		callId = call.getId();
-
-		if (!isAnonymous) {
-			$('#username-incoming').text(call.callerName + ' Calling!');
-		} else {
-			$('#username-incoming').text('Anonymous Calling');
-		}
-
-		UIState.callincoming();
-	}
-
-	// Event handler for oncallanswered event
-	function onCallAnswer(call) {
-		callId = call.getId();
-
-		$audioRingOut[0].pause();
-		$audioRingIn[0].pause();
-	}
-
-	// Event handler for callansweredfailed event
-	function onCallAnsweredFailed(call) {
-		console.debug('callanswerfailed');
-		callId = null;
-	}
-
-	// Event handler for callrejected event
-	function onCallRejected() {
-		console.debug('callrejected');
-		callId = null;
-		$audioRingIn[0].pause();
-		UIState.callrejected();
-		alert('Call Rejected');
-	}
-
-	// Event handler for callrejectfailed event
-	function onCallRejectFailed() {
-		console.debug('callrejectfailed');
-		alert('Call Decline Failed');
-	}
-
-	// Event handler for call answer button
-	$('#answer-call-btn').on('click', function() {
-		KandyAPI.Phone.answerCall(callId, true);
-		UIState.oncall();
-	});
-
-	// Event handler for call reject button
-	$('#reject-call-btn').on('click', function() {
-		KandyAPI.Phone.rejectCall(callId);
-		UIState.initial();
-	});
-
-	UIState.callincoming = function() {
-		console.log('call incoming');
-
-		$('#call-form, #call-connected').addClass('hidden');
-		$('#incoming-call').removeClass('hidden');
-	};
-
-	UIState.callrejected = function() {
-		console.log('call rejected');
-
-		$('#incoming-call').addClass('hidden');
 	};
 
 	// Chat integeration

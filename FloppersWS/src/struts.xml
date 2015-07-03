@@ -3,6 +3,7 @@
 Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<include file="com/flopper/framework/customer/struts-customer.xml"></include>
-
-
+	<include file="com/flopper/framework/common/struts-agent.xml"></include>
+	<include file="com/flopper/framework/common1/struts-agent1.xml"></include>
+	<include file="com/flopper/framework/customer1/struts-customer1.xml"></include>
 </struts> 
