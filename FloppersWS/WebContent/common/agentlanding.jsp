@@ -114,7 +114,7 @@
 							<li><a href="mailbox-main.html" title="Mailbox"> <i
 									class="linecons-mail"></i> Mailbox
 							</a></li>
-							<li class="logout-link"><a href="extra-login.html"
+							<li class="logout-link"><a href="agentlanding!logout"
 								title="Log out"> <i class="fa-power-off"></i>
 							</a></li>
 						</ul>
@@ -396,7 +396,7 @@
 							</a></li>
 							<li><a href="#help"> <i class="fa-info"></i> Help
 							</a></li>
-							<li class="last"><a href="extra-lockscreen.html"> <i
+							<li class="last"><a href="agentlanding!logout"> <i
 									class="fa-lock"></i> Logout
 							</a></li>
 						</ul></li>

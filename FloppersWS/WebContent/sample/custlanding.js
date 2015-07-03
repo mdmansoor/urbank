@@ -8,7 +8,6 @@ $(function() {
         
         $("#profile_section").show(500);
         $("#chat_section").hide(500);
-        
      });
     
 
@@ -18,9 +17,9 @@ $(function() {
    sendMessage();
  });
  $('#file-btn').on('click', function() {
+	 alert("send File");
 	   sendFile();
 	 }); 
- 
  
  //---------- Video/Audio ---
  
@@ -93,19 +92,19 @@ audioSource.ringOut.forEach(function(entry) {
     var $username="You";    
     var $message = message;
     //$('#xe-body ul').append('<li>Hi test</li>');;
-    $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+    $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
       
      },
      function () {
          alert('IM send failed');
        }
      );
-   }
+   }   
    
    function sendFile() {
        var file = $('#chat-file')[0].files[0];
        //var sendTo = $('#chat-contacts').val();
-      
+       
    
        /** sendImWithFile(userName, file, success, failure)
            Sends a file via chat
@@ -119,14 +118,13 @@ audioSource.ringOut.forEach(function(entry) {
          var $file = $('<p>').text(file.name);
    
          $chatItem.append($username, $file);
-         $('#xe-body ul').append($chatItem);
+         $('#chat-messages').append($chatItem);
        },
        function () {
            alert('IM send failed');
          }
        );
      }
- 
  
    // Event handler for messagesavailable 
      // receive messages from other Kandy users
@@ -152,13 +150,14 @@ audioSource.ringOut.forEach(function(entry) {
             // $('#chat-messages').append($chatItem);
              
              
-             var $username="Customer";    
+             var $username="Admin";    
              var $message = msg.message.text;
              //$('#xe-body ul').append('<li>Hi test</li>');;
-             $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+             $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 
-           } 
+           }
            if(msg.messageType == 'chat' && msg.contentType === 'file') {
+        	   alert("file received");
                var $username = $('<h5>').text(msg.sender.user_id);
                var uuid = msg.message.content_uuid;
                var thumbnailURL = kandy.messaging.buildFileThumbnailUrl(uuid);
@@ -169,9 +168,10 @@ audioSource.ringOut.forEach(function(entry) {
                $chatItem.append($username, $file, $fileName);
                $('#chat-messages').append($chatItem);
                
-               //$("#xe-body ul").append('<li><div class="xe-comment-entry"><img width="40" class="img-circle" src="../assets/images/cust_service.png"><div class="xe-comment"><strong>'+$username+'</strong><p>'+$file+'</p>'+$fileName+'</div></div></li>');
-               $("#xe-body ul").append($chatItem);
                
+               
+               //$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$file+'</p>'+$fileName+'</div></div></li>');
+               $("#xe-body ul").append($chatItem);
              }
            else {
              // When the recieved messageType is not chat, display message type
@@ -185,9 +185,9 @@ audioSource.ringOut.forEach(function(entry) {
  
      }
  
- var username;
+   var username;
  var userArray=[];
- var sendTo="customer1@webrtc.techmahindra.com";
+ var sendTo="admin@webrtc.techmahindra.com";
  
  // Event handler for login form button
  $('#support').on('click', function(e) {
@@ -199,7 +199,7 @@ audioSource.ringOut.forEach(function(entry) {
   /* username = $('#username').val();
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
-   username="admin";
+   username="customer1";
    var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
    password="reset@123";
     
@@ -208,7 +208,6 @@ audioSource.ringOut.forEach(function(entry) {
        @params <string> domainApiId, <string> userName, <string> password,  <function> success/failure
    */
    kandy.login(apiKey, username, password,function(msg){
-	   
      userArray.push(username);
      kandy.getLastSeen(userArray);
      UIState.authenticated();
@@ -439,8 +438,8 @@ console.log('call rejected');
 $('#incoming-call').addClass('hidden');
 };
 
-
-//-----------File Upload Script ----
+ 
+//----------File upload script----------------
 
 
 var i = 1,
@@ -451,6 +450,7 @@ url: 'data/upload-file.php',
 // Events
 addedfile: function(file)
 {
+	alert("added new");
     // Script to send file
 	
 	
@@ -462,7 +462,7 @@ addedfile: function(file)
 	  var $file = $('<p>').text(file.name);
 	
 	  $chatItem.append($username, $file);
-	  $('#chat-messages').append($chatItem);
+	  $('#xe-body ul').append($chatItem);
 	},
 	function () {
 	    alert('IM send failed');
@@ -500,27 +500,30 @@ uploadprogress: function(file, progress, bytesSent)
 
 success: function(file)
 {
+	
 	file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
 	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
 },
 
 error: function(file)
 {
-	file.fileEntryTd.find('td:last').html('<span class="text-success">success</span>');
+	
+	file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
 	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
 }
 });
 
 $("#advancedDropzone").css({
 minHeight: 200
-})
+});
 
 
-//--------- file upload end ---------
- 
+//-------------file upload end----------------
+
  });
 
 window.setInterval(function() {
     var elem = document.getElementById('xe-body');
     elem.scrollTop = elem.scrollHeight;
   }, 5000);
+

@@ -19,7 +19,6 @@ $(function() {
    sendMessage();
  });
  $('#file-btn').on('click', function() {
-	 alert("send File");
 	   sendFile();
 	 }); 
  
@@ -159,7 +158,6 @@ audioSource.ringOut.forEach(function(entry) {
 
            }
            if(msg.messageType == 'chat' && msg.contentType === 'file') {
-        	   alert("file received");
                var $username = $('<h5>').text(msg.sender.user_id);
                var uuid = msg.message.content_uuid;
                var thumbnailURL = kandy.messaging.buildFileThumbnailUrl(uuid);
@@ -201,9 +199,9 @@ audioSource.ringOut.forEach(function(entry) {
   /* username = $('#username').val();
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
-   username="customer";
+   username="customer1";
    //alert(username);
-   var apiKey="DAK654f8a1cf41445718a512c4a7eb9d9f6";
+   var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
    password="reset@123";
     
    /** login(domainApiId, userName, password,success,failure)
@@ -215,13 +213,13 @@ audioSource.ringOut.forEach(function(entry) {
      kandy.getLastSeen(userArray);
      UIState.authenticated();
      getSessions();
-alert("login over");
+
      //Checks every 5 seconds for incoming messages
      setInterval(receiveMessages, 5000);
    },
    function(msg){
      UIState.unauthenticated();
-     alert('Login Failed!');
+     alert('Kandy Server Down !!!');
   });
  });
  
@@ -454,7 +452,6 @@ url: 'data/upload-file.php',
 // Events
 addedfile: function(file)
 {
-	alert("added new");
     // Script to send file
 	
 	
@@ -527,7 +524,6 @@ minHeight: 200
 //kandy.session.getOpenSessionsByType(success, failure);
 
 function getSessions(){
-alert("get session called");
 	kandy.session.getOpenSessions(
 	function(msg){
 	    
