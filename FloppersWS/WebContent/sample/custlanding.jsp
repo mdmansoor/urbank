@@ -1208,12 +1208,20 @@ if (!('webkitSpeechRecognition' in window)) {
       upgrade();
       return;
     }
+    var xmlHttp = new XMLHttpRequest();
     var currentText;
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
         currentText = event.results[i][0].transcript;			
-        sendMessage(currentText);	
+        //sendMessage(currentText);
+        //alert(currentText);
+       	console.log(currentText);
+        xmlHttp.open("post", "../VoiceCustomerServlet", true); 
+        alert("get executed");
+        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xmlHttp.send( "final_span=" + currentText +"&username="+ "basha");
+        alert("get sent");
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
