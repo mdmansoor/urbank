@@ -64,15 +64,8 @@
 					</div>
 				</div>
 
-				<div class="hidden" id="logged-in">
-					<hr />
-					<div class="clearfix">
-						<p class="h4 pull-left">
-							<strong>Hello <span class="username"></span></strong>
-						</p>
-						<button class="btn btn-info pull-right" id="logout-btn">Logout</button>
-					</div>
-					<hr />
+				<div class="hidden" id="logged-in">					
+					
 					<div id="video-container">
 						<h3>Video</h3>
 						<div class="row">

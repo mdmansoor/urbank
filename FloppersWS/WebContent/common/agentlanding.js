@@ -674,7 +674,110 @@ function voiceToTextFile(){
 	
 }
 
- 
+//---- Call Handler ----------------------
+
+
+//Event handler for callinitiate
+function onCallInitiate(call) {
+	callId = call.getId();
+
+	$audioRingIn[0].pause();
+	$audioRingOut[0].play();
+
+	$('#username-calling').text('Calling ' + $('#user_to_call').val());
+	UIState.callinitialized();
+}
+
+// Event handler for callinitiatefail event
+function onCallInitiateFail() {
+	console.debug('call initiate fail');
+
+	$audioRingOut[0].pause();
+	UIState.initial();
+	alert('call failed');
+}
+
+UIState.callinitialized = function() {
+	console.log('callinitialized');
+
+	$('.call-initializer').addClass('hidden');
+};// Event handler for initiate call button
+$('#initialize-call-btn').on('click', function() {
+	var username = $('#user_to_call').val();
+
+	/**
+	 * makeCall( userName, cameraOn ) : Void Initiates a call to another
+	 * Kandy user over web
+	 * 
+	 * @params <string> userName, <boolean> cameraOn
+	 */
+	KandyAPI.Phone.makeCall(username, true);
+});
+// Event handler for oncall event
+function onCall(call) {
+	console.debug('oncall');
+	$audioRingOut[0].pause();
+	UIState.oncall();
+}
+
+// Event handler for callended event
+function onCallTerminate(call) {
+	console.debug('callended');
+	callId = null;
+
+	$audioRingOut[0].play();
+	$audioRingIn[0].pause();
+
+	UIState.initial();
+}
+
+// Event handler for callendedfailed event
+function onCallEndedFailed() {
+	console.debug('callendfailed');
+	callId = null;
+}
+
+$('#hold-call-btn').on('click', function() {
+	KandyAPI.Phone.holdCall(callId);
+	UIState.holdcall();
+});
+
+$('#resume-call-btn').on('click', function() {
+	KandyAPI.Phone.unHoldCall(callId);
+	UIState.resumecall();
+});
+
+// Event handler for call end button
+$('#end-call-btn').on('click', function() {
+	KandyAPI.Phone.endCall(callId);
+	UIState.initial();
+});
+
+UIState.oncall = function() {
+	console.log('oncall');
+
+	$('#incoming-call, #call-form').addClass('hidden');
+	$('#call-connected').removeClass('hidden');
+};
+
+UIState.holdcall = function() {
+	console.log('holdcall');
+
+	$('#hold-call-btn').addClass('hidden');
+	$('#resume-call-btn').removeClass('hidden');
+};
+
+UIState.resumecall = function() {
+	console.log('resumecall');
+
+	$('#hold-call-btn').removeClass('hidden');
+	$('#resume-call-btn').addClass('hidden');
+};
+
+
+//--------- call handler end -----------------
+
+
  });
 
 

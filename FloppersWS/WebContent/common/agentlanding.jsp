@@ -499,44 +499,57 @@ new gweb.analytics.AutoTrack({
 									</div>
 								</div>
 								<div class="xe-body video-scroll" id="xe-body">
-									<!-- chat to be added dynamically -->
 									<div class="row">
-										<div class="col-sm-10">
-												<div class="video" id="incoming-video"></div>
+										<div class="col-sm-6">
+											<div class="video" id="incoming-video"></div>
 										</div>
-										<!-- <div class="col-sm-6">
-				                  <div class="video" id="outgoing-video"></div>
-				                </div> -->
+										<div class="col-sm-6">
+											<div class="video" id="outgoing-video"></div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<hr />
-							<div class="hidden" id="incoming-call">
-								<h4>Incoming Call</h4>
-								<p id="username-incoming"></p>
-								<div class="btn-toolbar">
-									<button class="btn btn-success col-sm-5" id="answer-call-btn">Answer
-										Call</button>
-									<button class="btn btn-warning col-sm-5" id="reject-call-btn">Reject
-										Call</button>
+								
+								<div id="call-form">
+									<h4>Make a Call</h4>
+									<p id="username-calling"></p>
+									<div class="form-group call-initializer">
+										<label for="user_to_call">Enter Caller Username</label> <input
+											type="text" name="user_to_call" id="user_to_call"
+											class="form-control" placeholder="name@company.com"
+											value="customer@webrtc.techmahindra.com" />
+
+									</div>
+									<div class="form-group call-initializer">
+										<button class="btn btn-success" id="initialize-call-btn">Call</button>
+									</div>
+
+									<div class="form-group call-terminator hidden">
+										<button class="btn btn-danger" id="initialize-end-btn">End
+											Call</button>
+									</div>
+								
+
+								</div>
+								<div class="hidden" id="call-connected">
+									<h4>Call Connected</h4>
+									<p id="username-connected"></p>
+									<div class="btn-toolbar">
+										<button class="btn btn-danger" id="end-call-btn">End
+											Call</button>
+										<button class="btn btn-warning" id="hold-call-btn">Hold
+											Call</button>
+										<button class="btn btn-success hidden" id="resume-call-btn">Resume
+											Call</button>
+									</div>
+									<hr>
 								</div>
 							</div>
-							<div class="hidden" id="call-connected">
-								<h4>Call Connected</h4>
-								<p id="username-connected"></p>
-								<div class="btn-toolbar">
-									<button class="btn btn-danger col-sm-5" id="end-call-btn">End
-										Call</button>
-									<button class="btn btn-warning col-sm-5" id="hold-call-btn">Hold
-										Call</button>
-									<button class="btn btn-success hidden col-sm-5"
-										id="resume-call-btn">Resume Call</button>
-								</div>
-							</div>
+										
+							
 						</div>
-						<div id="start_call">
+						<!-- <div id="start_call">
 						<button class="btn btn-success col-sm-5" id="start_videocall_btn">Start Video Call</button>
-						</div>
+						</div> -->
 
 
 
