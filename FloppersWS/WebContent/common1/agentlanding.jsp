@@ -114,7 +114,7 @@
 							<li><a href="mailbox-main.html" title="Mailbox"> <i
 									class="linecons-mail"></i> Mailbox
 							</a></li>
-							<li class="logout-link"><a href="extra-login.html"
+							<li class="logout-link"><a href="agentlanding!logout"
 								title="Log out"> <i class="fa-power-off"></i>
 							</a></li>
 						</ul>
@@ -126,7 +126,7 @@
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<li><a href="dashboard-1.html"> <i class="linecons-cog"></i>
-							<span class="title">Account</span>
+							<span class="title">Call History</span>
 					</a>
 						<ul>
 							<li><a href="dashboard-1.html"> <span class="title">Dashboard
@@ -396,7 +396,7 @@
 							</a></li>
 							<li><a href="#help"> <i class="fa-info"></i> Help
 							</a></li>
-							<li class="last"><a href="extra-lockscreen.html"> <i
+							<li class="last"><a href="agentlanding!logout"> <i
 									class="fa-lock"></i> Logout
 							</a></li>
 						</ul></li>
@@ -412,8 +412,10 @@
 			<div class="page-title">
 
 				<div class="title-env">
-					<h1 class="title">Account Summary</h1>
-					<p class="description">User profile and story timeline</p>
+					<B>Expert Portal</B>
+					<div id="current_customer">Current Customer:<span>Mansoor</span></div>
+					<div id="current_customer">Customer ID:<span>customer1@webrtc.techmahindra.com</span></div>
+					<p class="description">Expert Portal to support the customer</p>
 				</div>
 
 				<div class="breadcrumb-env">
@@ -446,6 +448,7 @@
 									<small>Chatting arround</small>
 								</h3>
 							</div>
+							
 						</div>
 						<div class="xe-body  widget-scroll" id="xe-body" >
 							<!-- chat to be added dynamically -->
@@ -607,207 +610,6 @@
 <!--File upload end  -->
 
 			</section>
-			<section class="profile-env" id="profile_section">
-
-				<div class="row">
-
-					<!-- <div class="col-sm-3">
-						
-						User Info Sidebar
-						<div class="user-info-sidebar">
-							
-							<a href="#" class="user-img">
-								<img src="../assets/images/user-4.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-							</a>
-							
-							<a href="#" class="user-name">
-								Art Ramadani
-								<span class="user-status is-online"></span>
-							</a>
-							
-							<span class="user-title">
-								CEO at <strong>Google</strong>
-							</span>
-							
-							<hr />
-							
-							<ul class="list-unstyled user-info-list">
-							<li>
-								<i class="fa-home"></i>
-								Prishtina, Kosovo
-							</li>
-							<li>
-								<i class="fa-briefcase"></i>
-								<a href="#">Laborator</a>
-							</li>
-							<li>
-								<i class="fa-graduation-cap"></i>
-								University of Bologna
-							</li>
-						</ul>	
-								
-							<hr />
-							
-							<ul class="list-unstyled user-friends-count">
-								<li>
-									<span>643</span>
-									followers
-								</li>
-								<li>
-									<span>108</span>
-									following
-								</li>
-							</ul>
-							
-							<button type="button" class="btn btn-success btn-block text-left">
-								
-								<i class="fa-headphones "></i> Customer Care
-							</button>
-						</div>
-						
-					</div> -->
-					<div class="col-sm-12">
-
-						<div class="row">
-
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="linecons-user"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">1053 Rs</strong> <span>Current
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="true" data-duration="4" data-to="2470"
-									data-from="1000" data-count=".num"
-									class="xe-widget xe-counter xe-counter-info">
-									<div class="xe-icon">
-										<i class="linecons-camera"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">14556</strong> <span>Credit Card
-											Outstanding</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-delay="1" data-easing="true" data-duration="5"
-									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
-									data-count=".num" class="xe-widget xe-counter xe-counter-red">
-									<div class="xe-icon">
-										<i class="linecons-lightbulb"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">55000</strong> <span>Loan Amount</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="linecons-user"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">6050 Rs</strong> <span>Outstanding
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-12">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Recent Transactions</h3>
-
-								<div class="panel-options">
-									<a href="#"> <i class="linecons-cog"></i>
-									</a> <a href="#" data-toggle="panel"> <span
-										class="collapse-icon">&ndash;</span> <span class="expand-icon">+</span>
-									</a> <a href="#" data-toggle="reload"> <i
-										class="fa-rotate-right"></i>
-									</a>
-
-
-								</div>
-							</div>
-
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Date</th>
-										<th>Description</th>
-										<th>Type</th>
-										<th>Amount</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>30/Jun/2015</td>
-										<td>ATM Withdrawn at TechMCC Chennai</td>
-										<td>Debited</td>
-										<td class="middle-align">5000.00</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>27/Jun/2015</td>
-										<td>Cheque No:985054</td>
-										<td>Debited</td>
-										<td class="middle-align">9500.00</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>16/Jun/2015</td>
-										<td>IMPS Tranfered Inwards</td>
-										<td>Credited</td>
-										<td class="middle-align">78600.00</td>
-									</tr>
-
-									<tr>
-										<td>5</td>
-										<td>31/May/2015</td>
-										<td>Salary Credited Tech Mahindra</td>
-										<td>Credited</td>
-										<td class="middle-align">49660.00</td>
-									</tr>
-
-									<tr>
-										<td>4</td>
-										<td>28/May/2015</td>
-										<td>ATM Card Maintenace Charges</td>
-										<td>Debited</td>
-										<td class="middle-align">250.00</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-
-				</div>
-
-			</section>
 
 			<script type="text/javascript"
 				src="//maps.google.com/maps/api/js?sensor=false"></script>
@@ -843,10 +645,8 @@
 
 					<!-- Add your copyright text here -->
 					<div class="footer-text">
-						&copy; 2014 <strong>Floppers</strong> theme by <a
-							href="http://laborator.co" target="_blank">Laborator</a> - <a
-							href="http://themeforest.net/item/xenon-bootstrap-admin-theme/9059661?ref=Laborator"
-							target="_blank">Purchase for only <strong>23$</strong></a>
+						&copy; 2015 <strong>Flopper Developers</strong> <a
+							href="http://laborator.co" target="_blank"></a>
 					</div>
 
 
@@ -868,13 +668,7 @@
 	<link rel="stylesheet"
 		href="../assets/css/fonts/elusive/css/elusive.css">
 
-	<!-- Bottom Scripts -->
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
-	<script src="../assets/js/resizeable.js"></script>
-	<script src="../assets/js/joinable.js"></script>
-	<script src="../assets/js/xenon-api.js"></script>
-	<script src="../assets/js/xenon-toggles.js"></script>
+
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="../assets/js/xenon-custom.js"></script>
@@ -884,7 +678,7 @@
 
 	<!-- Bottom Scripts -->
 	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
+	<script src="../assets/js/tweenmax.min.js"></script>
 	<script src="../assets/js/resizeable.js"></script>
 	<script src="../assets/js/joinable.js"></script>
 	<script src="../assets/js/xenon-api.js"></script>

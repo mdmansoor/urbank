@@ -3,22 +3,36 @@ $(function() {
     
 	$("#profile_section").show();
 	$("#chat_section").hide();
+	var connectionStatus=false;
 
+	var sendTo="customer2@webrtc.techmahindra.com";
+	var username="basha";
+	var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+	var password="reset@123";
+	
     $("#home_btn").click(function(){
         
         $("#profile_section").show(500);
         $("#chat_section").hide(500);
      });
     
-    
-    
 
  
  // Event handler for send message button
  $('#chat-btn').on('click', function() {
-   sendMessage();
+	 
+	 if(connectionStatus){
+		 sendMessage();
+       }
+	 else{
+		 alert("you are not in the queue, you cannot send message!!");
+	 }
+	 
+       
+   
  });
  $('#file-btn').on('click', function() {
+	 alert("send File");
 	   sendFile();
 	 }); 
  
@@ -85,22 +99,25 @@ audioSource.ringOut.forEach(function(entry) {
          Sends a message via chat
          @params <string> userName, <string> message, <function> success/failure
      */
+     console.log("sending message to "+sendTo);
      kandy.messaging.sendIm(sendTo, message, function () {
  
        // On successful send, append chat item to DOM
    
        //var $username = $('<h5>').text(username);
-    var $username="You";    
-    var $message = message;
-    //$('#xe-body ul').append('<li>Hi test</li>');;
-    $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+    	 var $username="You";    
+    	 var $message = message;
+     
+       console.log("connection status:"+connectionStatus);
+   
+       $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
       
      },
      function () {
          alert('IM send failed');
        }
      );
-   }
+   }   
    
    function sendFile() {
        var file = $('#chat-file')[0].files[0];
@@ -122,7 +139,7 @@ audioSource.ringOut.forEach(function(entry) {
          $('#chat-messages').append($chatItem);
        },
        function () {
-           alert('IM send failed');
+           alert('File send failed');
          }
        );
      }
@@ -143,21 +160,44 @@ audioSource.ringOut.forEach(function(entry) {
          data.messages.forEach(function(msg) {
  
            if(msg.messageType == 'chat' && msg.contentType === 'text' && msg.message.mimeType == 'text/plain') {
-             //var $username = $('<h5>').text(msg.sender.user_id);
-             //var $message = $('<p>').text(msg.message.text);
-             //var $chatItem = $('<div class="well text-left">')
- 
-            // $chatItem.append($username, $message);
-            // $('#chat-messages').append($chatItem);
+        	   
+        	   var $username="Agent";  
+        	   var msgTxt=msg.message.text;
+               var $message = msgTxt;
+               var msgText=msg.message.text;
+               var index=msgText.indexOf("VOICEMESSAGE");
+               
+               //to check to status whether he is current customer in the call
+               if(msgTxt=="CONNECTED"){
+              	 connectionStatus=true;
+              	$("#queue_status").removeClass("btn btn-info");
+                $('#queue_status').addClass('btn btn-success');
+                $('#queue_status').text("Connected with Expert..");
+
+               }
+               if(msgTxt == "DISCONNECTED"){
+              	 connectionStatus=false
+              	$("#queue_status").removeClass("btn btn-success");
+                 $('#queue_status').addClass('btn btn-info');
+                 $('#queue_status').text("Queue disconnected rejoin..");
+               }
+               console.log("connection status:"+connectionStatus);
+
+               
+               if(msgText.indexOf("VOICEMESSAGE") == -1 && connectionStatus){
+            	   
+	        		 $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+	        	 }
+	        	 else if(connectionStatus){
+	        		 $message = msgTxt.substring(12);
+	        		 //$("#xe-body-voice2text ul").append('<li><div class="xe-comment-entry"><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+	        		 $("#xe-body-voice2text ul").append('<li>'+$username+':<p>'+$message+'</p></li>');
+	        	 }
              
-             
-             var $username="Admin";    
-             var $message = msg.message.text;
-             //$('#xe-body ul').append('<li>Hi test</li>');;
-             $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 
            }
            if(msg.messageType == 'chat' && msg.contentType === 'file') {
+        	   alert("file received");
                var $username = $('<h5>').text(msg.sender.user_id);
                var uuid = msg.message.content_uuid;
                var thumbnailURL = kandy.messaging.buildFileThumbnailUrl(uuid);
@@ -185,9 +225,8 @@ audioSource.ringOut.forEach(function(entry) {
  
      }
  
-   var username;
  var userArray=[];
- var sendTo="admin@webrtc.techmahindra.com";
+ 
  
  // Event handler for login form button
  $('#support').on('click', function(e) {
@@ -195,31 +234,36 @@ audioSource.ringOut.forEach(function(entry) {
   
    $("#profile_section").hide(500);
    $("#chat_section").show(500);
+   $("#title").hide();
+   $("#support_queue_status").show();
+   $("#support_queue_status").removeClass("hidden");
+   
    // Values extracted from login form
   /* username = $('#username').val();
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
-   username="customer1";
-   //alert(username);
-   var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
-   password="reset@123";
+   
     
    /** login(domainApiId, userName, password,success,failure)
        logs in user to Kandy Platform
        @params <string> domainApiId, <string> userName, <string> password,  <function> success/failure
    */
    kandy.login(apiKey, username, password,function(msg){
+	   //IAMALIVE
+	   
      userArray.push(username);
      kandy.getLastSeen(userArray);
      UIState.authenticated();
-     getSessions();
-
+     
+     $('#current_customer_name').text(username);
+     $('#current_customer_id').text(username+"@webrtc.techmahindra.com");
+     sendAmAlive(username);
      //Checks every 5 seconds for incoming messages
      setInterval(receiveMessages, 5000);
    },
    function(msg){
      UIState.unauthenticated();
-     alert('Kandy Server Down !!!');
+     alert('Login Failed!');
   });
  });
  
@@ -452,6 +496,7 @@ url: 'data/upload-file.php',
 // Events
 addedfile: function(file)
 {
+	alert("added new");
     // Script to send file
 	
 	
@@ -466,7 +511,7 @@ addedfile: function(file)
 	  $('#xe-body ul').append($chatItem);
 	},
 	function () {
-	    alert('IM send failed');
+	    alert('File send failed');
 	  }
 	);
 		
@@ -518,36 +563,27 @@ $("#advancedDropzone").css({
 minHeight: 200
 });
 
+function sendAmAlive(e) {
+	var message="IAMALIVE";
+    message = message+e;
+    
+    var sendTo = "customer2@webrtc.techmahindra.com";
+    kandy.messaging.sendIm(sendTo, message, function () {
 
+    	console.log("AM alive sent success");
+    	$("#queue_status").removeClass("btn btn-success");
+        $('#queue_status').addClass('btn btn-info');
+        $('#queue_status').text("You are in the queue..");
+    },
+    function () {
+        alert('AM alive send failed');
+      }
+    );
+  }
 //-------------file upload end----------------
 
-//kandy.session.getOpenSessionsByType(success, failure);
-
-function getSessions(){
-	kandy.session.getOpenSessions(
-	function(msg){
-	    
-		//alert(msg);
-		try{
-		
-			var strResp=JSON.stringify(msg);
-			alert(strResp);
-			
-		}catch(e){
-			
-		}
-		
-	  },
-	  function(){
-	    alert("error");
-	 
-	});
-	
-	
-}
-
-
  });
+
 
 
 

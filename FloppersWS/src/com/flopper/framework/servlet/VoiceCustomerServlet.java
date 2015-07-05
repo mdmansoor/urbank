@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class VoiceCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final String coversationPath="D:\\Conversations\\Customers";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,12 +32,17 @@ public class VoiceCustomerServlet extends HttpServlet {
        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
               String data = request.getParameter("final_span");
               String customer = request.getParameter("username");
-              Date date = new Date();                         
+              System.out.println("Data:"+data);
+              System.out.println("Customer:"+customer);
+              Date date = new Date(); 
+             // String newStr = data.replaceAll("<li>", "");
+              //newStr = newStr.replaceAll("</li>", "");
               SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
               String dirName= format1.format(date.getTime());
+              createDir();
               
               if(data!=null && data.length()!=0){
-                     File file = new File("D:\\"+ customer + dirName + ".txt");
+                     File file = new File(coversationPath+"\\"+ dirName +"-"+ customer + ".txt");
                        if(file.length()<0)
                                   file.createNewFile();          
                     FileWriter writer = new FileWriter(file,true); 
@@ -46,4 +51,16 @@ public class VoiceCustomerServlet extends HttpServlet {
                     writer.close();
               }
        }
+       
+       private void createDir(){
+    	   File file = new File(coversationPath);
+    		if (!file.exists()) {
+    			if (file.mkdirs()) {
+    				System.out.println("Directory is created!");
+    			} else {
+    				System.out.println("Failed to create directory!");
+    			}
+    		}
+       }      
+      
 }

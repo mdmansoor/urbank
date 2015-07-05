@@ -2,12 +2,12 @@
 $(function() {
     
 	$("#profile_section").show();
-	$("#chat_section").hide();
+	
 
     $("#home_btn").click(function(){
         
         $("#profile_section").show(500);
-        $("#chat_section").hide(500);
+    
         
      });
     
@@ -18,7 +18,6 @@ $(function() {
    sendMessage();
  });
  $('#file-btn').on('click', function() {
-	 alert("send File");
 	   sendFile();
 	 }); 
  
@@ -145,22 +144,24 @@ audioSource.ringOut.forEach(function(entry) {
          data.messages.forEach(function(msg) {
  
            if(msg.messageType == 'chat' && msg.contentType === 'text' && msg.message.mimeType == 'text/plain') {
-             //var $username = $('<h5>').text(msg.sender.user_id);
-             //var $message = $('<p>').text(msg.message.text);
-             //var $chatItem = $('<div class="well text-left">')
- 
-            // $chatItem.append($username, $message);
-            // $('#chat-messages').append($chatItem);
              
              
              var $username="Customer";    
              var $message = msg.message.text;
+             var msgText=msg.message.text;
              //$('#xe-body ul').append('<li>Hi test</li>');;
-             $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+            // $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 
+             var index=msgText.indexOf("VOICEMESSAGE");
+             console.log(index);
+             if(msgText.indexOf("VOICEMESSAGE") == -1){
+            	 $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+        	 }
+        	 else{
+        		 $("#xe-body-voice2text ul").append('<li><div class="xe-comment-entry"><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+        	 }
            } 
            if(msg.messageType == 'chat' && msg.contentType === 'file') {
-        	   alert("file received new");
                var $username = $('<h5>').text(msg.sender.user_id);
                var uuid = msg.message.content_uuid;
                var thumbnailURL = kandy.messaging.buildFileThumbnailUrl(uuid);
@@ -453,7 +454,6 @@ url: 'data/upload-file.php',
 // Events
 addedfile: function(file)
 {
-	alert("added new");
     // Script to send file
 	
 	
@@ -503,14 +503,12 @@ uploadprogress: function(file, progress, bytesSent)
 
 success: function(file)
 {
-	alert("success new");
 	file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
 	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
 },
 
 error: function(file)
 {
-	alert("failed new");
 	file.fileEntryTd.find('td:last').html('<span class="text-success">success</span>');
 	file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
 }

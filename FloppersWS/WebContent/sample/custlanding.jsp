@@ -1215,7 +1215,7 @@ if (!('webkitSpeechRecognition' in window)) {
         final_transcript += event.results[i][0].transcript;
         currentText = event.results[i][0].transcript;			
         //sendMessage(currentText);
-        //alert(currentText);
+        alert(currentText);
        	console.log(currentText);
         xmlHttp.open("post", "../VoiceCustomerServlet", true); 
         alert("get executed");

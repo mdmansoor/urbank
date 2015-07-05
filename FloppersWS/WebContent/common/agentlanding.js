@@ -1,13 +1,20 @@
 
 $(function() {
-    
-	$("#profile_section").show();
-	$("#chat_section").hide();
-
+    //initial configurations
+	login();
+	$("#profile_section").hide();
+	$("#chat_section").show();
+	$('#btn_get_customer').removeClass('btn btn-danger');
+	$('#btn_get_customer').addClass('btn btn-success');
+	$('#btn_get_customer').text('Get next customer from queue');	
+	var connectionStatus=false;
+	var currentUser="";
+	
+	
     $("#home_btn").click(function(){
         
-        $("#profile_section").show(500);
-        $("#chat_section").hide(500);
+        $("#profile_section").hide(500);
+        $("#chat_section").show(500);
         
      });
     
@@ -15,11 +22,72 @@ $(function() {
  
  // Event handler for send message button
  $('#chat-btn').on('click', function() {
-   sendMessage();
+	 
+	 if(connectionStatus){
+		 sendMessage();
+	 }
+	 else{
+		 alert("Please select a customer !!");
+	 }
+   
  });
  $('#file-btn').on('click', function() {
 	   sendFile();
-	 }); 
+ });
+ 
+ 
+ $('#user_queue a.queue').live('click', function(){
+	 if(connectionStatus){
+		 alert("Please disconnect the current user before select the next customer!!");
+	 }
+	 else{
+		 alert($(this).text());
+		  currentUser=$(this).text();
+		  $('#btn_get_customer').addClass('btn btn-danger');
+		  $('#btn_get_customer').removeClass('btn btn-success');
+		  $('#btn_get_customer').text('Disconnect Current Customer');
+		  $('#current_customer_name').text(currentUser);
+		  $('#current_customer_id').text(currentUser+'@webrtc.techmahindra.com');
+		  
+		  $(this).parent().remove();
+		  connectionStatus=true;
+		  sendConnectionStatus(true,currentUser);
+		  
+	 }
+});
+ 
+ 
+ $('#start_videocall_btn').on('click', function() {
+	   
+});
+ 
+$('#btn_get_customer').on('click', function() {
+	 	//alert("disconnected");
+	 	
+	 	if(connectionStatus){
+	 		console.log("disconnected");
+	 		$('#btn_get_customer').removeClass('btn btn-danger');
+			$('#btn_get_customer').addClass('btn btn-success');
+			$('#btn_get_customer').text('Get Next Customer');
+			var chat=$("#xe-body-voice2text").html();
+			//alert(chat);
+			connectionStatus=false;
+			var xmlHttp = new XMLHttpRequest();
+			var currentText=strip(chat);
+			xmlHttp.open("post", "../VoiceCustomerServlet", true); 
+			//alert("get executed");
+			xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send( "final_span=" + currentText +"&username="+ currentUser);
+			sendConnectionStatus(false,currentUser);
+
+	 	}	 	
+	 	else{
+	 		alert("Please select next customer from queue!!");
+	 	}
+		
+		//alert("get sent");	
+ });
  
  
  //---------- Video/Audio ---
@@ -93,6 +161,7 @@ audioSource.ringOut.forEach(function(entry) {
     var $username="You";    
     var $message = message;
     //$('#xe-body ul').append('<li>Hi test</li>');;
+    
     $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
       
      },
@@ -114,7 +183,7 @@ audioSource.ringOut.forEach(function(entry) {
        kandy.messaging.sendImWithFile(sendTo, file, function () {
    
          // On successful send, append chat item to DOM
-         var $chatItem = $('<div class="well text-right">')
+         var $chatItem = $('<div class="well text-right">');
          var $username = $('<h5>').text(username);
          var $file = $('<p>').text(file.name);
    
@@ -127,6 +196,28 @@ audioSource.ringOut.forEach(function(entry) {
        );
      }
  
+   function sendConnectionStatus(status,currentUser){
+
+	     var message = "DISCONNECTED";
+	     if(status){
+	    	 message = "CONNECTED";
+	     }
+	     else{
+	    	 message = "DISCONNECTED";
+	     }
+	     
+	    var to=currentUser+"@webrtc.techmahindra.com";
+	     kandy.messaging.sendIm(to, message, function () {
+	    	 console.log("Send Connection status to "+to+" success");
+	    	
+	      
+	     },
+	     function () {
+	         alert('Connection sending failed');
+	         console.log("Send Connection status to "+to+" failed");
+	       }
+	     );
+   }
  
    // Event handler for messagesavailable 
      // receive messages from other Kandy users
@@ -144,19 +235,40 @@ audioSource.ringOut.forEach(function(entry) {
          data.messages.forEach(function(msg) {
  
            if(msg.messageType == 'chat' && msg.contentType === 'text' && msg.message.mimeType == 'text/plain') {
-             //var $username = $('<h5>').text(msg.sender.user_id);
-             //var $message = $('<p>').text(msg.message.text);
-             //var $chatItem = $('<div class="well text-left">')
- 
-            // $chatItem.append($username, $message);
-            // $('#chat-messages').append($chatItem);
-             
+            
              
              var $username="Customer";    
-             var $message = msg.message.text;
+             var msgChat=msg.message.text;
+             var msgTxt=msg.message.text;
+             var $message = msgTxt.substring(12);
              //$('#xe-body ul').append('<li>Hi test</li>');;
-             $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
+             //$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 
+             var msgText=msg.message.text;
+             
+             var index=msgText.indexOf("VOICEMESSAGE");
+             console.log(index);
+             console.log(msgText);
+             if(msgText.indexOf("VOICEMESSAGE") == -1 && msgText.indexOf("IAMALIVE")==-1){
+            	 console.log("Chat Message received");
+            	 //update chat window
+            	 $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+msgText+'</p></div></div></li>');
+        	 }
+             else if(msgText.indexOf("VOICEMESSAGE") != -1 && msgText.indexOf("IAMALIVE") == -1){
+            	 // update voice to text
+            	 console.log("voice to text received");
+            	 $("#xe-body-voice2text ul").append('<li>'+$username+':<p>'+$message+'</p></li>');
+             }
+        	 else if(msgText.indexOf("VOICEMESSAGE") == -1 && msgText.indexOf("IAMALIVE") != -1){
+        		 //update customer queue
+        		 //<li><a class="queue" href"#">customer1</a></li>
+        		 console.log("user available status received");
+        		 var user=msgText.substring(8);
+        		 $("#user_queue_container ul").append('<li><a class="queue" href="#">'+user+'</a></li>');
+        		 
+        	 }
+             
+             
            } 
            if(msg.messageType == 'chat' && msg.contentType === 'file') {
                var $username = $('<h5>').text(msg.sender.user_id);
@@ -187,7 +299,30 @@ audioSource.ringOut.forEach(function(entry) {
  
  var username;
  var userArray=[];
- var sendTo="customer1@webrtc.techmahindra.com";
+ var sendTo="basha@webrtc.techmahindra.com";
+ 
+ function login(){
+	 	 
+		   username="customer2";
+		   var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+		   password="reset@123";	    
+		   console.log("agent login with id:"+username);
+		   
+		   kandy.login(apiKey, username, password,function(msg){
+			   
+		     userArray.push(username);
+		     kandy.getLastSeen(userArray);
+		     UIState.authenticated();
+		     
+		     //Checks every 5 seconds for incoming messages
+		     setInterval(receiveMessages, 5000);
+		   },
+		   function(msg){
+		     UIState.unauthenticated();
+		     alert('Login Failed!');
+		  });
+		 
+ }
  
  // Event handler for login form button
  $('#support').on('click', function(e) {
@@ -199,7 +334,7 @@ audioSource.ringOut.forEach(function(entry) {
   /* username = $('#username').val();
    var apiKey = $('#api_key').val();
    var password = $('#password').val();*/
-   username="admin";
+   username="customer2";
    var apiKey="DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
    password="reset@123";
     
@@ -517,10 +652,42 @@ minHeight: 200
 
 
 //--------- file upload end ---------
+
+function voiceToTextFile(){
+	//xe-body-voice2text
+	//btn_get_customer
+	alert("disconnected");
+	$('#btn_get_customer').removeClass('btn btn-danger');
+	$('#btn_get_customer').addClass('btn btn-success');
+	$('#btn_get_customer').text('Get Next Customer');
+	var chat=$("#xe-body-voice2text").html();
+	//alert(chat);
+	connectionStatus=false;
+	var xmlHttp = new XMLHttpRequest();
+	var currentText=strip(chat);
+	xmlHttp.open("post", "../VoiceCustomerServlet", true); 
+	//alert("get executed");
+	xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	
+	xmlHttp.send( "final_span=" + currentText +"&username="+ "basha");
+	//alert("get sent");	
+	
+}
+
  
  });
+
+
 
 window.setInterval(function() {
     var elem = document.getElementById('xe-body');
     elem.scrollTop = elem.scrollHeight;
   }, 5000);
+
+
+function strip(html)
+{
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
