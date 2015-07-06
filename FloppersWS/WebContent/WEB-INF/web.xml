@@ -26,6 +26,15 @@
 		<url-pattern>/customer/*</url-pattern>
 	</filter-mapping>
 	<filter>
+		<display-name>AgentRefererFilter</display-name>
+		<filter-name>AgentRefererFilter</filter-name>
+		<filter-class>com.flopper.framework.filter.AgentRefererFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AgentRefererFilter</filter-name>
+		<url-pattern>/common/*</url-pattern>
+	</filter-mapping>
+	<filter>
 		<display-name>SessionFilter</display-name>
 		<filter-name>SessionFilter</filter-name>
 		<filter-class>com.flopper.framework.filter.SessionFilter</filter-class>
@@ -56,4 +65,5 @@
 		<servlet-name>VoiceCustomerServlet</servlet-name>
 		<url-pattern>/VoiceCustomerServlet</url-pattern>
 	</servlet-mapping>
+
 </web-app>
