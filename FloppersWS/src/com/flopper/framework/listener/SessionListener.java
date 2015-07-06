@@ -3,6 +3,7 @@ package com.flopper.framework.listener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import com.flopper.framework.db.KandyUserDetail;
 import com.flopper.framework.db.logincheck;
 
 /**
@@ -16,7 +17,7 @@ public class SessionListener implements HttpSessionListener {
 	 */
 	public SessionListener() {
 		// TODO Auto-generated constructor stub
-	} 
+	}
 
 	/**
 	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
@@ -29,13 +30,17 @@ public class SessionListener implements HttpSessionListener {
 	 * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
 	 */
 	public void sessionDestroyed(HttpSessionEvent sessionEvent) {
+
 		System.out.println("sessionout"
 				+ sessionEvent.getSession().getAttribute("SESSION_USERID"));
 
 		String userID = (String) sessionEvent.getSession().getAttribute(
 				"SESSION_USERID");
-		if (userID != null)
+		if (userID != null) {
 			new logincheck().userLogout(userID);
+
+			new KandyUserDetail().kandyUserLogout(userID);
+		}
 	}
 
 }

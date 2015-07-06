@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.flopper.framework.constant.Constants;
+import com.flopper.framework.db.KandyUserDetail;
 import com.flopper.framework.db.logincheck;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -30,11 +31,11 @@ public class custlandingbean extends ActionSupport implements
 
 	public String logout() throws Exception {
 
-		System.out.println("hi");
 		HttpSession session = request.getSession(false);
 		String userID = (String) session.getAttribute("SESSION_USERID");
-		if (userID != null)
-			new logincheck().userLogout(userID);
+		if (userID != null) {
+			session.invalidate();
+		}
 		return "logout";
 
 	}

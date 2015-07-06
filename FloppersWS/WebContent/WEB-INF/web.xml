@@ -8,10 +8,10 @@
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>customer/custlogin.jsp</welcome-file>
 	</welcome-file-list>
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>3</session-timeout>
 	</session-config>
 	<listener>
 		<listener-class>com.flopper.framework.listener.SessionListener</listener-class>
@@ -41,6 +41,10 @@
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/customer/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/common/*</url-pattern>
 	</filter-mapping>
 	<servlet>
 		<description></description>

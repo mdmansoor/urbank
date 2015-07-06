@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.flopper.framework.constant.Constants;
+import com.flopper.framework.db.KandyUserDetail;
 import com.flopper.framework.db.logincheck;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,8 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author MM00344894
  * 
  */
-public class custloginbean extends ActionSupport implements
-		ServletRequestAware {
+public class custloginbean extends ActionSupport implements ServletRequestAware {
 
 	/**
 	 * 
@@ -76,19 +76,38 @@ public class custloginbean extends ActionSupport implements
 		logincheck login = new logincheck();
 		Map<String, String> map = new HashMap<String, String>();
 
-	
-		HttpSession session =request.getSession(true);
+		HttpSession session = request.getSession(true);
 		map = login.userLogin(username, password);
 		if (map.get(Constants.RESULT).equals(Constants.SUCCESS)) {
 
 			session.setAttribute("LASTLOGINTIME", map.get("LASTLOGINTIME"));
-			session.setAttribute("SESSION_USERNAME", map.get("SESSION_USERNAME"));
+			session.setAttribute("SESSION_USERNAME",
+					map.get("SESSION_USERNAME"));
 			session.setAttribute("SESSION_USERID", username);
-			
+
+			map = new KandyUserDetail().getKandyUserDetail(username);
+
+			if (!(map == null)) {
+				if (!map.isEmpty()) {
+					session.setAttribute("KANDY_USERNAME",
+							map.get("KANDY_USERNAME"));
+					session.setAttribute("KANDY_PASSWORD",
+							map.get("KANDY_PASSWORD"));
+					session.setAttribute("KANDY_APIKEY",
+							map.get("KANDY_APIKEY"));
+
+				} else {
+					this.addFieldError("username",
+							"Kandy User session unavailable");
+					return ERROR;
+				}
+
+			}
+
 			return SUCCESS;
 		} else
 			this.addFieldError("username", map.get(Constants.RESULT));
-			return ERROR;
+		return ERROR;
 
 	}
 

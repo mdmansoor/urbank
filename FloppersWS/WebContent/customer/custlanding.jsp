@@ -87,8 +87,14 @@ new gweb.analytics.AutoTrack({
 <tags:script src="customer/custlanding.js" />
 </head>
 <body class="page-body">
-
-
+	<input type="hidden" id="kandyUserName" name="kandyUserName"
+		value="<%=session.getAttribute("KANDY_USERNAME")%>">
+	<input type="hidden" id="kandyPassWord" name="kandyPassWord"
+		value="<%=session.getAttribute("KANDY_PASSWORD")%>">
+	<input type="hidden" id="api_key" name="api_key"
+		value="<%=session.getAttribute("KANDY_APIKEY")%>">
+	<input type="hidden" id="agent" name="agent"
+		value="agent@webrtc.techmahindra.com">
 
 	<div class="page-container">
 		<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -450,10 +456,15 @@ new gweb.analytics.AutoTrack({
 				</div>
 				<div class="title-env hidden" id="support_queue_status">
 					<B>Customer Support Portal</B>
-					<div id="current_customer">Customer:<span id="current_customer_name"></span></div>
-					<div id="current_customer">Customer ID:<span id="current_customer_id"></span></div>
+					<div id="current_customer">
+						Customer:<span id="current_customer_name"></span>
+					</div>
+					<div id="current_customer">
+						Customer ID:<span id="current_customer_id"></span>
+					</div>
 					<p class="description">You are joining the queue</p>
-					<button class="btn btn-info" id="queue_status">You are joining the queue</button>
+					<button class="btn btn-info" id="queue_status">You are
+						joining the queue</button>
 				</div>
 
 				<div class="breadcrumb-env">
@@ -534,7 +545,7 @@ new gweb.analytics.AutoTrack({
 									<!-- chat to be added dynamically -->
 									<div class="row">
 										<div class="col-sm-10">
-												<div class="video" id="incoming-video"></div>
+											<div class="video" id="incoming-video"></div>
 										</div>
 										<!-- <div class="col-sm-6">
 				                  <div class="video" id="outgoing-video"></div>
@@ -612,10 +623,10 @@ new gweb.analytics.AutoTrack({
 					</div>
 				</div>
 
-<!-- VOICE TO TEXT -->
+				<!-- VOICE TO TEXT -->
 				<div class="row">
 					<div class="panel panel-default" id="main">
-						<div class="compact marquee-stacked hidden" id="marquee" >
+						<div class="compact marquee-stacked hidden" id="marquee">
 							<div class="marquee-copy">
 								<h1>
 									<a class="c1"
@@ -653,16 +664,16 @@ new gweb.analytics.AutoTrack({
 								</p>
 							</div>
 							<div id="div_start">
-								<button id="start_button" onclick="startButton(event)" class="btn btn-purple btn-icon" text="Speak">
-								
-									<span>Translate</span>
-									<i class="fa-bullhorn"></i>
-								
+								<button id="start_button" onclick="startButton(event)"
+									class="btn btn-purple btn-icon" text="Speak">
+
+									<span>Translate</span> <i class="fa-bullhorn"></i>
+
 									<!-- <img alt="Start" id="start_img"
 										src="/intl/en/chrome/assets/common/images/content/mic.gif"> -->
 								</button>
 							</div>
-							
+
 							<div id="copy" class="hidden">
 								<button class="button" id="copy_button" onclick="copyButton()">Copy
 									and Paste</button>
@@ -677,8 +688,9 @@ new gweb.analytics.AutoTrack({
 									<p>(See chrome://settings/handlers to change.)</p>
 								</div>
 							</div>
-							<div class="select2-drop-mask" id="div_language" style="display: block;">
-								<select id="select_language" onchange="updateCountry()" >
+							<div class="select2-drop-mask" id="div_language"
+								style="display: block;">
+								<select id="select_language" onchange="updateCountry()">
 								</select>&nbsp;&nbsp; <select id="select_dialect">
 								</select>
 							</div>
@@ -689,7 +701,7 @@ new gweb.analytics.AutoTrack({
 						</div>
 					</div>
 				</div>
-			<!-- END -->
+				<!-- END -->
 				<!-- File upload new design -->
 				<div id="row">
 
@@ -743,16 +755,16 @@ new gweb.analytics.AutoTrack({
 
 
 				<!--File upload end  -->
-				
-				
+
+
 				<!-- Voice To Text Conversation merge -->
 
-			<div id="row">
-				<div class="col-sm-6" id="voice2text">
-					<div class="xe-widget xe-conversations">
-							
+				<div id="row">
+					<div class="col-sm-6" id="voice2text">
+						<div class="xe-widget xe-conversations">
+
 							<div class="xe-header">
-								
+
 								<div class="xe-label">
 									<h3>
 										Conversations <small>Voice to text</small>
@@ -762,14 +774,14 @@ new gweb.analytics.AutoTrack({
 							<div class="xe-body  widget-scroll" id="xe-body-voice2text">
 								<!-- chat to be added dynamically -->
 								<ul class="list-unstyled" id="chatItem">
-									
+
 								</ul>
 							</div>
-						</div>								
-				</div>			
-			</div>
+						</div>
+					</div>
+				</div>
 
-				
+
 				<!-- Voice to text conversation merge end -->
 
 			</section>
@@ -973,7 +985,7 @@ new gweb.analytics.AutoTrack({
 
 				</div>
 			</section>
-			
+
 			<script type="text/javascript"
 				src="//maps.google.com/maps/api/js?sensor=false"></script>
 			<script type="text/javascript">
@@ -1362,7 +1374,7 @@ function sendMessage(e) {
 	var message="VOICEMESSAGE";
     message = message+e;
     
-    var sendTo = "customer2@webrtc.techmahindra.com";
+   
     kandy.messaging.sendIm(sendTo, message, function () {
 
    var $username="Customer";    

@@ -87,7 +87,8 @@ new gweb.analytics.AutoTrack({
 </head>
 <body class="page-body">
 
-
+<input type="hidden" id="adminUserName" name="adminUserName"
+		value="agent">
 
 	<div class="page-container">
 		<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -1383,8 +1384,11 @@ function copyToString() {
 function sendMessage(e) {
 	var message="VOICEMESSAGE";
     message = message+e;
+    alert(sendTo);
     
-    var sendTo = "basha@webrtc.techmahindra.com";
+    console.log(sendTo);
+    sendTo =  $('#user_to_call').val();
+   console.log(sendTo);
     kandy.messaging.sendIm(sendTo, message, function () {
 
    var $username="You";    
