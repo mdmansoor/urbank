@@ -46,7 +46,8 @@ public class VoiceCustomerServlet extends HttpServlet {
                        if(file.length()<0)
                                   file.createNewFile();          
                     FileWriter writer = new FileWriter(file,true); 
-                    writer.write(date.getTime()+"-"+ customer +":"+ data+"\n"); 
+                    //writer.write(date.getTime()+"-"+ customer +":"+ data+"\n"); 
+                    writer.write(data+"\n");
                     writer.flush();
                     writer.close();
               }

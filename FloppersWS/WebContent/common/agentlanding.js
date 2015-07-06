@@ -48,7 +48,10 @@ $(function() {
 		  $('#btn_get_customer').text('Disconnect Current Customer');
 		  $('#current_customer_name').text(currentUser);
 		  $('#current_customer_id').text(currentUser+'@webrtc.techmahindra.com');
-		  
+		  $('#user_to_call').text(currentUser+'@webrtc.techmahindra.com');
+		  $('#user_to_call').val(currentUser+'@webrtc.techmahindra.com');
+
+			  
 		  $(this).parent().remove();
 		  connectionStatus=true;
 		  sendConnectionStatus(true,currentUser);
