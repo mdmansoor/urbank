@@ -668,6 +668,7 @@ new gweb.analytics.AutoTrack({
 									<!-- <img alt="Start" id="start_img"
 										src="/intl/en/chrome/assets/common/images/content/mic.gif"> -->
 								</button>
+									<input type="checkbox" id="chkSpanish" name="chkSpanish" value="spanish"> Translate to Spanish and send<br>
 							</div>
 							
 							<div id="copy" class="hidden">
@@ -1264,15 +1265,46 @@ if (!('webkitSpeechRecognition' in window)) {
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
-        currentText = event.results[i][0].transcript;			
-        sendMessage(currentText);
-        alert(currentText);
+        currentText = event.results[i][0].transcript;	
+        
+        alert($('#chkSpanish').is(':checked'));
+        if($('#chkSpanish').is(':checked')){
+        	
+        	 $.ajax({
+        	        type: "post",
+        	        url: "../TransServlet", //this is my servlet
+        	        dataType : 'text',
+
+
+        	        data:"message="+currentText,
+        	     
+        	        success: function(response){
+        	        	alert(response);
+        	        	 sendMessage(response);
+
+        	        }, error: function(e){
+        	        	   alert('Error: ' + e);
+        	        }
+        	        });
+        	/* console.log(currentText);
+            xmlHttp.open("post", "../TransServlet", true); 
+            xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlHttp.send( "message=" + currentText+"&msg=hi");
+            
+           alert(response);  */
+            
+        }
+        else{
+            sendMessage(currentText);
+
+        }
+        
        	console.log(currentText);
         xmlHttp.open("post", "../VoiceCustomerServlet", true); 
-        alert("get executed");
+        //alert("get executed");
         xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xmlHttp.send( "final_span=" + currentText +"&username="+ "basha");
-        alert("get sent");
+        //alert("get sent");
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
@@ -1384,10 +1416,11 @@ function copyToString() {
 function sendMessage(e) {
 	var message="VOICEMESSAGE";
     message = message+e;
-    alert(sendTo);
     
-    console.log(sendTo);
+    
+    
     sendTo =  $('#user_to_call').val();
+    alert(sendTo);
    console.log(sendTo);
     kandy.messaging.sendIm(sendTo, message, function () {
 

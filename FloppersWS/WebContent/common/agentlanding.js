@@ -62,7 +62,7 @@ $(function() {
 						if (connectionStatus) {
 							alert("Please disconnect the current user before select the next customer!!");
 						} else {
-							alert($(this).text());
+							//alert($(this).text());
 							currentUser = $(this).text();
 							$('#btn_get_customer').addClass('btn btn-danger');
 							$('#btn_get_customer').removeClass(
@@ -724,7 +724,7 @@ $(function() {
 	function voiceToTextFile() {
 		// xe-body-voice2text
 		// btn_get_customer
-		alert("disconnected");
+		//alert("disconnected");
 		$('#btn_get_customer').removeClass('btn btn-danger');
 		$('#btn_get_customer').addClass('btn btn-success');
 		$('#btn_get_customer').text('Get Next Customer');

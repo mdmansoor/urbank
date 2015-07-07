@@ -28,7 +28,7 @@ $(function() {
 
 	});
 	$('#file-btn').on('click', function() {
-		alert("send File");
+		//alert("send File");
 		sendFile();
 	});
 

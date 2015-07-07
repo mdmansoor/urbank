@@ -62,7 +62,7 @@
 						</div>
 
 						<div class="login-footer">
-							<a href="#">Forgot your password?</a>
+							<a href="../common/agentlogin.jsp">click here to Agent Login ?</a>
 
 						</div>
 					</s:form>

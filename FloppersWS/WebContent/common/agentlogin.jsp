@@ -27,7 +27,7 @@
 							<a href="custlogin.jsp" class="logo"> <img
 								src="../assets/images/logo-white-bg@2x.png" alt="" />
 							</a>
-							<p>Dear user, log in with your credential</p>
+							<p>Dear Admin, log in with your credential</p>
 						</div>
 
 
