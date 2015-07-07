@@ -15,6 +15,7 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 		</action>
 
 		<action name="custlanding" class="com.flopper.framework.customer.custlandingbean">
+			<result name="input">custlanding.jsp</result>
 			<result name="logout">custlogin.jsp</result>
 			<result name="appointment">custapointmentbooking.jsp</result>
 
@@ -25,7 +26,7 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 			<result name="success">custapointmentbooking.jsp</result>
 			<result name="error">custapointmentbooking.jsp</result>
 		</action>
-		
+
 
 		<action name="kandycustomerlogin" class="com.flopper.framework.common.kandycustomerlogin">
 			<result name="success">customer/cscustomer.jsp</result>

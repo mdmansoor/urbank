@@ -123,7 +123,7 @@
 						</a>
 
 						<ul class="user-links list-unstyled">
-							<li class="active"><a href="#" title="Edit profile"
+							<li class="active"><a href="custlanding!input" title="Edit profile"
 								id="home_btn"> <i class="fa-home"></i> Home
 							</a></li>
 							<li><a href="mailbox-main.html" title="Mailbox"> <i
@@ -140,9 +140,7 @@
 				<ul id="main-menu" class="main-menu">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-					<li><a href="dashboard-1.html"> <i class="linecons-cog"></i>
-							<span class="title">Account</span>
-					</a>
+					<li>
 						<ul>
 							<li><a href="dashboard-1.html"> <span class="title">Dashboard
 										1</span>
@@ -153,10 +151,7 @@
 
 
 						</ul></li>
-					<li><a href="layout-variants.html"> <i
-							class="linecons-desktop"></i> <span class="title">Fund
-								Transfer</span>
-					</a>
+					<li>
 						<ul>
 							<li><a href="layout-variants.html"> <span class="title">Layout
 										Variants &amp; API</span>
@@ -166,9 +161,7 @@
 							</a></li>
 
 						</ul></li>
-					<li><a href="ui-panels.html"> <i class="linecons-note"></i>
-							<span class="title">Credit Cards</span>
-					</a>
+					<li>
 						<ul>
 							<li><a href="ui-panels.html"> <span class="title">Panels</span>
 							</a></li>
@@ -176,12 +169,8 @@
 							</a></li>
 
 						</ul></li>
-					<li><a href="ui-widgets.html"> <i class="linecons-star"></i>
-							<span class="title">Loan</span>
-					</a></li>
-					<li><a href=""> <i class="linecons-note"></i> <span
-							class="title">Support</span>
-					</a>
+					<li></li>
+					<li>
 						<ul>
 							<li><a href="" id="support"> <span class="title">Help</span></a></li>
 							<li><a href="custlanding!appointment"> <span

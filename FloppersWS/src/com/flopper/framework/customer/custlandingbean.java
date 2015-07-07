@@ -44,5 +44,10 @@ public class custlandingbean extends ActionSupport implements
 		return "appointment";
 
 	}
+	
+	public String input() throws Exception {
+		return "input";
+
+	}
 
 }
