@@ -45,7 +45,7 @@ public class TransServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		try {
+/*		try {
 			//String data = request.getParameter("message");
 			 String data = "HI Good Morning ";
 			System.out.println(data);
@@ -68,20 +68,21 @@ public class TransServlet extends HttpServlet {
 			System.out.println("Original english phrase: " + data);
 			System.out
 					.println("Translated hindi valueUTF8: " + valueUTF8);
-			System.out
-			.println("Translated hindi direct: " + spanishTranslation);
+			//System.out.println("Translated hindi direct: " + spanishTranslation);
 
 			PrintWriter out = response.getWriter();
-			
+			response.setCharacterEncoding("UTF-16LE");
+			response.setHeader("Content-Language","zh");
+			response.setContentType("text/html");
 			
 			
 			out.println(spanishTranslation);
 			
 			
 			
-			request.setCharacterEncoding("utf8");
+			//request.setCharacterEncoding("utf8");
 	        //response.setCharacterEncoding("utf8");
-	        response.setContentType("application/json");
+	        //response.setContentType("application/json");
 	        
 	       
 	        JSONObject obj = new JSONObject();
@@ -94,7 +95,52 @@ public class TransServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+*/
+		
+		
+		
+		
+		try{
+			
+			
+			String data = request.getParameter("message");
+			//String data = "My name is Basha ";
+			System.getProperties().put("proxySet", "true");
+		    System.getProperties().put("proxyHost", "one.proxy.att.com");
+		    System.getProperties().put("proxyPort", "8080");
 
+			Translate.setClientId("URBANK");
+			Translate
+					.setClientSecret("2eROFQziZko9sDH/Z+23pWjGeQq3p8fwyMCgyvXRLe0=");
+
+			
+			// Translate an english string to spanish
+			String englishString = data;
+			String spanishTranslation = Translate.execute(englishString,Language.HINDI);
+			String valueISO = new String(spanishTranslation.getBytes("CP850"), "ISO-8859-1");
+			String valueUTF8 = new String(valueISO.getBytes(), "UTF-8");
+			System.out.println("Original english phrase: " + englishString);
+			System.out.println("Translated hindi phrase: " + valueUTF8);
+			
+			
+			response.setCharacterEncoding("UTF-16LE");
+			response.setHeader("Content-Language","zh");
+			response.setContentType("text/html");
+			//out.printf(spanishTranslation);
+			
+			PrintWriter outs=response.getWriter();
+			outs.println(spanishTranslation);
+			//out.print(valueUTF8);
+			//PrintWriter out=response.getWriter();
+			//out.printf(l,  "UTF-8",  "UTF-8");
+			
+		
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

@@ -668,7 +668,7 @@ new gweb.analytics.AutoTrack({
 									<!-- <img alt="Start" id="start_img"
 										src="/intl/en/chrome/assets/common/images/content/mic.gif"> -->
 								</button>
-									<input type="checkbox" id="chkSpanish" name="chkSpanish" value="spanish"> Translate to Spanish and send<br>
+									<input type="checkbox" id="chkTranslate" name="chkTranslate" value="chkTranslate" class="iswitch iswitch-secondary"> Translate to English when other languge message comes in.<br>
 							</div>
 							
 							<div id="copy" class="hidden">
@@ -1267,8 +1267,8 @@ if (!('webkitSpeechRecognition' in window)) {
         final_transcript += event.results[i][0].transcript;
         currentText = event.results[i][0].transcript;	
         
-        alert($('#chkSpanish').is(':checked'));
-        if($('#chkSpanish').is(':checked')){
+        alert($('#chkTranslate').is(':checked'));
+        if($('#chkTranslate').is(':checked')){
         	
         	 $.ajax({
         	        type: "post",
