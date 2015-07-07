@@ -22,7 +22,7 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 		<action name="custapointmentbooking"
 			class="com.flopper.framework.customer.custapointmentbookingbean">
 			<result name="input">custapointmentbooking.jsp</result>
-			<result name="success">custsuccessmessage.jsp</result>
+			<result name="success">custapointmentbooking.jsp</result>
 			<result name="error">custapointmentbooking.jsp</result>
 		</action>
 		

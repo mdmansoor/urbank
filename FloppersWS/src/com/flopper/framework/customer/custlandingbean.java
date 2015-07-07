@@ -41,7 +41,6 @@ public class custlandingbean extends ActionSupport implements
 	}
 
 	public String appointment() throws Exception {
-		System.out.println("hi");
 		return "appointment";
 
 	}

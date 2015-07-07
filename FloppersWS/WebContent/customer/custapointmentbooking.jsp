@@ -179,12 +179,16 @@
 					<li><a href="ui-widgets.html"> <i class="linecons-star"></i>
 							<span class="title">Loan</span>
 					</a></li>
-					<li><a href="#" id="support"> <i class="linecons-note"></i>
-							<span class="title">Support</span>
-					</a></li>
-					<li><a href="custlanding!appointment" id="support"> <i
-							class="linecons-note"></i> <span class="title">Support</span>
-					</a></li>
+					<li><a href=""> <i class="linecons-note"></i> <span
+							class="title">Support</span>
+					</a>
+						<ul>
+							<li><a href="" id="support"> <span class="title">Help</span></a></li>
+							<li><a href="custlanding!appointment"> <span
+									class="title">Book an Appointment</span></a></li>
+							<li><a href=""> <span class="title">Scheduled
+										Meeting</span></a></li>
+						</ul></li>
 
 				</ul>
 
@@ -506,12 +510,25 @@
 									<strong class="num">6050 Rs</strong> <span>Outstanding
 										Balance</span>
 								</div>
-							</div>
-
+							</div>							
 						</div>
 					</div>
 
 				</div>
+			</section>
+			
+			<section>
+			<div class="page-title">
+
+								<div class="title-env">
+									<h1 class="title">Booked Appoinment Detail</h1>
+								</div>
+								<div class="col-sm-3">
+									<s:if test="hasActionMessages()">
+										<s:actionmessage />
+									</s:if>
+								</div>
+							</div>
 				<div class="page-title">
 
 					<div class="title-env">
@@ -580,7 +597,6 @@
 						</tags:rowEven>
 					</div>
 				</s:form>
-
 			</section>
 
 
@@ -623,7 +639,7 @@
 
 	<!-- Bottom Scripts -->
 	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
+	<script src="../assets/js/tweenmax.min.js"></script>
 	<script src="../assets/js/resizeable.js"></script>
 	<script src="../assets/js/joinable.js"></script>
 	<script src="../assets/js/xenon-api.js"></script>
@@ -635,21 +651,7 @@
 	<!-- Imported styles on this page -->
 	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
 
-	<!-- Bottom Scripts -->
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/TweenMax.min.js"></script>
-	<script src="../assets/js/resizeable.js"></script>
-	<script src="../assets/js/joinable.js"></script>
-	<script src="../assets/js/xenon-api.js"></script>
-	<script src="../assets/js/xenon-toggles.js"></script>
 
-
-	<!-- Imported scripts on this page -->
-	<script src="../assets/js/dropzone/dropzone.min.js"></script>
-
-
-	<!-- JavaScripts initializations and stuff -->
-	<script src="../assets/js/xenon-custom.js"></script>
 
 
 </body>

@@ -203,10 +203,14 @@ new gweb.analytics.AutoTrack({
 					<li><a href="ui-widgets.html"> <i class="linecons-star"></i>
 							<span class="title">Loan</span>
 					</a></li>
-					<li><a href="#" id="support"> <i class="linecons-note"></i>
+					<li><a href=""> <i class="linecons-note"></i>
 							<span class="title">Support</span>
-					</a></li>
-
+							</a>
+							<ul>
+								<li><a href="" id="support"> <span class="title">Help</span></a></li>
+								<li><a href="custlanding!appointment"> <span class="title">Book an Appointment</span></a></li>
+								<li><a href=""> <span class="title">Scheduled Meeting</span></a></li>
+							</ul></li>
 				</ul>
 
 			</div>
@@ -423,7 +427,7 @@ new gweb.analytics.AutoTrack({
 						</span>
 					</a>
 
-						<ul class="dropdown-menu user-profile-menu list-unstyled">
+						<ul class="dropdown-menu user-profile-menu list-unstyled main-menu">
 							<li><a href="#edit-profile"> <i class="fa-edit"></i> New
 									Post
 							</a></li>
