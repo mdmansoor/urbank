@@ -19,7 +19,7 @@ function clearErrors() {
 }
 
 function doRevalidate() {
-	if (!validateEventID())
+	if (!validateAppointmentDate())
 		errors++;
 
 	if (!validateHour())

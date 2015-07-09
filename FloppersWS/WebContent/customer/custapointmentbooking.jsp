@@ -14,46 +14,6 @@
 
 <title>UR Bank - Customer Banking</title>
 
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
-<link rel="stylesheet"
-	href="../assets/css/fonts/linecons/css/linecons.css">
-<link rel="stylesheet"
-	href="../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="../assets/css/bootstrap.css">
-<link rel="stylesheet" href="../assets/css/xenon-core.css">
-<link rel="stylesheet" href="../assets/css/xenon-forms.css">
-<link rel="stylesheet" href="../assets/css/xenon-components.css">
-<link rel="stylesheet" href="../assets/css/xenon-skins.css">
-<link rel="stylesheet" href="../assets/css/custom.css">
-<link rel="stylesheet" href="../common/css/common.css">
-<script src="../assets/js/jquery-1.11.1.min.js"></script>
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
-
-<!-- Kandy API includes -->
-
-<script
-	src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.4/fcs.js"></script>
-<script
-	src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.2.2/kandy.js"></script>
-
-<!--Load Pace AJAX Progress Bar (optional)-->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-<link rel="stylesheet" media="screen"
-	href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/pink/pace-theme-minimal.css" />
-
-<link rel="stylesheet" type="text/css"
-	href="../codebase/dhtmlxcalendar.css" />
-<script src="../codebase/dhtmlxcalendar.js"></script>
-<!-- Kandy END -->
-
 <style>
 #calendar_input {
 	border: 1px solid #909090;
@@ -66,6 +26,7 @@
 	cursor: pointer;
 }
 </style>
+<tags:custdependencies></tags:custdependencies>
 <tags:script src="customer/custapointmentbooking.js" />
 </head>
 <body class="page-body">
@@ -627,24 +588,6 @@
 		</div>
 	</div>
 
-
-	<!-- Imported styles on this page -->
-	<link rel="stylesheet"
-		href="../assets/css/fonts/elusive/css/elusive.css">
-
-	<!-- Bottom Scripts -->
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/tweenmax.min.js"></script>
-	<script src="../assets/js/resizeable.js"></script>
-	<script src="../assets/js/joinable.js"></script>
-	<script src="../assets/js/xenon-api.js"></script>
-	<script src="../assets/js/xenon-toggles.js"></script>
-
-	<!-- JavaScripts initializations and stuff -->
-	<script src="../assets/js/xenon-custom.js"></script>
-
-	<!-- Imported styles on this page -->
-	<link rel="stylesheet" href="../assets/js/dropzone/css/dropzone.css">
 
 
 

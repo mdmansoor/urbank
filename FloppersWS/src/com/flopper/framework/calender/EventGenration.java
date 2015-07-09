@@ -31,7 +31,7 @@ public class EventGenration {
 						conn))
 					map.put(Constants.RESULT, Constants.SUCCESS);
 				map.put("EventID", eventID);
-			CalenderEvent.sendAnEvent(eventID,date,hour,minute,emailID);
+				CalenderEvent.sendAnEvent(eventID, date, hour, minute, emailID);
 				return map;
 
 			}
@@ -67,6 +67,26 @@ public class EventGenration {
 			stmt.setString(4, time);
 			int rs = stmt.executeUpdate();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean validateEventID(String eventID) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Connection conn = DBHelper.getConnection();
+		try {
+			stmt = conn
+					.prepareStatement("SELECT * FROM EVENTCREATION E WHERE E.EVENTID= ?  AND (TO_CHAR(E.EVENTDATE,'DD-MM-YY')= TO_CHAR(SYSDATE,'DD-MM-YY') OR  TO_CHAR(E.EVENTDATE,'DD-MM-YY')= TO_CHAR(SYSDATE+1,'DD-MM-YY'))");
+			stmt.setString(1, eventID);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				return true;
+
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
