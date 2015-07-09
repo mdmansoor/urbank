@@ -4,6 +4,7 @@ $(function() {
 	var sendTo = "";
 	var username='';
 	var userArray = [];
+	var language="English";
 	$("#profile_section").hide();
 	$("#chat_section").show();
 	$('#btn_get_customer').removeClass('btn btn-danger');
@@ -11,7 +12,7 @@ $(function() {
 	$('#btn_get_customer').text('Get next customer from queue');
 	var connectionStatus = false;
 	var currentUser = "";
-
+	var domainName="codathon.techmahindra.com";
 	$("#home_btn").click(function() {
 
 		$("#profile_section").hide(500);
@@ -22,7 +23,7 @@ $(function() {
 	function login() {
 		username=$('#adminUserName').val();
 	
-		var apiKey = "DAK5aa3e878df1d46ca9f83e27ad0dfba1f";
+		var apiKey = "DAKc67e5b97cbca4fc5b140766ac0dc2a2c";
 		password = "reset@123";
 		console.log("agent login with id:" + username);
 
@@ -71,13 +72,13 @@ $(function() {
 									'Disconnect Current Customer');
 							$('#current_customer_name').text(currentUser);
 							$('#current_customer_id').text(
-									currentUser + '@webrtc.techmahindra.com');
+									currentUser + '@'+domainName);
 							$('#user_to_call').text(
-									currentUser + '@webrtc.techmahindra.com');
+									currentUser + '@'+domainName);
 							$('#user_to_call').val(
-									currentUser + '@webrtc.techmahindra.com');
-							sendTo = currentUser + '@webrtc.techmahindra.com';
-
+									currentUser + '@'+domainName);
+							sendTo = currentUser + '@'+domainName;
+							console.log("user to call:"+currentUser);
 							$(this).parent().remove();
 							connectionStatus = true;
 							sendConnectionStatus(true, currentUser);
@@ -203,6 +204,7 @@ $(function() {
 		 * @params <string> userName, <string> message, <function>
 		 *         success/failure
 		 */
+		console.log('sendig message to:'+sendTo+":"+message);
 		kandy.messaging
 				.sendIm(
 						sendTo,
@@ -262,13 +264,15 @@ $(function() {
 			message = "DISCONNECTED";
 		}
 
-		var to = currentUser + "@webrtc.techmahindra.com";
-		kandy.messaging.sendIm(to, message, function() {
-			console.log("Send Connection status to " + to + " success");
+		var to = currentUser + "@"+domainName;
+		console.log("To:"+to);
+		console.log("sendTo:"+sendTo);
+		kandy.messaging.sendIm(sendTo, message, function() {
+			console.log("Send Connection status to " + sendTo + " success");
 
 		}, function() {
 			alert('Connection sending failed');
-			console.log("Send Connection status to " + to + " failed");
+			console.log("Send Connection status to " + sendTo + " failed");
 		});
 	}
 
@@ -316,26 +320,19 @@ $(function() {
 													.indexOf("VOICEMESSAGE");
 											console.log(index);
 											console.log(msgText);
+											
+											
+											
 											if (msgText.indexOf("VOICEMESSAGE") == -1
-													&& msgText
-															.indexOf("IAMALIVE") == -1) {
+													&& msgText.indexOf("IAMALIVE") == -1
+													&& msgText.indexOf("LANGUAGE") == -1) {
 												console
 														.log("Chat Message received");
 												// update chat window
-												$("#xe-body ul")
-														.append(
-																'<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'
-																		+ $username
-																		+ '</strong></a><p>'
-																		+ msgText
-																		+ '</p></div></div></li>');
-											} else if (msgText
-													.indexOf("VOICEMESSAGE") != -1
-													&& msgText
-															.indexOf("IAMALIVE") == -1) {
+												$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+ $username+ '</strong></a><p>'+ msgText+ '</p></div></div></li>');
+											} else if (msgText.indexOf("VOICEMESSAGE") != -1&& msgText.indexOf("IAMALIVE") == -1 && msgText.indexOf("LANGUAGE") == -1) {
 												// update voice to text
-												console
-														.log("voice to text received");
+												console.log("voice to text received");
 												$("#xe-body-voice2text ul")
 														.append(
 																'<li>'
@@ -345,8 +342,8 @@ $(function() {
 																		+ '</p></li>');
 											} else if (msgText
 													.indexOf("VOICEMESSAGE") == -1
-													&& msgText
-															.indexOf("IAMALIVE") != -1) {
+													&& msgText.indexOf("IAMALIVE") != -1
+													&& msgText.indexOf("LANGUAGE") == -1) {
 												// update customer queue
 												// <li><a class="queue"
 												// href"#">customer1</a></li>
@@ -359,6 +356,30 @@ $(function() {
 																		+ user
 																		+ '</a></li>');
 
+											}
+											
+											else if (msgText.indexOf("VOICEMESSAGE") == -1
+													&& msgText.indexOf("IAMALIVE") == -1
+													&& msgText.indexOf("LANGUAGE") != -1) {
+												// update customer queue
+												// <li><a class="queue"
+												// href"#">customer1</a></li>
+												
+												language = msgText.substring(8);	
+												
+												$('#user_language').text(language);
+												if(language=="Hindi")
+													$('#user_language_code').text('hi-IN');
+												if(language=="English")
+													$('#user_language_code').text('en-US');
+												if(language=="French")
+													$('#user_language_code').text('fr-FR');
+												if(language=="Chinese")
+													$('#user_language_code').text('zh-CN');
+												
+												
+
+												console.log("LANGUAGE  received:"+language);
 											}
 
 										}

@@ -103,7 +103,9 @@ public class TransServlet extends HttpServlet {
 		try{
 			
 			
-			String data = request.getParameter("message");
+			String message = request.getParameter("message");
+			String language = request.getParameter("language");
+
 			//String data = "My name is Basha ";
 			System.getProperties().put("proxySet", "true");
 		    System.getProperties().put("proxyHost", "one.proxy.att.com");
@@ -114,25 +116,19 @@ public class TransServlet extends HttpServlet {
 					.setClientSecret("2eROFQziZko9sDH/Z+23pWjGeQq3p8fwyMCgyvXRLe0=");
 
 			
-			// Translate an english string to spanish
-			String englishString = data;
-			String spanishTranslation = Translate.execute(englishString,Language.HINDI);
-			String valueISO = new String(spanishTranslation.getBytes("CP850"), "ISO-8859-1");
-			String valueUTF8 = new String(valueISO.getBytes(), "UTF-8");
-			System.out.println("Original english phrase: " + englishString);
-			System.out.println("Translated hindi phrase: " + valueUTF8);
+			
+			String originalMessage = message;
+			String convertedMessage = Translate.execute(originalMessage,getLanguageCode(language));
+			
 			
 			
 			response.setCharacterEncoding("UTF-16LE");
 			response.setHeader("Content-Language","zh");
 			response.setContentType("text/html");
-			//out.printf(spanishTranslation);
+			
 			
 			PrintWriter outs=response.getWriter();
-			outs.println(spanishTranslation);
-			//out.print(valueUTF8);
-			//PrintWriter out=response.getWriter();
-			//out.printf(l,  "UTF-8",  "UTF-8");
+			outs.println(convertedMessage);
 			
 		
 			
@@ -141,6 +137,23 @@ public class TransServlet extends HttpServlet {
 		}
 		
 		
+	}
+	private Language getLanguageCode(String languageStr){
+		Language lang=Language.ENGLISH;
+		
+		if(languageStr.equalsIgnoreCase("Hindi"))
+			return Language.HINDI;
+		if(languageStr.equalsIgnoreCase("English"))
+			return Language.ENGLISH;
+		if(languageStr.equalsIgnoreCase("Spanish"))
+			return Language.SPANISH;
+		if(languageStr.equalsIgnoreCase("Chinese"))
+			return Language.CHINESE_TRADITIONAL;
+		if(languageStr.equalsIgnoreCase("French"))
+			return Language.FRENCH;
+			
+		
+		return lang;
 	}
 
 }

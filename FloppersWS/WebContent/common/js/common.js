@@ -1,5 +1,7 @@
 var errors = 0;
 
+var isScheduled=false;
+
 function onReset() {
 	errors = 0;
 	doReset();

@@ -8,8 +8,42 @@ $(function() {
 	var username = $('#kandyUserName').val();
 	var apiKey = $('#api_key').val();
 	var password = $('#kandyPassWord').val();
-
+	var custLanguage="English";	
+	var domainName="codathon.techmahindra.com";
 	
+	
+	
+	$("input:checkbox").on('click', function() {
+		// in the handler, 'this' refers to the box clicked on
+		var $box = $(this);
+		if ($box.is(":checked")) {
+			// the name of the box is retrieved using the .attr() method
+			// as it is assumed and expected to be immutable
+			var group = "input:checkbox[name='" + $box.attr("name") + "']";
+			// the checked state of the group/box on the other hand will change
+			// and the current value is retrieved using .prop() method
+			$(group).prop("checked", false);
+			$box.prop("checked", true);
+			custLanguage=$box.val();
+			console.log("Selected Check:"+custLanguage);
+		} else {
+			$box.prop("checked", false);
+		}
+		
+		$('#current_language').text(custLanguage);
+		if(custLanguage=="Hindi")
+			$('#current_language_code').text('hi-IN');
+		if(custLanguage=="English")
+			$('#current_language_code').text('en-US');
+		if(custLanguage=="French")
+			$('#current_language_code').text('fr-FR');
+		if(custLanguage=="Chinese")
+			$('#current_language_code').text('zh-CN');
+		
+		sendLanguage(custLanguage);
+		
+	});
+
 
 	$("#home_btn").click(function() {
 
@@ -336,7 +370,7 @@ $(function() {
 
 					$('#current_customer_name').text(username);
 					$('#current_customer_id').text(
-							username + "@webrtc.techmahindra.com");
+							username + "@"+domainName);
 					sendAmAlive(username);
 					// Checks every 5 seconds for incoming messages
 					setInterval(receiveMessages, 5000);
@@ -673,6 +707,18 @@ $(function() {
 			$('#queue_status').text("You are in the queue..");
 		}, function() {
 			alert('AM alive send failed');
+		});
+	}
+	function sendLanguage(e) {
+		var message = "LANGUAGE";
+		message = message + e;
+
+		
+		kandy.messaging.sendIm(sendTo, message, function() {
+
+			console.log("send language:"+message+" sent success");			
+		}, function() {
+			alert('send language sent failed');
 		});
 	}
 	// -------------file upload end----------------
