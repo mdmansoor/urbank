@@ -209,7 +209,7 @@ new gweb.analytics.AutoTrack({
 							<ul>
 								<li><a href="" id="support"> <span class="title">Help</span></a></li>
 								<li><a href="custlanding!appointment"> <span class="title">Book an Appointment</span></a></li>
-								<li><a href=""> <span class="title">Scheduled Meeting</span></a></li>
+								<li><a href="custlanding!scheduledmeeting"> <span class="title">Scheduled Meeting</span></a></li>
 							</ul></li>
 				</ul>
 

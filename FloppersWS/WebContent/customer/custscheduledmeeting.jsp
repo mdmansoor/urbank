@@ -66,7 +66,7 @@
 	cursor: pointer;
 }
 </style>
-<tags:script src="customer/custapointmentbooking.js" />
+<tags:script src="customer/custscheduledmeeting.js" />
 </head>
 <body class="page-body">
 
@@ -523,78 +523,34 @@
 							<s:actionmessage />
 						</s:if>
 						<s:else>
+							<div class="page-title">
 
-							<div class="title-env">
-								<h1 class="title">Appoinment Detail</h1>
+								<div class="title-env">
+									<h1 class="title">Scheduled Meeting</h1>
+								</div>
+
 							</div>
 						</s:else>
 					</div>
 				</div>
-				<div class="page-title"></div>
-				<s:form action="custapointmentbooking">
+
+				<s:form action="custscheduledmeeting">
 					<div class="col-sm-12">
-
 						<tags:rowOdd>
-							<td><label>Appointment Date</label></td>
-							<td><input type="text" name="appointmentDate"
-								id="appointmentDate"> <span><img
-									id="appointmentDate_icon" src="../codebase/imgs/calendar.gif"
-									border="0"></span></td>
-							<td><div id="appointmentDate_error" class="level4_error">
-									<s:fielderror fieldName="appointmentDate"
-										cssClass="level4_error">
+							<td><label>Event ID</label></td>
+							<td><input type="text" name="eventID" id="eventID"></td>
+							<td><div id="eventID_error" class="level4_error">
+									<s:fielderror fieldName="eventID" cssClass="level4_error">
 									</s:fielderror>
 								</div></td>
-						</tags:rowOdd>
-						<tags:rowEven>
-							<td><label>Time</label></td>
-							<td><select id="hour" name="hour">
-									<option value="">--- Please Select --</option>
-									<option value="9">09</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-									<option value="13">01</option>
-									<option value="14">02</option>
-									<option value="15">03</option>
-									<option value="16">04</option>
-									<option value="17">05</option>
-							</select></td>
-							<td><select id="minute" name="minute">
-									<option value="">--- Please Select --</option>
-									<option value="00">00</option>
-									<option value="30">30</option>
-							</select></td>
-
-							<td><div id="hour_error" class="level4_error">
-									<s:fielderror fieldName="hour" cssClass="level4_error">
-									</s:fielderror>
-								</div></td>
-							<td><div id="minute_error" class="level4_error">
-									<s:fielderror fieldName="minute" cssClass="level4_error">
-									</s:fielderror>
-								</div></td>
-						</tags:rowEven>
-						<tags:rowOdd>
-							<td>Email address</td>
-							<td><input type="text" id="emailID" name="emailID"></td>
-							<td><div id="emailID_error" class="level4_error">
-									<s:fielderror fieldName="emailID" cssClass="level4_error">
-									</s:fielderror>
-								</div></td>
-
 						</tags:rowOdd>
 						<tags:rowEven>
 							<tags:submitreset />
-							<td></td>
-							<td></td>
 							<td></td>
 						</tags:rowEven>
 					</div>
 				</s:form>
 			</section>
-
-
 
 			<!-- Main Footer -->
 			<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->

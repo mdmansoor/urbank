@@ -45,6 +45,11 @@ public class custlandingbean extends ActionSupport implements
 
 	}
 	
+	public String scheduledmeeting() throws Exception {
+		return "scheduledmeeting";
+
+	}
+	
 	public String input() throws Exception {
 		return "input";
 
