@@ -181,239 +181,6 @@ new gweb.analytics.AutoTrack({
 
 		<div class="main-content">
 
-			<nav class="navbar user-info-navbar" role="navigation">
-				<!-- User Info, Notifications and Menu Bar -->
-
-				<!-- Left links for user info navbar -->
-				<ul class="user-info-menu left-links list-inline list-unstyled">
-
-					<li class="hidden-sm hidden-xs"><a href="#"
-						data-toggle="sidebar"> <i class="fa-bars"></i>
-					</a></li>
-
-					<li class="dropdown hover-line"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="fa-envelope-o"></i> <span class="badge badge-green">15</span>
-					</a>
-
-						<ul class="dropdown-menu messages">
-							<li>
-
-								<ul class="dropdown-menu-list list-unstyled ps-scrollbar">
-
-									<li class="active">
-										<!-- "active" class means message is unread --> <a href="#">
-											<span class="line"> <strong>Luc Chartier</strong> <span
-												class="light small">- yesterday</span>
-										</span> <span class="line desc small"> This ain't our first
-												item, it is the best of the rest. </span>
-									</a>
-									</li>
-
-									<li class="active"><a href="#"> <span class="line">
-												<strong>Salma Nyberg</strong> <span class="light small">-
-													2 days ago</span>
-										</span> <span class="line desc small"> Oh he decisively
-												impression attachment friendship so if everything. </span>
-									</a></li>
-
-									<li><a href="#"> <span class="line"> Hayden
-												Cartwright <span class="light small">- a week ago</span>
-										</span> <span class="line desc small"> Whose her enjoy chief
-												new young. Felicity if ye required likewise so doubtful. </span>
-									</a></li>
-
-									<li><a href="#"> <span class="line"> Sandra
-												Eberhardt <span class="light small">- 16 days ago</span>
-										</span> <span class="line desc small"> On so attention
-												necessary at by provision otherwise existence direction. </span>
-									</a></li>
-
-									<!-- Repeated -->
-
-									<li class="active">
-										<!-- "active" class means message is unread --> <a href="#">
-											<span class="line"> <strong>Luc Chartier</strong> <span
-												class="light small">- yesterday</span>
-										</span> <span class="line desc small"> This ain't our first
-												item, it is the best of the rest. </span>
-									</a>
-									</li>
-
-									<li class="active"><a href="#"> <span class="line">
-												<strong>Salma Nyberg</strong> <span class="light small">-
-													2 days ago</span>
-										</span> <span class="line desc small"> Oh he decisively
-												impression attachment friendship so if everything. </span>
-									</a></li>
-
-									<li><a href="#"> <span class="line"> Hayden
-												Cartwright <span class="light small">- a week ago</span>
-										</span> <span class="line desc small"> Whose her enjoy chief
-												new young. Felicity if ye required likewise so doubtful. </span>
-									</a></li>
-
-									<li><a href="#"> <span class="line"> Sandra
-												Eberhardt <span class="light small">- 16 days ago</span>
-										</span> <span class="line desc small"> On so attention
-												necessary at by provision otherwise existence direction. </span>
-									</a></li>
-
-								</ul>
-
-							</li>
-
-							<li class="external"><a href="mailbox-main.html"> <span>All
-										Messages</span> <i class="fa-link-ext"></i>
-							</a></li>
-						</ul></li>
-
-					<li class="dropdown hover-line"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="fa-bell-o"></i> <span class="badge badge-purple">7</span>
-					</a>
-
-						<ul class="dropdown-menu notifications">
-							<li class="top">
-								<p class="small">
-									<a href="#" class="pull-right">Mark all Read</a> You have <strong>3</strong>
-									new notifications.
-								</p>
-							</li>
-
-							<li>
-								<ul class="dropdown-menu-list list-unstyled ps-scrollbar">
-									<li class="active notification-success"><a href="#"> <i
-											class="fa-user"></i> <span class="line"> <strong>New
-													user registered</strong>
-										</span> <span class="line small time"> 30 seconds ago </span>
-									</a></li>
-
-									<li class="active notification-secondary"><a href="#">
-											<i class="fa-lock"></i> <span class="line"> <strong>Privacy
-													settings have been changed</strong>
-										</span> <span class="line small time"> 3 hours ago </span>
-									</a></li>
-
-									<li class="notification-primary"><a href="#"> <i
-											class="fa-thumbs-up"></i> <span class="line"> <strong>Someone
-													special liked this</strong>
-										</span> <span class="line small time"> 2 minutes ago </span>
-									</a></li>
-
-									<li class="notification-danger"><a href="#"> <i
-											class="fa-calendar"></i> <span class="line"> John
-												cancelled the event </span> <span class="line small time"> 9
-												hours ago </span>
-									</a></li>
-
-									<li class="notification-info"><a href="#"> <i
-											class="fa-database"></i> <span class="line"> The
-												server is status is stable </span> <span class="line small time">
-												yesterday at 10:30am </span>
-									</a></li>
-
-									<li class="notification-warning"><a href="#"> <i
-											class="fa-envelope-o"></i> <span class="line"> New
-												comments waiting approval </span> <span class="line small time">
-												last week </span>
-									</a></li>
-								</ul>
-							</li>
-
-							<li class="external"><a href="#"> <span>View all
-										notifications</span> <i class="fa-link-ext"></i>
-							</a></li>
-						</ul></li>
-
-					<!-- Added in v1.2 -->
-					<li class="dropdown hover-line language-switcher"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <img
-							src="../assets/images/flags/flag-uk.png" alt="flag-uk" />
-							English
-					</a>
-
-						<ul class="dropdown-menu languages">
-							<li><a href="#"> <img
-									src="../assets/images/flags/flag-al.png" alt="flag-al" />
-									Shqip
-							</a></li>
-							<li class="active"><a href="#"> <img
-									src="../assets/images/flags/flag-uk.png" alt="flag-uk" />
-									English
-							</a></li>
-							<li><a href="#"> <img
-									src="../assets/images/flags/flag-de.png" alt="flag-de" />
-									Deutsch
-							</a></li>
-							<li><a href="#"> <img
-									src="../assets/images/flags/flag-fr.png" alt="flag-fr" />
-									Fran&ccedil;ais
-							</a></li>
-							<li><a href="#"> <img
-									src="../assets/images/flags/flag-br.png" alt="flag-br" />
-									Portugu&ecirc;s
-							</a></li>
-							<li><a href="#"> <img
-									src="../assets/images/flags/flag-es.png" alt="flag-es" />
-									Espa&ntilde;ol
-							</a></li>
-						</ul></li>
-
-				</ul>
-
-
-				<!-- Right links for user info navbar -->
-				<ul class="user-info-menu right-links list-inline list-unstyled">
-					<li class="search-form">
-						<!-- You can add "always-visible" to show make the search input visible -->
-
-						<form name="userinfo_search_form" method="get"
-							action="extra-search.html">
-							<input type="text" name="s" class="form-control search-field"
-								placeholder="Type to search..." />
-
-							<button type="submit" class="btn btn-link">
-								<i class="linecons-search"></i>
-							</button>
-						</form>
-
-					</li>
-
-					<li class="dropdown user-profile"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <img
-							src="../assets/images/user-4.png" alt="user-image"
-							class="img-circle img-inline userpic-32" width="28" /> <span>
-								<%=session.getAttribute("SESSION_USERID")%> <i
-								class="fa-angle-down"></i>
-						</span>
-					</a>
-
-						<ul class="dropdown-menu user-profile-menu list-unstyled">
-							<li><a href="#edit-profile"> <i class="fa-edit"></i> New
-									Post
-							</a></li>
-							<li><a href="#settings"> <i class="fa-wrench"></i>
-									Settings
-							</a></li>
-							<li><a href="#profile"> <i class="fa-user"></i> Account
-									Summary
-							</a></li>
-							<li><a href="#help"> <i class="fa-info"></i> Help
-							</a></li>
-							<li class="last"><a href="agentlanding!logout"> <i
-									class="fa-lock"></i> Logout
-							</a></li>
-						</ul></li>
-
-					<li><a href="#" data-toggle="chat"> <i
-							class="fa-comments-o"></i>
-					</a></li>
-
-				</ul>
-
-			</nav>
-
 			<div class="page-title">
 
 				<div class="title-env">
@@ -668,7 +435,11 @@ new gweb.analytics.AutoTrack({
 									<!-- <img alt="Start" id="start_img"
 										src="/intl/en/chrome/assets/common/images/content/mic.gif"> -->
 								</button>
-									<input type="checkbox" id="chkTranslate" name="chkTranslate" value="chkTranslate" class="iswitch iswitch-secondary"> Translate to English when other languge message comes in.<br>
+								<div>
+								<label><strong>User Selected Language is:</strong><h3><div id="user_language"></div></h3><div id="#user_language_code" class="hidden"></div></label>
+								
+								</div>
+									<!-- <input type="checkbox" id="chkTranslate" name="chkTranslate" value="chkTranslate" class="iswitch iswitch-secondary"> Translate to English when other languge message comes in.<br> -->
 							</div>
 							
 							<div id="copy" class="hidden">
@@ -784,231 +555,8 @@ new gweb.analytics.AutoTrack({
 				<!-- Voice to text conversation merge end -->
 
 			</section>
-			<section class="profile-env" id="profile_section">
+			
 
-				<div class="row">
-
-					<!-- <div class="col-sm-3">
-						
-						User Info Sidebar
-						<div class="user-info-sidebar">
-							
-							<a href="#" class="user-img">
-								<img src="../assets/images/user-4.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-							</a>
-							
-							<a href="#" class="user-name">
-								Art Ramadani
-								<span class="user-status is-online"></span>
-							</a>
-							
-							<span class="user-title">
-								CEO at <strong>Google</strong>
-							</span>
-							
-							<hr />
-							
-							<ul class="list-unstyled user-info-list">
-							<li>
-								<i class="fa-home"></i>
-								Prishtina, Kosovo
-							</li>
-							<li>
-								<i class="fa-briefcase"></i>
-								<a href="#">Laborator</a>
-							</li>
-							<li>
-								<i class="fa-graduation-cap"></i>
-								University of Bologna
-							</li>
-						</ul>	
-								
-							<hr />
-							
-							<ul class="list-unstyled user-friends-count">
-								<li>
-									<span>643</span>
-									followers
-								</li>
-								<li>
-									<span>108</span>
-									following
-								</li>
-							</ul>
-							
-							<button type="button" class="btn btn-success btn-block text-left">
-								
-								<i class="fa-headphones "></i> Customer Care
-							</button>
-						</div>
-						
-					</div> -->
-					<div class="col-sm-12">
-
-						<div class="row">
-
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="linecons-user"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">1053 Rs</strong> <span>Current
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="true" data-duration="4" data-to="2470"
-									data-from="1000" data-count=".num"
-									class="xe-widget xe-counter xe-counter-info">
-									<div class="xe-icon">
-										<i class="linecons-camera"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">14556</strong> <span>Credit Card
-											Outstanding</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-delay="1" data-easing="true" data-duration="5"
-									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
-									data-count=".num" class="xe-widget xe-counter xe-counter-red">
-									<div class="xe-icon">
-										<i class="linecons-lightbulb"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">55000</strong> <span>Loan Amount</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="linecons-user"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">6050 Rs</strong> <span>Outstanding
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-12">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Recent Transactions</h3>
-
-								<div class="panel-options">
-									<a href="#"> <i class="linecons-cog"></i>
-									</a> <a href="#" data-toggle="panel"> <span
-										class="collapse-icon">&ndash;</span> <span class="expand-icon">+</span>
-									</a> <a href="#" data-toggle="reload"> <i
-										class="fa-rotate-right"></i>
-									</a>
-
-
-								</div>
-							</div>
-
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Date</th>
-										<th>Description</th>
-										<th>Type</th>
-										<th>Amount</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>30/Jun/2015</td>
-										<td>ATM Withdrawn at TechMCC Chennai</td>
-										<td>Debited</td>
-										<td class="middle-align">5000.00</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>27/Jun/2015</td>
-										<td>Cheque No:985054</td>
-										<td>Debited</td>
-										<td class="middle-align">9500.00</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>16/Jun/2015</td>
-										<td>IMPS Tranfered Inwards</td>
-										<td>Credited</td>
-										<td class="middle-align">78600.00</td>
-									</tr>
-
-									<tr>
-										<td>5</td>
-										<td>31/May/2015</td>
-										<td>Salary Credited Tech Mahindra</td>
-										<td>Credited</td>
-										<td class="middle-align">49660.00</td>
-									</tr>
-
-									<tr>
-										<td>4</td>
-										<td>28/May/2015</td>
-										<td>ATM Card Maintenace Charges</td>
-										<td>Debited</td>
-										<td class="middle-align">250.00</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-
-				</div>
-
-			</section>
-
-			<script type="text/javascript"
-				src="//maps.google.com/maps/api/js?sensor=false"></script>
-			<script type="text/javascript">
-				function initialize() {
-					var $ = jQuery, map_canvas = $("#sample-checkin");
-
-					var location = new google.maps.LatLng(36.738888,
-							-119.783013), map = new google.maps.Map(
-							map_canvas[0], {
-								center : location,
-								zoom : 14,
-								mapTypeId : google.maps.MapTypeId.ROADMAP,
-								scrollwheel : false
-							});
-
-					var marker = new google.maps.Marker({
-						position : location,
-						map : map
-					});
-				}
-
-				google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
 
 			<!-- Main Footer -->
 			<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
@@ -1253,69 +801,53 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onresult = function(event) {
-    var interim_transcript = '';
-    if (typeof(event.results) == 'undefined') {
-      recognition.onend = null;
-      recognition.stop();
-      upgrade();
-      return;
-    }
-    var xmlHttp = new XMLHttpRequest();
-    var currentText;
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final_transcript += event.results[i][0].transcript;
-        currentText = event.results[i][0].transcript;	
-        
-        alert($('#chkTranslate').is(':checked'));
-        if($('#chkTranslate').is(':checked')){
-        	
-        	 $.ajax({
-        	        type: "post",
-        	        url: "../TransServlet", //this is my servlet
-        	        dataType : 'text',
+	    var interim_transcript = '';
+	    if (typeof(event.results) == 'undefined') {
+	      recognition.onend = null;
+	      recognition.stop();
+	      upgrade();
+	      return;
+	    }
+	    var xmlHttp = new XMLHttpRequest();
+	    var currentText;
+	    for (var i = event.resultIndex; i < event.results.length; ++i) {
+	      if (event.results[i].isFinal) {
+	        final_transcript += event.results[i][0].transcript;
+	        currentText = event.results[i][0].transcript;	
+	        // Start transaltion here
+	        var lang=$('#user_language_code').text();
+	        console.log("Translang:"+lang);
+	       $.ajax({
+	        	        type: "post",
+	        	        url: "../TransServlet", //this is my servlet
+	        	        dataType : 'text',
 
 
-        	        data:"message="+currentText,
-        	     
-        	        success: function(response){
-        	        	alert(response);
-        	        	 sendMessage(response);
+	        	        data:"message="+currentText+"&language="+lang,
+	        	     
+	        	        success: function(response){
+	        	        	console.log(response);
+	        	        	 sendMessage(response);
 
-        	        }, error: function(e){
-        	        	   alert('Error: ' + e);
-        	        }
-        	        });
-        	/* console.log(currentText);
-            xmlHttp.open("post", "../TransServlet", true); 
-            xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            xmlHttp.send( "message=" + currentText+"&msg=hi");
-            
-           alert(response);  */
-            
-        }
-        else{
-            sendMessage(currentText);
+	        	        }, error: function(e){
+	        	        	   alert('Error: ' + e);
+	        	        }
+	        	  });
 
-        }
-        
-       	console.log(currentText);
-        xmlHttp.open("post", "../VoiceCustomerServlet", true); 
-        //alert("get executed");
-        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        xmlHttp.send( "final_span=" + currentText +"&username="+ "basha");
-        //alert("get sent");
-      } else {
-        interim_transcript += event.results[i][0].transcript;
-      }
-    }
-    final_transcript = capitalize(final_transcript);
-    final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
-    if (final_transcript || interim_transcript) {
-      showButtons('inline-block');
-    }
-  };
+	        alert(currentText);
+	       	console.log(currentText);
+	       
+	      } else {
+	        interim_transcript += event.results[i][0].transcript;
+	      }
+	    }
+	    final_transcript = capitalize(final_transcript);
+	    final_span.innerHTML = linebreak(final_transcript);
+	    interim_span.innerHTML = linebreak(interim_transcript);
+	    if (final_transcript || interim_transcript) {
+	      showButtons('inline-block');
+	    }
+	  };
 }
 
 function upgrade() {
@@ -1426,8 +958,6 @@ function sendMessage(e) {
 
    var $username="You";    
    var $message = message.substring(12);
-//   $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
-   //$("#xe-body-voice2text ul").append('<li><div class="xe-comment-entry"><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
    $("#xe-body-voice2text ul").append('<li>'+$username+':<p>'+$message+'</p></li>');
 
     },

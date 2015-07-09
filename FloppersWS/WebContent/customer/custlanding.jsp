@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%
+	javax.servlet.http.HttpServletRequest _request = (javax.servlet.http.HttpServletRequest) request;
+	String _path = _request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +31,10 @@
 <link rel="stylesheet" href="../assets/css/custom.css">
 <link rel="stylesheet" href="../common/css/common.css">
 <link rel="stylesheet" href="../sample/voice_text.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/common/css/common.css"
+	type="text/css" />
+<script type="text/javascript" src="<%=_path%>/common/js/common.js"></script>
 <script src="../assets/js/jquery-1.11.1.min.js"></script>
 
 <!-- Voice To Text -->
@@ -94,7 +102,9 @@ new gweb.analytics.AutoTrack({
 	<input type="hidden" id="api_key" name="api_key"
 		value="<%=session.getAttribute("KANDY_APIKEY")%>">
 	<input type="hidden" id="agent" name="agent"
-		value="agent@webrtc.techmahindra.com">
+		value="<%=pageContext.getServletContext().getInitParameter("agent")%>">
+	<input type="hidden" id="admin" name="admin"
+		value="<%=pageContext.getServletContext().getInitParameter("admin")%>">
 
 	<div class="page-container">
 		<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -203,14 +213,16 @@ new gweb.analytics.AutoTrack({
 					<li><a href="ui-widgets.html"> <i class="linecons-star"></i>
 							<span class="title">Loan</span>
 					</a></li>
-					<li><a href=""> <i class="linecons-note"></i>
-							<span class="title">Support</span>
-							</a>
-							<ul>
-								<li><a href="" id="support"> <span class="title">Help</span></a></li>
-								<li><a href="custlanding!appointment"> <span class="title">Book an Appointment</span></a></li>
-								<li><a href="custlanding!scheduledmeeting"> <span class="title">Scheduled Meeting</span></a></li>
-							</ul></li>
+					<li><a href=""> <i class="linecons-note"></i> <span
+							class="title">Support</span>
+					</a>
+						<ul>
+							<li><a href="" id="support"> <span class="title">Help</span></a></li>
+							<li><a href="custlanding!appointment"> <span
+									class="title">Book an Appointment</span></a></li>
+							<li><a href="custlanding!scheduledmeeting"> <span
+									class="title">Scheduled Meeting</span></a></li>
+						</ul></li>
 				</ul>
 
 			</div>
@@ -427,7 +439,8 @@ new gweb.analytics.AutoTrack({
 						</span>
 					</a>
 
-						<ul class="dropdown-menu user-profile-menu list-unstyled main-menu">
+						<ul
+							class="dropdown-menu user-profile-menu list-unstyled main-menu">
 							<li><a href="#edit-profile"> <i class="fa-edit"></i> New
 									Post
 							</a></li>
@@ -466,7 +479,9 @@ new gweb.analytics.AutoTrack({
 					<div id="current_customer">
 						Customer ID:<span id="current_customer_id"></span>
 					</div>
-					<p class="description">You are joining the queue</p>
+					<div>
+					Current Language:<span id="current_language">English</span><label id="current_language_code" class="hidden">en-US</label>
+					</div>					
 					<button class="btn btn-info" id="queue_status">You are
 						joining the queue</button>
 				</div>
@@ -676,7 +691,19 @@ new gweb.analytics.AutoTrack({
 									<!-- <img alt="Start" id="start_img"
 										src="/intl/en/chrome/assets/common/images/content/mic.gif"> -->
 								</button>
+
+								Translate voice messages to:<br> <input type="checkbox"
+									id="chkTranslate" name="chkTranslate" value="English" 
+									class="iswitch iswitch-secondary" checked>English<br> <input
+									type="checkbox" id="chkTranslate" name="chkTranslate"
+									value="Hindi" class="iswitch iswitch-secondary">Hindi<br>
+								<input type="checkbox" id="chkTranslate" name="chkTranslate"
+									value="French" class="iswitch iswitch-secondary">French<br>
+								<input type="checkbox" id="chkTranslate" name="chkTranslate"
+									value="Chinese" class="iswitch iswitch-secondary">Chinese<br>
+
 							</div>
+
 
 							<div id="copy" class="hidden">
 								<button class="button" id="copy_button" onclick="copyButton()">Copy
@@ -693,7 +720,7 @@ new gweb.analytics.AutoTrack({
 								</div>
 							</div>
 							<div class="select2-drop-mask" id="div_language"
-								style="display: block;">
+								style="display: block;" class="hidden">
 								<select id="select_language" onchange="updateCountry()">
 								</select>&nbsp;&nbsp; <select id="select_dialect">
 								</select>
@@ -1164,6 +1191,7 @@ var langs =
 
 for (var i = 0; i < langs.length; i++) {
   select_language.options[i] = new Option(langs[i][0], i);
+  
 }
 select_language.selectedIndex = 7;
 updateCountry();
@@ -1257,15 +1285,29 @@ if (!('webkitSpeechRecognition' in window)) {
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
-        currentText = event.results[i][0].transcript;			
-        sendMessage(currentText);
+        currentText = event.results[i][0].transcript;	
+        // Start transaltion here
+        
+       $.ajax({
+        	        type: "post",
+        	        url: "../TransServlet", //this is my servlet
+        	        dataType : 'text',
+
+
+        	        data:"message="+currentText+"&language=English",
+        	     
+        	        success: function(response){
+        	        	console.log(response);
+        	        	 sendMessage(response);
+
+        	        }, error: function(e){
+        	        	   alert('Error: ' + e);
+        	        }
+        	  });
+
         alert(currentText);
        	console.log(currentText);
-       /*  xmlHttp.open("post", "../VoiceCustomerServlet", true); 
-        alert("get executed");
-        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        xmlHttp.send( "final_span=" + currentText +"&username="+ "basha");
-        alert("get sent"); */
+       
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
@@ -1334,7 +1376,10 @@ function startButton(event) {
     return;
   }
   final_transcript = '';
-  recognition.lang = select_dialect.value;
+  
+  //recognition.lang = select_dialect.value;
+  
+  recognition.lang =$('#current_language_code').text();
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';
@@ -1377,16 +1422,15 @@ function copyToString() {
 function sendMessage(e) {
 	var message="VOICEMESSAGE";
     message = message+e;
-    
-   
+    //expert_id_txt;
+   var sendTo =  $('#agent').val();
+
     kandy.messaging.sendIm(sendTo, message, function () {
 
-   var $username="Customer";    
-   var $message = message.substring(12);
-//   $("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
-   //$("#xe-body-voice2text ul").append('<li><div class="xe-comment-entry"><div class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
-   
-   $("#xe-body-voice2text ul").append('<li>'+$username+':<p>'+$message+'</p></li>');
+	   var $username="Customer";    
+	   var $message = message.substring(12);
+	   
+	   $("#xe-body-voice2text ul").append('<li>'+$username+':<p>'+$message+'</p></li>');
 
     },
     function () {

@@ -481,6 +481,10 @@
 							<div class="title-env">
 								<h1 class="title">Booked Appoinment Detail</h1>
 							</div>
+							<script type="text/javascript">
+							
+							
+							</script>
 							<s:actionmessage />
 						</s:if>
 						<s:else>
