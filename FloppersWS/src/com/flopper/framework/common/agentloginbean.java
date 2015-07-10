@@ -84,6 +84,7 @@ public class agentloginbean extends ActionSupport implements
 			session.setAttribute("LASTLOGINTIME", map.get("LASTLOGINTIME"));
 			session.setAttribute("SESSION_USERNAME", map.get("SESSION_USERNAME"));
 			session.setAttribute("SESSION_USERID", username);
+			session.setAttribute("USER_ROLE", map.get("USER_ROLE"));
 			
 			return SUCCESS;
 		} else

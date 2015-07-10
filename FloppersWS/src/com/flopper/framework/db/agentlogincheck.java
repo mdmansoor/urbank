@@ -25,6 +25,7 @@ public class agentlogincheck {
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				map.put("SESSION_USERNAME", rs.getString(2));
+				map.put("USER_ROLE", rs.getString(4));
 				lastLoginDetail(username, conn);
 				loginHistory(username, conn);
 
