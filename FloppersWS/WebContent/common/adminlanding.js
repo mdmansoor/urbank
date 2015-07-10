@@ -2,10 +2,10 @@ $(function() {
 	// initial configurations
 	login();
 	var sendTo = "";
-	var username='';
+	var username = '';
 	var userArray = [];
-	var apiKey='';
-	var language="English";
+	var apiKey = '';
+	var language = "English";
 	$("#profile_section").hide();
 	$("#chat_section").show();
 	$('#btn_get_customer').removeClass('btn btn-danger');
@@ -13,7 +13,9 @@ $(function() {
 	$('#btn_get_customer').text('Get next customer from queue');
 	var connectionStatus = false;
 	var currentUser = "";
-	var domainName="codathon.techmahindra.com";
+	var domainName=$('#domainName').val();
+	
+
 	$("#home_btn").click(function() {
 
 		$("#profile_section").hide(500);
@@ -22,8 +24,8 @@ $(function() {
 	});
 
 	function login() {
-		username=$('#adminUserName').val();
-	
+		username = $('#adminUserName').val();
+
 		apiKey = $('#api_key').val();
 		password = $('#password').val();
 		console.log("agent login with id:" + username);
@@ -64,7 +66,7 @@ $(function() {
 						if (connectionStatus) {
 							alert("Please disconnect the current user before select the next customer!!");
 						} else {
-							//alert($(this).text());
+							// alert($(this).text());
 							currentUser = $(this).text();
 							$('#btn_get_customer').addClass('btn btn-danger');
 							$('#btn_get_customer').removeClass(
@@ -73,13 +75,13 @@ $(function() {
 									'Disconnect Current Customer');
 							$('#current_customer_name').text(currentUser);
 							$('#current_customer_id').text(
-									currentUser + '@'+domainName);
+									currentUser + '@' + domainName);
 							$('#user_to_call').text(
-									currentUser + '@'+domainName);
+									currentUser + '@' + domainName);
 							$('#user_to_call').val(
-									currentUser + '@'+domainName);
-							sendTo = currentUser + '@'+domainName;
-							console.log("user to call:"+currentUser);
+									currentUser + '@' + domainName);
+							sendTo = currentUser + '@' + domainName;
+							console.log("user to call:" + currentUser);
 							$(this).parent().remove();
 							connectionStatus = true;
 							sendConnectionStatus(true, currentUser);
@@ -205,7 +207,7 @@ $(function() {
 		 * @params <string> userName, <string> message, <function>
 		 *         success/failure
 		 */
-		console.log('sendig message to:'+sendTo+":"+message);
+		console.log('sendig message to:' + sendTo + ":" + message);
 		kandy.messaging
 				.sendIm(
 						sendTo,
@@ -265,9 +267,9 @@ $(function() {
 			message = "DISCONNECTED";
 		}
 
-		var to = currentUser + "@"+domainName;
-		console.log("To:"+to);
-		console.log("sendTo:"+sendTo);
+		var to = currentUser + "@" + domainName;
+		console.log("To:" + to);
+		console.log("sendTo:" + sendTo);
 		kandy.messaging.sendIm(sendTo, message, function() {
 			console.log("Send Connection status to " + sendTo + " success");
 
@@ -321,19 +323,31 @@ $(function() {
 													.indexOf("VOICEMESSAGE");
 											console.log(index);
 											console.log(msgText);
-											
-											
-											
+
 											if (msgText.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") == -1
-													&& msgText.indexOf("LANGUAGE") == -1) {
+													&& msgText
+															.indexOf("IAMALIVE") == -1
+													&& msgText
+															.indexOf("LANGUAGE") == -1) {
 												console
 														.log("Chat Message received");
 												// update chat window
-												$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+ $username+ '</strong></a><p>'+ msgText+ '</p></div></div></li>');
-											} else if (msgText.indexOf("VOICEMESSAGE") != -1&& msgText.indexOf("IAMALIVE") == -1 && msgText.indexOf("LANGUAGE") == -1) {
+												$("#xe-body ul")
+														.append(
+																'<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'
+																		+ $username
+																		+ '</strong></a><p>'
+																		+ msgText
+																		+ '</p></div></div></li>');
+											} else if (msgText
+													.indexOf("VOICEMESSAGE") != -1
+													&& msgText
+															.indexOf("IAMALIVE") == -1
+													&& msgText
+															.indexOf("LANGUAGE") == -1) {
 												// update voice to text
-												console.log("voice to text received");
+												console
+														.log("voice to text received");
 												$("#xe-body-voice2text ul")
 														.append(
 																'<li>'
@@ -343,8 +357,10 @@ $(function() {
 																		+ '</p></li>');
 											} else if (msgText
 													.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") != -1
-													&& msgText.indexOf("LANGUAGE") == -1) {
+													&& msgText
+															.indexOf("IAMALIVE") != -1
+													&& msgText
+															.indexOf("LANGUAGE") == -1) {
 												// update customer queue
 												// <li><a class="queue"
 												// href"#">customer1</a></li>
@@ -358,35 +374,48 @@ $(function() {
 																		+ '</a></li>');
 
 											}
-											
-											else if (msgText.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") == -1
-													&& msgText.indexOf("LANGUAGE") != -1) {
+
+											else if (msgText
+													.indexOf("VOICEMESSAGE") == -1
+													&& msgText
+															.indexOf("IAMALIVE") == -1
+													&& msgText
+															.indexOf("LANGUAGE") != -1) {
 												// update customer queue
 												// <li><a class="queue"
 												// href"#">customer1</a></li>
-												
-												language = msgText.substring(8);	
-												
-												$('#user_language').text(language);
-												
-												if(language == 'Hindi'){
-													console.log()
-													$('#user_language_code').val('hi-IN');
-												}
-												else if(language == 'English'){
-													$('#user_language_code').val('en-US');
-												}
-												else if(language == 'French'){
-													$('#user_language_code').val('fr-FR');
-												}
-												else if(language == 'Chinese'){
-													$('#user_language_code').val('zh-CN');
-												}				
 
-												var langCode=$('#user_language_code').val();
-												console.log("LANGUAGE  received:"+language);
-												console.log("LANGUAGE  code  set:"+langCode);
+												language = msgText.substring(8);
+
+												$('#user_language').text(
+														language);
+												$('#user_language').val(
+														language);
+
+												if (language == 'Hindi') {
+													console.log()
+													$('#user_language_code')
+															.val('hi-IN');
+												} else if (language == 'English') {
+													$('#user_language_code')
+															.val('en-US');
+												} else if (language == 'French') {
+													$('#user_language_code')
+															.val('fr-FR');
+												} else if (language == 'Chinese') {
+													$('#user_language_code')
+															.val('zh-CN');
+												}
+
+												var langCode = $(
+														'#user_language_code')
+														.val();
+												console
+														.log("LANGUAGE  received:"
+																+ language);
+												console
+														.log("LANGUAGE  code  set:"
+																+ langCode);
 
 											}
 
@@ -459,7 +488,7 @@ $(function() {
 	 * and the rest are hidden. Using this method is NOT recommended!
 	 */
 
-	var  UIState = {};
+	var UIState = {};
 
 	UIState.authenticated = function() {
 
@@ -659,7 +688,10 @@ $(function() {
 
 	// -----------File Upload Script ----
 
-	var i = 1, $example_dropzone_filetable = $("#example-dropzone-filetable"), example_dropzone = $("#advancedDropzone").dropzone({
+	var i = 1, $example_dropzone_filetable = $("#example-dropzone-filetable"), example_dropzone = $(
+			"#advancedDropzone")
+			.dropzone(
+					{
 						url : 'data/upload-file.php',
 
 						// Events
@@ -753,7 +785,7 @@ $(function() {
 	function voiceToTextFile() {
 		// xe-body-voice2text
 		// btn_get_customer
-		//alert("disconnected");
+		// alert("disconnected");
 		$('#btn_get_customer').removeClass('btn btn-danger');
 		$('#btn_get_customer').addClass('btn btn-success');
 		$('#btn_get_customer').text('Get Next Customer');
@@ -767,7 +799,7 @@ $(function() {
 		xmlHttp.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded");
 
-		xmlHttp.send("final_span=" + currentText + "&username=" +username);
+		xmlHttp.send("final_span=" + currentText + "&username=" + username);
 		// alert("get sent");
 
 	}

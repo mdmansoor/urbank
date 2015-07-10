@@ -1309,7 +1309,6 @@ if (!('webkitSpeechRecognition' in window)) {
         	        }
         	  });
 
-        alert(currentText);
        	console.log(currentText);
        
       } else {

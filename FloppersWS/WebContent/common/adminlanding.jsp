@@ -91,6 +91,8 @@ new gweb.analytics.AutoTrack({
 		value="<%=pageContext.getServletContext().getInitParameter("apikey")%>">
 		<input type="hidden" id="password" name="password"
 		value="<%=pageContext.getServletContext().getInitParameter("password")%>">
+		<input type="hidden" id="domainName" name="domainName"
+		value="<%=pageContext.getServletContext().getInitParameter("domainname")%>">
 		<input type="hidden" id="adminUserName" name="adminUserName"
 		value="<%=pageContext.getServletContext().getInitParameter("adminname")%>">
 
@@ -819,7 +821,12 @@ if (!('webkitSpeechRecognition' in window)) {
 	        final_transcript += event.results[i][0].transcript;
 	        currentText = event.results[i][0].transcript;	
 	        // Start transaltion here
-	        var lang=$('#user_language_code').val();
+	        
+	        var lang=$('#user_language').val();
+	        console.log("Actual Translang:"+lang);
+	        if(lang == null || lang==""){
+	        	lang="Hindi";
+	        }
 	        console.log("Translang:"+lang);
 	       $.ajax({
 	        	        type: "post",
@@ -838,7 +845,6 @@ if (!('webkitSpeechRecognition' in window)) {
 	        	        }
 	        	  });
 
-	        alert(currentText);
 	       	console.log(currentText);
 	       
 	      } else {
@@ -909,7 +915,7 @@ function startButton(event) {
     return;
   }
   final_transcript = '';
-  recognition.lang = select_dialect.value;
+  recognition.lang = 'en-IN';
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';
@@ -956,7 +962,6 @@ function sendMessage(e) {
     
     
     sendTo =  $('#user_to_call').val();
-    alert(sendTo);
    console.log(sendTo);
     kandy.messaging.sendIm(sendTo, message, function () {
 

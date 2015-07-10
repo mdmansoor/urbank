@@ -91,6 +91,8 @@ new gweb.analytics.AutoTrack({
 		value="<%=pageContext.getServletContext().getInitParameter("apikey")%>">
 		<input type="hidden" id="password" name="password"
 		value="<%=pageContext.getServletContext().getInitParameter("password")%>">
+		<input type="hidden" id="domainName" name="domainName"
+		value="<%=pageContext.getServletContext().getInitParameter("domainname")%>">
 		<input type="hidden" id="adminUserName" name="adminUserName"
 		value="<%=pageContext.getServletContext().getInitParameter("agentname")%>">
 
@@ -843,7 +845,6 @@ if (!('webkitSpeechRecognition' in window)) {
 	        	        }
 	        	  });
 
-	        alert(currentText);
 	       	console.log(currentText);
 	       
 	      } else {
@@ -961,7 +962,6 @@ function sendMessage(e) {
     
     
     sendTo =  $('#user_to_call').val();
-    alert(sendTo);
    console.log(sendTo);
     kandy.messaging.sendIm(sendTo, message, function () {
 

@@ -13,7 +13,10 @@ $(function() {
 	$('#btn_get_customer').text('Get next customer from queue');
 	var connectionStatus = false;
 	var currentUser = "";
-	var domainName="codathon.techmahindra.com";
+	var domainName=$('#domainName').val();
+	
+	
+	
 	$("#home_btn").click(function() {
 
 		$("#profile_section").hide(500);

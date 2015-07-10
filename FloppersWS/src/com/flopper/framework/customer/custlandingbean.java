@@ -54,5 +54,7 @@ public class custlandingbean extends ActionSupport implements
 		return "input";
 
 	}
+	
+	
 
 }

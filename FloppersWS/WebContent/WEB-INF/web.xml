@@ -25,6 +25,10 @@
 	</context-param>
 
 	<context-param>
+		<param-name>domainname</param-name>
+		<param-value>codathon.techmahindra.com</param-value>
+	</context-param>
+	<context-param>
 		<param-name>user1</param-name>
 		<param-value>user001</param-value>
 	</context-param>

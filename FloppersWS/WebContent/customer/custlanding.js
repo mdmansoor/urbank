@@ -9,9 +9,12 @@ $(function() {
 	var apiKey = $('#api_key').val();
 	var password = $('#kandyPassWord').val();
 	var custLanguage="English";	
-	var domainName="codathon.techmahindra.com";
-	
-	
+	var domainName="";
+	if(sendTo != null && sendTo.indexOf('@') != -1){
+		var domain=sendTo.split('@');
+		domainName=domain[1];
+		console.log("domainName:"+domainName);
+	}
 	
 	$("input:checkbox").on('click', function() {
 		// in the handler, 'this' refers to the box clicked on
@@ -607,7 +610,6 @@ $(function() {
 
 						// Events
 						addedfile : function(file) {
-							alert("added new");
 							// Script to send file
 
 							kandy.messaging

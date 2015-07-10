@@ -101,9 +101,7 @@ new gweb.analytics.AutoTrack({
 	<input type="hidden" id="kandyPassWord" name="kandyPassWord"
 		value="<%=session.getAttribute("KANDY_PASSWORD")%>">
 	<input type="hidden" id="api_key" name="api_key"
-		value="<%=session.getAttribute("KANDY_APIKEY")%>">
-	<input type="hidden" id="agent" name="agent"
-		value="<%=pageContext.getServletContext().getInitParameter("agent")%>">
+		value="<%=pageContext.getServletContext().getInitParameter("apikey")%>">
 	<input type="hidden" id="admin" name="admin"
 		value="<%=pageContext.getServletContext().getInitParameter("admin")%>">
 
@@ -115,7 +113,6 @@ new gweb.analytics.AutoTrack({
 		<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
 
 		
-	
 		<div class="sidebar-menu toggle-others fixed">
 
 			<div class="sidebar-menu-inner">
@@ -161,7 +158,7 @@ new gweb.analytics.AutoTrack({
 						</a>
 
 						<ul class="user-links list-unstyled">
-							<li class="active"><a href="#" title="Edit profile"
+							<li class="active"><a href="custlanding!input" title="Edit profile"
 								id="home_btn"> <i class="fa-home"></i> Home
 							</a></li>
 							<li><a href="mailbox-main.html" title="Mailbox"> <i
@@ -821,206 +818,7 @@ new gweb.analytics.AutoTrack({
 				<!-- Voice to text conversation merge end -->
 
 			</section>
-			<section class="profile-env" id="profile_section">
-
-				<div class="row">
-
-					<!-- <div class="col-sm-3">
-						
-						User Info Sidebar
-						<div class="user-info-sidebar">
-							
-							<a href="#" class="user-img">
-								<img src="../assets/images/user-4.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-							</a>
-							
-							<a href="#" class="user-name">
-								Art Ramadani
-								<span class="user-status is-online"></span>
-							</a>
-							
-							<span class="user-title">
-								CEO at <strong>Google</strong>
-							</span>
-							
-							<hr />
-							
-							<ul class="list-unstyled user-info-list">
-							<li>
-								<i class="fa-home"></i>
-								Prishtina, Kosovo
-							</li>
-							<li>
-								<i class="fa-briefcase"></i>
-								<a href="#">Laborator</a>
-							</li>
-							<li>
-								<i class="fa-graduation-cap"></i>
-								University of Bologna
-							</li>
-						</ul>	
-								
-							<hr />
-							
-							<ul class="list-unstyled user-friends-count">
-								<li>
-									<span>643</span>
-									followers
-								</li>
-								<li>
-									<span>108</span>
-									following
-								</li>
-							</ul>
-							
-							<button type="button" class="btn btn-success btn-block text-left">
-								
-								<i class="fa-headphones "></i> Customer Care
-							</button>
-						</div>
-						
-					</div> -->
-					<div class="col-sm-12">
-
-						<div class="row">
-
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="fa-bank"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">1053 Rs</strong> <span>Current
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="true" data-duration="4" data-to="2470"
-									data-from="1000" data-count=".num"
-									class="xe-widget xe-counter xe-counter-info">
-									<div class="xe-icon">
-										<i class="fa-credit-card"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">14556</strong> <span>Credit Card
-											Outstanding</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-sm-3">
-
-								<div data-delay="1" data-easing="true" data-duration="5"
-									data-suffix="%" data-prefix="-," data-to="57" data-from="0"
-									data-count=".num" class="xe-widget xe-counter xe-counter-red">
-									<div class="xe-icon">
-										<i class="fa-cubes"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">55000</strong> <span>Loan Amount</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-
-								<div data-easing="false" data-duration="3" data-suffix="k"
-									data-to="117" data-from="1" data-count=".num"
-									class="xe-widget xe-counter xe-counter-blue">
-									<div class="xe-icon">
-										<i class="fa-calculator"></i>
-									</div>
-									<div class="xe-label">
-										<strong class="num">6050 Rs</strong> <span>Outstanding
-											Balance</span>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-12">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Recent Transactions</h3>
-
-								<div class="panel-options">
-									<a href="#"> <i class="linecons-cog"></i>
-									</a> <a href="#" data-toggle="panel"> <span
-										class="collapse-icon">&ndash;</span> <span class="expand-icon">+</span>
-									</a> <a href="#" data-toggle="reload"> <i
-										class="fa-rotate-right"></i>
-									</a>
-
-
-								</div>
-							</div>
-
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Date</th>
-										<th>Description</th>
-										<th>Type</th>
-										<th>Amount</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>30/Jun/2015</td>
-										<td>ATM Withdrawn at TechMCC Chennai</td>
-										<td>Debited</td>
-										<td class="middle-align">5000.00</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>27/Jun/2015</td>
-										<td>Cheque No:985054</td>
-										<td>Debited</td>
-										<td class="middle-align">9500.00</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>16/Jun/2015</td>
-										<td>IMPS Tranfered Inwards</td>
-										<td>Credited</td>
-										<td class="middle-align">78600.00</td>
-									</tr>
-
-									<tr>
-										<td>5</td>
-										<td>31/May/2015</td>
-										<td>Salary Credited Tech Mahindra</td>
-										<td>Credited</td>
-										<td class="middle-align">49660.00</td>
-									</tr>
-
-									<tr>
-										<td>4</td>
-										<td>28/May/2015</td>
-										<td>ATM Card Maintenace Charges</td>
-										<td>Debited</td>
-										<td class="middle-align">250.00</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-
-				</div>
-			</section>
+			
 
 			<script type="text/javascript"
 				src="//maps.google.com/maps/api/js?sensor=false"></script>
@@ -1428,7 +1226,7 @@ function sendMessage(e) {
 	var message="VOICEMESSAGE";
     message = message+e;
     //expert_id_txt;
-   var sendTo =  $('#agent').val();
+   var sendTo =  $('#admin').val();
 
     kandy.messaging.sendIm(sendTo, message, function () {
 

@@ -1,19 +1,20 @@
 $(function() {
 
-	alert(isScheduled);
-	$("#profile_section").show();
-	$("#chat_section").hide();
 	var connectionStatus = false;
 
-	var sendTo = $('#agent').val();
+	var sendTo = $('#admin').val();
 	var username = $('#kandyUserName').val();
 	var apiKey = $('#api_key').val();
 	var password = $('#kandyPassWord').val();
-	var custLanguage="English";	
-	var domainName="codathon.techmahindra.com";
-	
-	
-	
+	var custLanguage = "English";
+	var domainName = "";
+	if (sendTo != null && sendTo.indexOf('@') != -1) {
+		var domain = sendTo.split('@');
+		domainName = domain[1];
+		console.log("domainName:" + domainName);
+	}
+	login();
+
 	$("input:checkbox").on('click', function() {
 		// in the handler, 'this' refers to the box clicked on
 		var $box = $(this);
@@ -25,31 +26,24 @@ $(function() {
 			// and the current value is retrieved using .prop() method
 			$(group).prop("checked", false);
 			$box.prop("checked", true);
-			custLanguage=$box.val();
-			console.log("Selected Check:"+custLanguage);
+			custLanguage = $box.val();
+			console.log("Selected Check:" + custLanguage);
 		} else {
 			$box.prop("checked", false);
 		}
-		
+
 		$('#current_language').text(custLanguage);
-		if(custLanguage=="Hindi")
+		if (custLanguage == "Hindi")
 			$('#current_language_code').text('hi-IN');
-		if(custLanguage=="English")
+		if (custLanguage == "English")
 			$('#current_language_code').text('en-US');
-		if(custLanguage=="French")
+		if (custLanguage == "French")
 			$('#current_language_code').text('fr-FR');
-		if(custLanguage=="Chinese")
+		if (custLanguage == "Chinese")
 			$('#current_language_code').text('zh-CN');
-		
+
 		sendLanguage(custLanguage);
-		
-	});
 
-
-	$("#home_btn").click(function() {
-
-		$("#profile_section").show(500);
-		$("#chat_section").hide(500);
 	});
 
 	// Event handler for send message button
@@ -63,7 +57,7 @@ $(function() {
 
 	});
 	$('#file-btn').on('click', function() {
-		//alert("send File");
+		// alert("send File");
 		sendFile();
 	});
 
@@ -338,48 +332,44 @@ $(function() {
 	var userArray = [];
 
 	// Event handler for login form button
-	$('#support').on(
-			'click',
-			function(e) {
-				e.preventDefault();
+	function login() {
 
-				$("#profile_section").hide(500);
-				$("#chat_section").show(500);
-				$("#title").hide();
-				$("#support_queue_status").show();
-				$("#support_queue_status").removeClass("hidden");
+		$("#chat_section").show(500);
+		$("#title").hide();
 
-				// Values extracted from login form
-				/*
-				 * username = $('#username').val(); var apiKey =
-				 * $('#api_key').val(); var password = $('#password').val();
-				 */
+		$("#support_queue_status").show();
+		$("#support_queue_status").removeClass("hidden");
 
-				/**
-				 * login(domainApiId, userName, password,success,failure) logs
-				 * in user to Kandy Platform
-				 * 
-				 * @params <string> domainApiId, <string> userName, <string>
-				 *         password, <function> success/failure
-				 */
-				kandy.login(apiKey, username, password, function(msg) {
-					// IAMALIVE
+		// Values extracted from login form
+		/*
+		 * username = $('#username').val(); var apiKey = $('#api_key').val();
+		 * var password = $('#password').val();
+		 */
 
-					userArray.push(username);
-					kandy.getLastSeen(userArray);
-					UIState.authenticated();
+		/**
+		 * login(domainApiId, userName, password,success,failure) logs in user
+		 * to Kandy Platform
+		 * 
+		 * @params <string> domainApiId, <string> userName, <string> password,
+		 *         <function> success/failure
+		 */
+		kandy.login(apiKey, username, password, function(msg) {
+			// IAMALIVE
 
-					$('#current_customer_name').text(username);
-					$('#current_customer_id').text(
-							username + "@"+domainName);
-					sendAmAlive(username);
-					// Checks every 5 seconds for incoming messages
-					setInterval(receiveMessages, 5000);
-				}, function(msg) {
-					UIState.unauthenticated();
-					alert('Login Failed!');
-				});
-			});
+			userArray.push(username);
+			kandy.getLastSeen(userArray);
+			UIState.authenticated();
+
+			$('#current_customer_name').text(username);
+			$('#current_customer_id').text(username + "@" + domainName);
+			sendAmAlive(username);
+			// Checks every 5 seconds for incoming messages
+			setInterval(receiveMessages, 5000);
+		}, function(msg) {
+			UIState.unauthenticated();
+			alert('Login Failed!');
+		});
+	}
 
 	// Event handler for logout button
 	$('#logout-btn').on('click', function() {
@@ -603,7 +593,10 @@ $(function() {
 
 	// ----------File upload script----------------
 
-	var i = 1, $example_dropzone_filetable = $("#example-dropzone-filetable"), example_dropzone = $("#advancedDropzone").dropzone({
+	var i = 1, $example_dropzone_filetable = $("#example-dropzone-filetable"), example_dropzone = $(
+			"#advancedDropzone")
+			.dropzone(
+					{
 						url : 'data/upload-file.php',
 
 						// Events
@@ -699,7 +692,6 @@ $(function() {
 		var message = "IAMALIVE";
 		message = message + e;
 
-		
 		kandy.messaging.sendIm(sendTo, message, function() {
 
 			console.log("AM alive sent success");
@@ -714,10 +706,9 @@ $(function() {
 		var message = "LANGUAGE";
 		message = message + e;
 
-		
 		kandy.messaging.sendIm(sendTo, message, function() {
 
-			console.log("send language:"+message+" sent success");			
+			console.log("send language:" + message + " sent success");
 		}, function() {
 			alert('send language sent failed');
 		});
