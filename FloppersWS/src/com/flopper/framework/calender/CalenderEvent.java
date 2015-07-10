@@ -24,7 +24,7 @@ public class CalenderEvent {
 		Calendar service = null;
 		Date startDate = null, endDate = null;
 
-		event.setSummary("Flopper's Bank ");
+		event.setSummary("UR Bank ");
 		event.setLocation("IND");
 		event.setDescription("Your Appointment with Executive is scheduled  @ "
 				+ hour + ":" + minute + "IST  Event ID : " + eventID);

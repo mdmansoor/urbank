@@ -107,9 +107,9 @@ public class TransServlet extends HttpServlet {
 			String language = request.getParameter("language");
 
 			//String data = "My name is Basha ";
-			System.getProperties().put("proxySet", "true");
+			/*System.getProperties().put("proxySet", "true");
 		    System.getProperties().put("proxyHost", "one.proxy.att.com");
-		    System.getProperties().put("proxyPort", "8080");
+		    System.getProperties().put("proxyPort", "8080");*/
 
 			Translate.setClientId("URBANK");
 			Translate
