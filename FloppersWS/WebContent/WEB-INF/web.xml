@@ -24,6 +24,31 @@
 		<param-value>DAKc67e5b97cbca4fc5b140766ac0dc2a2c</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>user1</param-name>
+		<param-value>user001</param-value>
+	</context-param>
+	<context-param>
+		<param-name>user2</param-name>
+		<param-value>user002</param-value>
+	</context-param>
+	<context-param>
+		<param-name>user3</param-name>
+		<param-value>user003</param-value>
+	</context-param>
+	<context-param>
+		<param-name>agentname</param-name>
+		<param-value>agent</param-value>
+	</context-param>
+	<context-param>
+		<param-name>adminname</param-name>
+		<param-value>admin</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>password</param-name>
+		<param-value>reset@123</param-value>
+	</context-param>
 
 	<listener>
 		<listener-class>com.flopper.framework.listener.SessionListener</listener-class>

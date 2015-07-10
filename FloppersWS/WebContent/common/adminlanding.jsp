@@ -83,7 +83,7 @@ new gweb.analytics.AutoTrack({
 <!-- Kandy END -->
 
 
-<tags:script src="common/agentlanding.js" />
+<tags:script src="common/adminlanding.js" />
 </head>
 <body class="page-body">
 
@@ -92,7 +92,7 @@ new gweb.analytics.AutoTrack({
 		<input type="hidden" id="password" name="password"
 		value="<%=pageContext.getServletContext().getInitParameter("password")%>">
 		<input type="hidden" id="adminUserName" name="adminUserName"
-		value="<%=pageContext.getServletContext().getInitParameter("agentname")%>">
+		value="<%=pageContext.getServletContext().getInitParameter("adminname")%>">
 
 	<div class="page-container">
 		<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -819,12 +819,7 @@ if (!('webkitSpeechRecognition' in window)) {
 	        final_transcript += event.results[i][0].transcript;
 	        currentText = event.results[i][0].transcript;	
 	        // Start transaltion here
-	        
-	        var lang=$('#user_language').val();
-	        console.log("Actual Translang:"+lang);
-	        if(lang == null || lang==""){
-	        	lang="Hindi";
-	        }
+	        var lang=$('#user_language_code').val();
 	        console.log("Translang:"+lang);
 	       $.ajax({
 	        	        type: "post",
@@ -914,7 +909,7 @@ function startButton(event) {
     return;
   }
   final_transcript = '';
-  recognition.lang = 'en-IN';
+  recognition.lang = select_dialect.value;
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';

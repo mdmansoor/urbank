@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.eclipse.jdt.internal.compiler.ast.MagicLiteral;
 
 import com.flopper.framework.constant.Constants;
 import com.flopper.framework.db.agentlogincheck;
@@ -76,21 +77,22 @@ public class agentloginbean extends ActionSupport implements
 		agentlogincheck login = new agentlogincheck();
 		Map<String, String> map = new HashMap<String, String>();
 
-	
-		HttpSession session =request.getSession(true);
+		HttpSession session = request.getSession(true);
 		map = login.userLogin(username, password);
 		if (map.get(Constants.RESULT).equals(Constants.SUCCESS)) {
 
 			session.setAttribute("LASTLOGINTIME", map.get("LASTLOGINTIME"));
-			session.setAttribute("SESSION_USERNAME", map.get("SESSION_USERNAME"));
+			session.setAttribute("SESSION_USERNAME",
+					map.get("SESSION_USERNAME"));
 			session.setAttribute("SESSION_USERID", username);
 			session.setAttribute("USER_ROLE", map.get("USER_ROLE"));
-			
-			return SUCCESS;
+			if (map.get("USER_ROLE").equals("1"))
+				return "agent";
+			else
+				return "admin";
 		} else
 			this.addFieldError("username", map.get(Constants.RESULT));
-			return ERROR;
+		return ERROR;
 
 	}
-
 }

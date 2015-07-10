@@ -369,7 +369,6 @@ $(function() {
 												language = msgText.substring(8);	
 												
 												$('#user_language').text(language);
-												$('#user_language').val(language);
 												
 												if(language == 'Hindi'){
 													console.log()

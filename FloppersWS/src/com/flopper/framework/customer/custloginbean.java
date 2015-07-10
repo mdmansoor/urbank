@@ -3,10 +3,12 @@ package com.flopper.framework.customer;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.util.ServletContextAware;
 
 import com.flopper.framework.constant.Constants;
 import com.flopper.framework.db.KandyUserDetail;
@@ -17,11 +19,25 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author MM00344894
  * 
  */
-public class custloginbean extends ActionSupport implements ServletRequestAware {
+public class custloginbean extends ActionSupport implements
+		ServletRequestAware, ServletContextAware {
 
 	/**
 	 * 
 	 */
+
+	ServletContext context;
+
+	public ServletContext getContext() {
+		return context;
+	}
+
+	@Override
+	public void setServletContext(ServletContext context) {
+		this.context = context;
+
+	}
+
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
@@ -85,7 +101,7 @@ public class custloginbean extends ActionSupport implements ServletRequestAware 
 					map.get("SESSION_USERNAME"));
 			session.setAttribute("SESSION_USERID", username);
 
-			map = new KandyUserDetail().getKandyUserDetail(username);
+			map = new KandyUserDetail(context).getKandyUserDetail(username);
 
 			if (!(map == null)) {
 				if (!map.isEmpty()) {

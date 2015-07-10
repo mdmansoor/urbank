@@ -1,47 +1,56 @@
 $(function() {
-	// initial configurations
-	login();
-	var sendTo = "";
-	var username='';
-	var userArray = [];
-	var apiKey='';
-	var language="English";
-	$("#profile_section").hide();
-	$("#chat_section").show();
-	$('#btn_get_customer').removeClass('btn btn-danger');
-	$('#btn_get_customer').addClass('btn btn-success');
-	$('#btn_get_customer').text('Get next customer from queue');
+
+	alert(isScheduled);
+	$("#profile_section").show();
+	$("#chat_section").hide();
 	var connectionStatus = false;
-	var currentUser = "";
+
+	var sendTo = $('#agent').val();
+	var username = $('#kandyUserName').val();
+	var apiKey = $('#api_key').val();
+	var password = $('#kandyPassWord').val();
+	var custLanguage="English";	
 	var domainName="codathon.techmahindra.com";
-	$("#home_btn").click(function() {
-
-		$("#profile_section").hide(500);
-		$("#chat_section").show(500);
-
+	
+	
+	
+	$("input:checkbox").on('click', function() {
+		// in the handler, 'this' refers to the box clicked on
+		var $box = $(this);
+		if ($box.is(":checked")) {
+			// the name of the box is retrieved using the .attr() method
+			// as it is assumed and expected to be immutable
+			var group = "input:checkbox[name='" + $box.attr("name") + "']";
+			// the checked state of the group/box on the other hand will change
+			// and the current value is retrieved using .prop() method
+			$(group).prop("checked", false);
+			$box.prop("checked", true);
+			custLanguage=$box.val();
+			console.log("Selected Check:"+custLanguage);
+		} else {
+			$box.prop("checked", false);
+		}
+		
+		$('#current_language').text(custLanguage);
+		if(custLanguage=="Hindi")
+			$('#current_language_code').text('hi-IN');
+		if(custLanguage=="English")
+			$('#current_language_code').text('en-US');
+		if(custLanguage=="French")
+			$('#current_language_code').text('fr-FR');
+		if(custLanguage=="Chinese")
+			$('#current_language_code').text('zh-CN');
+		
+		sendLanguage(custLanguage);
+		
 	});
 
-	function login() {
-		username=$('#adminUserName').val();
-	
-		apiKey = $('#api_key').val();
-		password = $('#password').val();
-		console.log("agent login with id:" + username);
 
-		kandy.login(apiKey, username, password, function(msg) {
+	$("#home_btn").click(function() {
 
-			userArray.push(username);
-			kandy.getLastSeen(userArray);
-			UIState.authenticated();
-
-			// Checks every 5 seconds for incoming messages
-			setInterval(receiveMessages, 5000);
-		}, function(msg) {
-			UIState.unauthenticated();
-			alert('Login Failed!');
-		});
-
-	}
+		$("#profile_section").show(500);
+		$("#chat_section").hide(500);
+	});
 
 	// Event handler for send message button
 	$('#chat-btn').on('click', function() {
@@ -49,78 +58,14 @@ $(function() {
 		if (connectionStatus) {
 			sendMessage();
 		} else {
-			alert("Please select a customer !!");
+			alert("you are not in the queue, you cannot send message!!");
 		}
 
 	});
 	$('#file-btn').on('click', function() {
+		//alert("send File");
 		sendFile();
 	});
-
-	$('#user_queue a.queue')
-			.live(
-					'click',
-					function() {
-						if (connectionStatus) {
-							alert("Please disconnect the current user before select the next customer!!");
-						} else {
-							//alert($(this).text());
-							currentUser = $(this).text();
-							$('#btn_get_customer').addClass('btn btn-danger');
-							$('#btn_get_customer').removeClass(
-									'btn btn-success');
-							$('#btn_get_customer').text(
-									'Disconnect Current Customer');
-							$('#current_customer_name').text(currentUser);
-							$('#current_customer_id').text(
-									currentUser + '@'+domainName);
-							$('#user_to_call').text(
-									currentUser + '@'+domainName);
-							$('#user_to_call').val(
-									currentUser + '@'+domainName);
-							sendTo = currentUser + '@'+domainName;
-							console.log("user to call:"+currentUser);
-							$(this).parent().remove();
-							connectionStatus = true;
-							sendConnectionStatus(true, currentUser);
-
-						}
-					});
-
-	$('#start_videocall_btn').on('click', function() {
-
-	});
-
-	$('#btn_get_customer').on(
-			'click',
-			function() {
-				// alert("disconnected");
-
-				if (connectionStatus) {
-					console.log("disconnected");
-					$('#btn_get_customer').removeClass('btn btn-danger');
-					$('#btn_get_customer').addClass('btn btn-success');
-					$('#btn_get_customer').text('Get Next Customer');
-					var chat = $("#xe-body-voice2text").html();
-					// alert(chat);
-					connectionStatus = false;
-					var xmlHttp = new XMLHttpRequest();
-					var currentText = strip(chat);
-					xmlHttp.open("post", "../VoiceCustomerServlet", true);
-					// alert("get executed");
-					xmlHttp.setRequestHeader("Content-Type",
-							"application/x-www-form-urlencoded");
-
-					xmlHttp.send("final_span=" + currentText + "&username="
-							+ currentUser);
-					sendConnectionStatus(false, currentUser);
-
-				} else {
-					alert("Please select next customer from queue!!");
-				}
-
-				// alert("get sent");
-			});
 
 	// ---------- Video/Audio ---
 
@@ -205,7 +150,7 @@ $(function() {
 		 * @params <string> userName, <string> message, <function>
 		 *         success/failure
 		 */
-		console.log('sendig message to:'+sendTo+":"+message);
+		console.log("sending message to " + sendTo);
 		kandy.messaging
 				.sendIm(
 						sendTo,
@@ -217,11 +162,14 @@ $(function() {
 							// var $username = $('<h5>').text(username);
 							var $username = "You";
 							var $message = message;
-							// $('#xe-body ul').append('<li>Hi test</li>');;
+
+							console
+									.log("connection status:"
+											+ connectionStatus);
 
 							$("#xe-body ul")
 									.append(
-											'<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'
+											'<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'
 													+ $username
 													+ '</strong></a><p>'
 													+ $message
@@ -245,35 +193,14 @@ $(function() {
 		kandy.messaging.sendImWithFile(sendTo, file, function() {
 
 			// On successful send, append chat item to DOM
-			var $chatItem = $('<div class="well text-right">');
+			var $chatItem = $('<div class="well text-right">')
 			var $username = $('<h5>').text(username);
 			var $file = $('<p>').text(file.name);
 
 			$chatItem.append($username, $file);
-			$('#xe-body ul').append($chatItem);
+			$('#chat-messages').append($chatItem);
 		}, function() {
-			alert('IM send failed');
-		});
-	}
-
-	function sendConnectionStatus(status, currentUser) {
-
-		var message = "DISCONNECTED";
-		if (status) {
-			message = "CONNECTED";
-		} else {
-			message = "DISCONNECTED";
-		}
-
-		var to = currentUser + "@"+domainName;
-		console.log("To:"+to);
-		console.log("sendTo:"+sendTo);
-		kandy.messaging.sendIm(sendTo, message, function() {
-			console.log("Send Connection status to " + sendTo + " success");
-
-		}, function() {
-			alert('Connection sending failed');
-			console.log("Send Connection status to " + sendTo + " failed");
+			alert('File send failed');
 		});
 	}
 
@@ -302,38 +229,55 @@ $(function() {
 												&& msg.contentType === 'text'
 												&& msg.message.mimeType == 'text/plain') {
 
-											var $username = "Customer";
-											var msgChat = msg.message.text;
+											var $username = "Agent";
 											var msgTxt = msg.message.text;
-											var $message = msgTxt.substring(12);
-											// $('#xe-body ul').append('<li>Hi
-											// test</li>');;
-											// $("#xe-body ul").append('<li><div
-											// class="xe-comment-entry"><a
-											// class="xe-user-img" href="#"><img
-											// width="40" class="img-circle"
-											// src="../assets/images/user-2.png"></a><div
-											// class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
-
+											var $message = msgTxt;
 											var msgText = msg.message.text;
-
 											var index = msgText
 													.indexOf("VOICEMESSAGE");
-											console.log(index);
-											console.log(msgText);
-											
-											
-											
+
+											// to check to status whether he is
+											// current customer in the call
+											if (msgTxt == "CONNECTED") {
+												connectionStatus = true;
+												$("#queue_status").removeClass(
+														"btn btn-info");
+												$('#queue_status').addClass(
+														'btn btn-success');
+												$('#queue_status')
+														.text(
+																"Connected with Expert..");
+
+											}
+											if (msgTxt == "DISCONNECTED") {
+												connectionStatus = false
+												$("#queue_status").removeClass(
+														"btn btn-success");
+												$('#queue_status').addClass(
+														'btn btn-info');
+												$('#queue_status')
+														.text(
+																"Queue disconnected rejoin..");
+											}
+											console.log("connection status:"
+													+ connectionStatus);
+
 											if (msgText.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") == -1
-													&& msgText.indexOf("LANGUAGE") == -1) {
-												console
-														.log("Chat Message received");
-												// update chat window
-												$("#xe-body ul").append('<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/user-2.png"></a><div class="xe-comment"><strong>'+ $username+ '</strong></a><p>'+ msgText+ '</p></div></div></li>');
-											} else if (msgText.indexOf("VOICEMESSAGE") != -1&& msgText.indexOf("IAMALIVE") == -1 && msgText.indexOf("LANGUAGE") == -1) {
-												// update voice to text
-												console.log("voice to text received");
+													&& connectionStatus) {
+
+												$("#xe-body ul")
+														.append(
+																'<li><div class="xe-comment-entry"><a class="xe-user-img" href="#"><img width="40" class="img-circle" src="../assets/images/cust_service.png"></a><div class="xe-comment"><strong>'
+																		+ $username
+																		+ '</strong></a><p>'
+																		+ $message
+																		+ '</p></div></div></li>');
+											} else if (connectionStatus) {
+												$message = msgTxt.substring(12);
+												// $("#xe-body-voice2text
+												// ul").append('<li><div
+												// class="xe-comment-entry"><div
+												// class="xe-comment"><strong>'+$username+'</strong></a><p>'+$message+'</p></div></div></li>');
 												$("#xe-body-voice2text ul")
 														.append(
 																'<li>'
@@ -341,59 +285,12 @@ $(function() {
 																		+ ':<p>'
 																		+ $message
 																		+ '</p></li>');
-											} else if (msgText
-													.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") != -1
-													&& msgText.indexOf("LANGUAGE") == -1) {
-												// update customer queue
-												// <li><a class="queue"
-												// href"#">customer1</a></li>
-												console
-														.log("user available status received");
-												var user = msgText.substring(8);
-												$("#user_queue_container ul")
-														.append(
-																'<li><a class="queue" href="#">'
-																		+ user
-																		+ '</a></li>');
-
-											}
-											
-											else if (msgText.indexOf("VOICEMESSAGE") == -1
-													&& msgText.indexOf("IAMALIVE") == -1
-													&& msgText.indexOf("LANGUAGE") != -1) {
-												// update customer queue
-												// <li><a class="queue"
-												// href"#">customer1</a></li>
-												
-												language = msgText.substring(8);	
-												
-												$('#user_language').text(language);
-												$('#user_language').val(language);
-												
-												if(language == 'Hindi'){
-													console.log()
-													$('#user_language_code').val('hi-IN');
-												}
-												else if(language == 'English'){
-													$('#user_language_code').val('en-US');
-												}
-												else if(language == 'French'){
-													$('#user_language_code').val('fr-FR');
-												}
-												else if(language == 'Chinese'){
-													$('#user_language_code').val('zh-CN');
-												}				
-
-												var langCode=$('#user_language_code').val();
-												console.log("LANGUAGE  received:"+language);
-												console.log("LANGUAGE  code  set:"+langCode);
-
 											}
 
 										}
 										if (msg.messageType == 'chat'
 												&& msg.contentType === 'file') {
+											alert("file received");
 											var $username = $('<h5>').text(
 													msg.sender.user_id);
 											var uuid = msg.message.content_uuid;
@@ -419,12 +316,12 @@ $(function() {
 													$chatItem);
 
 											// $("#xe-body ul").append('<li><div
-											// class="xe-comment-entry"><img
+											// class="xe-comment-entry"><a
+											// class="xe-user-img" href="#"><img
 											// width="40" class="img-circle"
-											// src="../assets/images/cust_service.png"><div
-											// class="xe-comment"><strong>'+$username+'</strong><p>'+$file+'</p>'+$fileName+'</div></div></li>');
+											// src="../assets/images/cust_service.png"></a><div
+											// class="xe-comment"><strong>'+$username+'</strong></a><p>'+$file+'</p>'+$fileName+'</div></div></li>');
 											$("#xe-body ul").append($chatItem);
-
 										} else {
 											// When the recieved messageType is
 											// not chat, display message type
@@ -437,6 +334,52 @@ $(function() {
 						});
 
 	}
+
+	var userArray = [];
+
+	// Event handler for login form button
+	$('#support').on(
+			'click',
+			function(e) {
+				e.preventDefault();
+
+				$("#profile_section").hide(500);
+				$("#chat_section").show(500);
+				$("#title").hide();
+				$("#support_queue_status").show();
+				$("#support_queue_status").removeClass("hidden");
+
+				// Values extracted from login form
+				/*
+				 * username = $('#username').val(); var apiKey =
+				 * $('#api_key').val(); var password = $('#password').val();
+				 */
+
+				/**
+				 * login(domainApiId, userName, password,success,failure) logs
+				 * in user to Kandy Platform
+				 * 
+				 * @params <string> domainApiId, <string> userName, <string>
+				 *         password, <function> success/failure
+				 */
+				kandy.login(apiKey, username, password, function(msg) {
+					// IAMALIVE
+
+					userArray.push(username);
+					kandy.getLastSeen(userArray);
+					UIState.authenticated();
+
+					$('#current_customer_name').text(username);
+					$('#current_customer_id').text(
+							username + "@"+domainName);
+					sendAmAlive(username);
+					// Checks every 5 seconds for incoming messages
+					setInterval(receiveMessages, 5000);
+				}, function(msg) {
+					UIState.unauthenticated();
+					alert('Login Failed!');
+				});
+			});
 
 	// Event handler for logout button
 	$('#logout-btn').on('click', function() {
@@ -460,7 +403,7 @@ $(function() {
 	 * and the rest are hidden. Using this method is NOT recommended!
 	 */
 
-	var  UIState = {};
+	var username, UIState = {};
 
 	UIState.authenticated = function() {
 
@@ -658,13 +601,14 @@ $(function() {
 		$('#incoming-call').addClass('hidden');
 	};
 
-	// -----------File Upload Script ----
+	// ----------File upload script----------------
 
 	var i = 1, $example_dropzone_filetable = $("#example-dropzone-filetable"), example_dropzone = $("#advancedDropzone").dropzone({
 						url : 'data/upload-file.php',
 
 						// Events
 						addedfile : function(file) {
+							alert("added new");
 							// Script to send file
 
 							kandy.messaging
@@ -683,10 +627,10 @@ $(function() {
 
 												$chatItem.append($username,
 														$file);
-												$('#chat-messages').append(
+												$('#xe-body ul').append(
 														$chatItem);
 											}, function() {
-												alert('IM send failed');
+												alert('File send failed');
 											});
 
 							// ----end
@@ -725,6 +669,7 @@ $(function() {
 						},
 
 						success : function(file) {
+
 							file.fileEntryTd
 									.find('td:last')
 									.html(
@@ -735,10 +680,11 @@ $(function() {
 						},
 
 						error : function(file) {
+
 							file.fileEntryTd
 									.find('td:last')
 									.html(
-											'<span class="text-success">success</span>');
+											'<span class="text-success">Uploaded</span>');
 							file.progressBar
 									.removeClass('progress-bar-warning')
 									.addClass('progress-bar-success');
@@ -747,132 +693,36 @@ $(function() {
 
 	$("#advancedDropzone").css({
 		minHeight : 200
-	})
-
-	// --------- file upload end ---------
-
-	function voiceToTextFile() {
-		// xe-body-voice2text
-		// btn_get_customer
-		//alert("disconnected");
-		$('#btn_get_customer').removeClass('btn btn-danger');
-		$('#btn_get_customer').addClass('btn btn-success');
-		$('#btn_get_customer').text('Get Next Customer');
-		var chat = $("#xe-body-voice2text").html();
-		// alert(chat);
-		connectionStatus = false;
-		var xmlHttp = new XMLHttpRequest();
-		var currentText = strip(chat);
-		xmlHttp.open("post", "../VoiceCustomerServlet", true);
-		// alert("get executed");
-		xmlHttp.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded");
-
-		xmlHttp.send("final_span=" + currentText + "&username=" +username);
-		// alert("get sent");
-
-	}
-
-	// ---- Call Handler ----------------------
-
-	// Event handler for callinitiate
-	function onCallInitiate(call) {
-		callId = call.getId();
-
-		$audioRingIn[0].pause();
-		$audioRingOut[0].play();
-
-		$('#username-calling').text('Calling ' + $('#user_to_call').val());
-		UIState.callinitialized();
-	}
-
-	// Event handler for callinitiatefail event
-	function onCallInitiateFail() {
-		console.debug('call initiate fail');
-
-		$audioRingOut[0].pause();
-		UIState.initial();
-		alert('call failed');
-	}
-
-	UIState.callinitialized = function() {
-		console.log('callinitialized');
-
-		$('.call-initializer').addClass('hidden');
-	};// Event handler for initiate call button
-	$('#initialize-call-btn').on('click', function() {
-		var tousername = $('#user_to_call').val();
-
-		/**
-		 * makeCall( userName, cameraOn ) : Void Initiates a call to another
-		 * Kandy user over web
-		 * 
-		 * @params <string> userName, <boolean> cameraOn
-		 */
-		KandyAPI.Phone.makeCall(tousername, true);
-	});
-	// Event handler for oncall event
-	function onCall(call) {
-		console.debug('oncall');
-		$audioRingOut[0].pause();
-		UIState.oncall();
-	}
-
-	// Event handler for callended event
-	function onCallTerminate(call) {
-		console.debug('callended');
-		callId = null;
-
-		$audioRingOut[0].play();
-		$audioRingIn[0].pause();
-
-		UIState.initial();
-	}
-
-	// Event handler for callendedfailed event
-	function onCallEndedFailed() {
-		console.debug('callendfailed');
-		callId = null;
-	}
-
-	$('#hold-call-btn').on('click', function() {
-		KandyAPI.Phone.holdCall(callId);
-		UIState.holdcall();
 	});
 
-	$('#resume-call-btn').on('click', function() {
-		KandyAPI.Phone.unHoldCall(callId);
-		UIState.resumecall();
-	});
+	function sendAmAlive(e) {
+		var message = "IAMALIVE";
+		message = message + e;
 
-	// Event handler for call end button
-	$('#end-call-btn').on('click', function() {
-		KandyAPI.Phone.endCall(callId);
-		UIState.initial();
-	});
+		
+		kandy.messaging.sendIm(sendTo, message, function() {
 
-	UIState.oncall = function() {
-		console.log('oncall');
+			console.log("AM alive sent success");
+			$("#queue_status").removeClass("btn btn-success");
+			$('#queue_status').addClass('btn btn-info');
+			$('#queue_status').text("You are in the queue..");
+		}, function() {
+			alert('AM alive send failed');
+		});
+	}
+	function sendLanguage(e) {
+		var message = "LANGUAGE";
+		message = message + e;
 
-		$('#incoming-call, #call-form').addClass('hidden');
-		$('#call-connected').removeClass('hidden');
-	};
+		
+		kandy.messaging.sendIm(sendTo, message, function() {
 
-	UIState.holdcall = function() {
-		console.log('holdcall');
-
-		$('#hold-call-btn').addClass('hidden');
-		$('#resume-call-btn').removeClass('hidden');
-	};
-
-	UIState.resumecall = function() {
-		console.log('resumecall');
-
-		$('#hold-call-btn').removeClass('hidden');
-		$('#resume-call-btn').addClass('hidden');
-	};
-
-	// --------- call handler end -----------------
+			console.log("send language:"+message+" sent success");			
+		}, function() {
+			alert('send language sent failed');
+		});
+	}
+	// -------------file upload end----------------
 
 });
 
@@ -880,9 +730,3 @@ window.setInterval(function() {
 	var elem = document.getElementById('xe-body');
 	elem.scrollTop = elem.scrollHeight;
 }, 5000);
-
-function strip(html) {
-	var tmp = document.createElement("DIV");
-	tmp.innerHTML = html;
-	return tmp.textContent || tmp.innerText || "";
-}

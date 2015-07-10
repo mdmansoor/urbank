@@ -47,7 +47,7 @@ public class custscheduledmeetingbean extends ActionSupport implements
 
 	@Override
 	public String execute() throws Exception {
-		addActionMessage("scdulemeeting");
+		addActionMessage("SUCCESS");
 		return SUCCESS;
 	}
 

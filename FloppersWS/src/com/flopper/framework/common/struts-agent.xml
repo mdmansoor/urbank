@@ -6,7 +6,8 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 		<action name="agentlogin" class="com.flopper.framework.common.agentloginbean">
 			<result name="input">agentlogin.jsp</result>
 			<result name="error">agentlogin.jsp</result>
-			<result name="success">agentlanding.jsp</result>
+			<result name="agent">agentlanding.jsp</result>
+			<result name="admin">adminlanding.jsp</result>
 		</action>
 		
 		

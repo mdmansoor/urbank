@@ -93,7 +93,7 @@ new gweb.analytics.AutoTrack({
 <!-- Kandy END -->
 
 
-<tags:script src="customer/custlanding.js" />
+<tags:script src="customer/custscheduledlanding.js" />
 </head>
 <body class="page-body">
 	<input type="hidden" id="kandyUserName" name="kandyUserName"
@@ -101,7 +101,7 @@ new gweb.analytics.AutoTrack({
 	<input type="hidden" id="kandyPassWord" name="kandyPassWord"
 		value="<%=session.getAttribute("KANDY_PASSWORD")%>">
 	<input type="hidden" id="api_key" name="api_key"
-		value="<%=pageContext.getServletContext().getInitParameter("apikey")%>">
+		value="<%=session.getAttribute("KANDY_APIKEY")%>">
 	<input type="hidden" id="agent" name="agent"
 		value="<%=pageContext.getServletContext().getInitParameter("agent")%>">
 	<input type="hidden" id="admin" name="admin"
@@ -115,6 +115,7 @@ new gweb.analytics.AutoTrack({
 		<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
 
 		
+	
 		<div class="sidebar-menu toggle-others fixed">
 
 			<div class="sidebar-menu-inner">

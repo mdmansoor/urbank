@@ -8,15 +8,45 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KandyUserDetail {
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.util.ServletContextAware;
+
+public class KandyUserDetail implements ServletContextAware {
+	
+	
+	
+	public KandyUserDetail() {
+		super();
+	}
+
+
+	public KandyUserDetail(ServletContext context) {
+		super();
+		this.context = context;
+	}
+
+	ServletContext context;
+	
+	public ServletContext getContext() {
+		return context;
+	}
+
+	
+	@Override
+	public void setServletContext(ServletContext context) {
+		this.context = context;
+		
+	}
+
 	List<String> kandyUserName = new ArrayList<String>();
 	Map<String, String> map = new HashMap<String, String>();
 
 	public Map<String, String> getKandyUserDetail(String username) {
 		List<String> kandyuserList = new ArrayList<String>();
-		kandyUserName.add("user001");
-		kandyUserName.add("user002");
-		kandyUserName.add("user003");
+		kandyUserName.add(getContext().getInitParameter("user1"));
+		kandyUserName.add(getContext().getInitParameter("user2"));
+		kandyUserName.add(getContext().getInitParameter("user3"));
 		kandyuserList = getAvailableKandyUser();
 		kandyUserName.removeAll(kandyuserList);
 
@@ -148,5 +178,7 @@ public class KandyUserDetail {
 		}
 
 	}
+
+	
 
 }
